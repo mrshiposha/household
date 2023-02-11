@@ -1,1 +1,1 @@
-# home-conf
+# Household common configuration files
