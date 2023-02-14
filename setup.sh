@@ -11,7 +11,7 @@ host=$1
 scriptdir=$(cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd)
 ln -s $scriptdir /etc/household-conf
 
-hostconf = /etc/household-conf/host/$host.nix
+hostconf=/etc/household-conf/host/$host.nix
 
 if [ ! -f $hostconf ]; then
     echo "There no such host '$host'"
