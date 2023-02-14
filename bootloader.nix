@@ -1,4 +1,15 @@
 { config, pkgs, ... }: {
-  boot.loader.grub.enable = true;
-  boot.loader.grub.version = 2;
+  boot.loader = {
+    efi = {
+      canTouchEfiVariables = true;
+      efiSysMountPoint = /boot/efi;
+    };
+
+    grub = {
+      enable = true;
+      version = 2;
+      efiSupport = true;
+      device = "nodev";
+    };
+  };
 }
