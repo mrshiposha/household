@@ -20,6 +20,6 @@ fi
 
 cat > /etc/nixos/configuration.nix <<- EOM
 { config, pkgs, ... }: {
-    imports = [ /etc/household-conf/host/$conf.nix ];
+    imports = [ /etc/household-conf/host/$hostconf.nix ];
 }
 EOM
