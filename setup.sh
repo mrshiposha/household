@@ -28,7 +28,5 @@ if [ ! -f $hostconf ]; then
 fi
 
 cat > $targetdir/nixos/configuration.nix <<- EOM
-{ config, pkgs, ... }: {
-    imports = [ $hostconf ];
-}
+args @ { config, pkgs, ... }: import $hostconf args
 EOM
