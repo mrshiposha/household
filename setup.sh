@@ -16,7 +16,7 @@ if [ -z "$2" ]
 fi
 
 host=$1
-confdir=/household-conf
+confdir=$rootdir/household-conf
 
 hostconf=$confdir/host/$host.nix
 
