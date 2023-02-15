@@ -26,5 +26,10 @@ if [ ! -f $hostconf ]; then
 fi
 
 cat > $rootdir/etc/nixos/configuration.nix <<- EOM
-args @ { config, pkgs, ... }: import $hostconf args
+{ config, pkgs, ... }: {
+    imports = [
+        $hostconf
+        ./hardware-configuration.nix
+    ];
+}
 EOM
