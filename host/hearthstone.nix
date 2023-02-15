@@ -7,6 +7,6 @@
     "${root}/users/mrshiposha.nix"
   ];
 
-  networking.hostname = "hearthstone";
+  networking.hostName = "hearthstone";
   users.mutableUsers = false;
 }
