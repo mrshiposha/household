@@ -10,23 +10,23 @@ fi
 
 if [ -z "$2" ]
   then
-    targetdir=/etc
+    rootdir=/
   else
-    targetdir=$2
+    rootdir=$2
 fi
 
 host=$1
 
 scriptdir=$(cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd)
-ln -nsf $scriptdir $targetdir/household-conf
+ln -nsf $scriptdir $rootdir/etc/household-conf
 
-hostconf=$targetdir/household-conf/host/$host.nix
+hostconf=$rootdir/etc/household-conf/host/$host.nix
 
 if [ ! -f $hostconf ]; then
     echo "There no such host '$host'"
     exit 2
 fi
 
-cat > $targetdir/nixos/configuration.nix <<- EOM
+cat > $rootdir/etc/nixos/configuration.nix <<- EOM
 args @ { config, pkgs, ... }: import $hostconf args
 EOM
