@@ -6,4 +6,6 @@
     extraGroups = [ "wheel" ];
     isNormalUser = true;
   };
+
+  home-manager.users.mrshiposha = import ./functions/home-shell.nix;
 }
