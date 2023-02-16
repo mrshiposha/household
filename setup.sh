@@ -25,6 +25,13 @@ if [ ! -f $hostconf ]; then
     exit 2
 fi
 
+systemver=$(cat functions/system-version.nix)
+
+nix-channel --add https://github.com/nix-community/home-manager/archive/release-$systemver.tar.gz home-manager
+nix-channel --update
+
+mkdir -p $rootdir/etc/nixos
+
 cat > $rootdir/etc/nixos/configuration.nix <<- EOM
 { config, pkgs, ... }: {
     imports = [

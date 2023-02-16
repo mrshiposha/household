@@ -1,3 +1,3 @@
 { config, pkgs, ... }: {
-  system.stateVersion = "22.11";
+  system.stateVersion = import "./functions/system-version.nix";
 }
