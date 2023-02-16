@@ -1,5 +1,5 @@
 { config, pkgs, ... }: {
-  import = [
+  imports = [
     ./mrshiposha.nix
     ./wally.nix
   ];
