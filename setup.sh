@@ -25,7 +25,7 @@ if [ ! -f $hostconf ]; then
     exit 2
 fi
 
-systemver=$(cat functions/system-version.nix)
+systemver=$(cat functions/system-version.nix | sed 's/"//g')
 
 nix-channel --add https://github.com/nix-community/home-manager/archive/release-$systemver.tar.gz home-manager
 nix-channel --update
