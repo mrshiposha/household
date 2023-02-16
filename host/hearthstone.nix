@@ -4,6 +4,7 @@
     "${root}/system.nix"
     "${root}/timezone.nix"
     "${root}/shell.nix"
+    "${root}/dev-related.nix"
     "${root}/users/mrshiposha.nix"
   ];
 
