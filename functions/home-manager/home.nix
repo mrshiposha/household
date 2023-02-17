@@ -14,5 +14,8 @@ username: { pkgs, ... }: with pkgs; {
         src = "${zsh-powerlevel10k}/share/zsh-powerlevel10k";
       }
     ];
+    initExtra = ''
+      source ~/.p10k.zsh
+    '';
   };
 }
