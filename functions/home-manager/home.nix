@@ -1,4 +1,8 @@
-{ pkgs, ... }: with pkgs; {
+username: { pkgs, ... }: with pkgs; {
+  home.username = username;
+  home.homeDiretory = "/home/${username}";
+  home.stateVersion = import ../system-version.nix;
+
   fonts.fontconfig.enable = true;
   home.packages = [meslo-lgs-nf];
   programs.zsh = {

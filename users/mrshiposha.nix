@@ -8,5 +8,5 @@
     isNormalUser = true;
   };
 
-  home-manager.users.mrshiposha = import ../functions/home-shell.nix;
+  home-manager.users.mrshiposha = import ../functions/home-shell.nix "mrshiposha";
 }
