@@ -10,13 +10,13 @@ fi
 
 if [ -z "$2" ]
   then
-    rootdir=/
+    rootdir=
   else
     rootdir=$2
 fi
 
 host=$1
-confdir=$rootdir/household-conf
+confdir=../../household-conf
 
 hostconf=$confdir/host/$host.nix
 
