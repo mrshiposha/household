@@ -16,11 +16,10 @@ if [ -z "$2" ]
 fi
 
 host=$1
-confdir=../../household-conf
 
-hostconf=$confdir/host/$host.nix
+hostconf=host/$host.nix
 
-if [ ! -f $hostconf ]; then
+if [ ! -f $rootdir/household-conf/$hostconf ]; then
     echo "There no such host '$host'"
     exit 2
 fi
@@ -35,7 +34,7 @@ mkdir -p $rootdir/etc/nixos
 cat > $rootdir/etc/nixos/configuration.nix <<- EOM
 { config, pkgs, ... }: {
     imports = [
-        $hostconf
+        ../../household-conf/$hostconf
         ./hardware-configuration.nix
     ];
 }
