@@ -1,4 +1,4 @@
-username: { pkgs, ... }: with pkgs; {
+{ pkgs, ... }: with pkgs; {
   fonts.fontconfig.enable = true;
   home.packages = [meslo-lgs-nf];
   programs.zsh = {
