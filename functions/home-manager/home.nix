@@ -1,6 +1,6 @@
 username: { pkgs, ... }: with pkgs; {
   home.username = username;
-  home.homeDiretory = "/home/${username}";
+  home.homeDirectory = "/home/${username}";
   home.stateVersion = import ../system-version.nix;
 
   fonts.fontconfig.enable = true;
