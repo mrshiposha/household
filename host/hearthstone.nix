@@ -1,6 +1,5 @@
 { config, pkgs, ... }: let root = ./..; in {
   imports = [
-    <home-manager/nixos>
     "${root}/bootloader.nix"
     "${root}/system.nix"
     "${root}/timezone.nix"

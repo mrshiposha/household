@@ -1,4 +1,5 @@
 { config, pkgs, ... }: {
+  imports = [<home-manager/nixos>];
   users.users.mrshiposha = {
     home = "/home/mrshiposha";
     initialPassword = "helloworld";
