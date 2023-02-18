@@ -4,11 +4,14 @@ in {
   config = lib.mkMerge [
     {
       home.file."home.nix" = {
-        # enable = !builtins.pathExists homenix;
         target = homenix;
-        text = ''args @ { pkgs, ... }: with pkgs; 
-        (import /household-conf/common/home.nix ${username} args) // {
-          # Add you modifications here
+        text = ''args @ { pkgs, lib, ... }: with pkgs; {
+          config = lib.mkMerge [
+            (import /household-conf/common/home.nix ${username} args)
+            {
+              # Add your modifications here
+            }
+          ];
         }'';
       };
     }
