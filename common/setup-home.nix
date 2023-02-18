@@ -4,7 +4,7 @@ in {
   config = lib.mkMerge [
     (import ./home.nix username args)
     {
-      home.file."home.nix" = {
+      home.file.home = {
         enable = !builtins.pathExists homenix;
         target = homenix;
         text = ''args @ { pkgs, ... }: with pkgs; 
