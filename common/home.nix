@@ -1,5 +1,5 @@
 username: { pkgs, ... }: with pkgs;
-let cp-local-home-nix = ./common/scripts/cp-local-home-nix.sh;
+let cp-local-home-nix = ./scripts/cp-local-home-nix.sh;
 in {
   home.username = username;
   home.homeDirectory = "/home/${username}";
