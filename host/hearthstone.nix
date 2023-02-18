@@ -7,6 +7,7 @@ let root = ./..; in {
     "${root}/shell.nix"
     "${root}/dev-related.nix"
     "${root}/users.nix"
+    "${root}/home-manager.nix"
   ];
 
   networking.hostName = "hearthstone";
