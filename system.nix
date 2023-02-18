@@ -1,3 +1,3 @@
 {
-  system.stateVersion = import ./functions/system-version.nix;
+  system.stateVersion = import ./common/system-version.nix;
 }
