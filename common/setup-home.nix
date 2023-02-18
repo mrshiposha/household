@@ -3,7 +3,9 @@ let homenix = "/home/${username}/.config/nixpkgs/home.nix";
 in let homenixExists = builtins.pathExists homenix;
 in {
   config = lib.mkMerge [
-    (if homenixExists then {} else {
+    (if homenixExists
+    then {}
+    else {
       home.file."home.nix" = {
         target = homenix;
         text = ''args @ { pkgs, lib, ... }: with pkgs; {
@@ -19,6 +21,8 @@ in {
 '';
       };
     })
-    (import ./home.nix username args)
+    (if homenixExists
+    then (import homenix) 
+    else (import ./home.nix username args))
   ];
 }
