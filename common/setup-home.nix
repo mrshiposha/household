@@ -22,7 +22,7 @@ in {
       };
     })
     (if homenixExists
-    then (import homenix) 
+    then (import homenix args) 
     else (import ./home.nix username args))
   ];
 }
