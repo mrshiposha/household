@@ -1,4 +1,4 @@
-{ lib, ... }: let userfiles = lib.listFilesRecursive ./users; in {
+{ lib, ... }: let userfiles = lib.filesystem.listFilesRecursive ./users; in {
   imports = userfiles ++ [(import ../functions/home-manager/home-manager.nix)];
 
   home-manager.users = lib.listToAttrs (
