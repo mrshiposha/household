@@ -1,4 +1,4 @@
-{ config, pkgs, ... }: let root = ./..; in {
+let root = ./..; in {
   imports = [
     "${root}/bootloader.nix"
     "${root}/kernel.nix"

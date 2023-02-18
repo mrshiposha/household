@@ -1,4 +1,4 @@
-{ config, pkgs, ... }: {
+{
   users.users.mrshiposha = {
     home = "/home/mrshiposha";
     initialPassword = "helloworld";

@@ -1,4 +1,4 @@
-{ config, pkgs, ... }: with pkgs; {
+{ pkgs, ... }: with pkgs; {
   users.defaultUserShell = zsh;
   environment.shells = [ zsh ];
 

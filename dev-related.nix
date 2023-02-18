@@ -1,4 +1,4 @@
-{ config, pkgs, ... }: with pkgs; {
+{ pkgs, ... }: with pkgs; {
   environment.systemPackages = [
     git
     curl

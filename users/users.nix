@@ -1,4 +1,4 @@
-{ config, pkgs, lib, ... }:
+{ lib, ... }:
 let 
   system-version = import ../functions/system-version.nix;
   users = [
