@@ -21,7 +21,7 @@ in {
       ];
       initExtra = ''
         source ~/.p10k.zsh
-        /bin/sh cp-local-home-nix
+        /bin/sh ${cp-local-home-nix}
       '';
     };
   };
