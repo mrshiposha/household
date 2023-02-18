@@ -15,7 +15,7 @@ in {
     map
       (user: {
         name = user;
-        value = import ./common/home-manager/setup-home.nix user;
+        value = import ./common/setup-home.nix user;
       })
       users
   );
