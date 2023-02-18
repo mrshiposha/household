@@ -6,7 +6,7 @@ let root = ./..; in {
     "${root}/timezone.nix"
     "${root}/shell.nix"
     "${root}/dev-related.nix"
-    "${root}/users/users.nix"
+    "${root}/users.nix"
   ];
 
   networking.hostName = "hearthstone";
