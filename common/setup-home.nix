@@ -7,9 +7,11 @@ in {
         target = homenix;
         text = ''args @ { pkgs, lib, ... }: with pkgs; {
           config = lib.mkMerge [
-            (import /household-conf/common/home.nix ${username} args)
+            (import /household-conf/common/home.nix "${username}" args)
             {
-              # Add your modifications here
+              # NOTE: You can copy this file from the nix store to ~/.config/nixpkgs/home.nix
+              # and add your modifications here.
+              # E.g., programs.htop.enable = true;
             }
           ];
         }'';
