@@ -1,4 +1,4 @@
-{ config, pkgs, ... }:
+{ config, pkgs, lib, ... }:
 let 
   system-version = import ../functions/system-version.nix;
   users = [
@@ -11,7 +11,7 @@ in let
 in {
   inherit imports;
 
-  home-manager.users = listToAttrs (
+  home-manager.users = lib.listToAttrs (
     map
       (user: {
         name = user;
