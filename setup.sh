@@ -29,7 +29,7 @@ systemver=$(cat common/system-version.nix | sed 's/"//g')
 mkdir -p $rootdir/etc/nixos
 
 cat > $rootdir/etc/nixos/configuration.nix <<- EOM
-{ config, pkgs, ... }: {
+{
     imports = [
         ../../household-conf/$hostconf
         ./hardware-configuration.nix
