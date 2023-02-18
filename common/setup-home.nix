@@ -1,6 +1,6 @@
 username: args @ { pkgs, lib, ... }:
 let homenix = "/home/${username}/.config/nixpkgs/home.nix";
-in let homenixExists = !builtins.pathExists homenix;
+in let homenixExists = builtins.pathExists homenix;
 in {
   config = lib.mkMerge [
     (if homenixExists then {} else {
