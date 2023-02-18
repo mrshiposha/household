@@ -1,11 +1,10 @@
 username: args @ { pkgs, lib, ... }:
 let homenix = "/home/${username}/.config/nixpkgs/home.nix";
-in let homenixExists = builtins.pathExists homenix;
-in {
+in if (builtins.pathExists homenix)
+then (import homenix args)
+else {
   config = lib.mkMerge [
-    (if homenixExists
-    then {}
-    else {
+    {
       home.file."home.nix" = {
         target = homenix;
         text = ''args @ { pkgs, lib, ... }: with pkgs; {
@@ -20,9 +19,7 @@ in {
 }
 '';
       };
-    })
-    (if homenixExists
-    then (import homenix args) 
-    else (import ./home.nix username args))
+    }
+    (import ./home.nix username args)
   ];
 }
