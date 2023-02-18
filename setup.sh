@@ -24,7 +24,7 @@ if [ ! -f $rootdir/household-conf/$hostconf ]; then
     exit 2
 fi
 
-systemver=$(cat functions/system-version.nix | sed 's/"//g')
+systemver=$(cat common/system-version.nix | sed 's/"//g')
 
 mkdir -p $rootdir/etc/nixos
 
