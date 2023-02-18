@@ -1,7 +1,7 @@
 { pkgs, lib, ... }:
 let 
   userfiles = lib.filesystem.listFilesRecursive ./users; 
-  system-version = import ../system-version.nix;
+  system-version = import ./common/system-version.nix;
 in let
   users = map (userfile: lib.removeSuffix ".nix" (baseNameOf userfile)) userfiles;
   home-manager = builtins.fetchTarball "https://github.com/nix-community/home-manager/archive/release-${system-version}.tar.gz";
