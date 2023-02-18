@@ -2,9 +2,8 @@ username: args @ { pkgs, lib, ... }:
 let homenix = "/home/${username}/.config/nixpkgs/home.nix";
 in {
   config = lib.mkMerge [
-    (import ./home.nix username args)
     {
-      home.file.home = {
+      home.file."home.nix" = {
         enable = !builtins.pathExists homenix;
         target = homenix;
         text = ''args @ { pkgs, ... }: with pkgs; 
@@ -13,5 +12,6 @@ in {
         }'';
       };
     }
+    (import ./home.nix username args)
   ];
 }
