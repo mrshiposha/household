@@ -7,7 +7,7 @@ let
   ];
 in let
   home-manager = builtins.fetchTarball "https://github.com/nix-community/home-manager/archive/release-${system-version}.tar.gz";
-  imports = (map (u: ./${u}) users) ++ [(import "${home-manager}/nixos")];
+  imports = (map (user: ./${user}.nix) users) ++ [(import "${home-manager}/nixos")];
 in {
   inherit imports;
 
