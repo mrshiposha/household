@@ -1,6 +1,6 @@
 { config, pkgs, lib, ... }: {
   boot.kernelPackages =
     if config.virtualisation.virtualbox.guest.enable
-    then null
+    then pkgs.linuxPackages
     else pkgs.linuxPackages_6_1;
 }
