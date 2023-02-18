@@ -1,6 +1,6 @@
 username: args @ { pkgs, ... }:
 let homenix = "/home/${username}/.config/nixpkgs/home.nix";
-in (import /household-conf/common/home.nix username args) // {
+in (import ./home.nix username args) // {
   home.file."home.nix" = {
     enable = !builtins.pathExists homenix;
     target = homenix;
