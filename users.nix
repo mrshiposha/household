@@ -3,7 +3,7 @@
 
   home-manager.users = lib.listToAttrs (
     map
-      (userfile: let user = lib.removeSuffix (baseNameOf userfile) ".nix"; in {
+      (userfile: let user = lib.removeSuffix ".nix" (baseNameOf userfile); in {
         name = user;
         value = import ./functions/home-manager/home.nix user;
       })
