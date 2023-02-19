@@ -1,4 +1,4 @@
-let root = ./..; in {
+let root = ./../..; in {
   imports = [
     (
       import "${root}/boot.nix" {
