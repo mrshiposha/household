@@ -1,6 +1,6 @@
 let root = ./..; in {
   imports = [
-    "${root}/bootloader.nix"
+    "${root}/boot.nix"
     "${root}/kernel.nix"
     "${root}/system.nix"
     "${root}/timezone.nix"
