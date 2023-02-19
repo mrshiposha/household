@@ -1,4 +1,7 @@
-let root = ./../..; in {
+let 
+  root = ./../..;
+  host = "hearthstone";
+in {
   imports = [
     (
       import "${root}/boot.nix" {
@@ -12,9 +15,9 @@ let root = ./../..; in {
     "${root}/shell.nix"
     "${root}/base-sysenv.nix"
     "${root}/users.nix"
-    "${root}/home-manager.nix"
+    (import "${root}/home-manager.nix" host)
   ];
 
-  networking.hostName = "hearthstone";
+  networking.hostName = host;
   users.mutableUsers = false;
 }
