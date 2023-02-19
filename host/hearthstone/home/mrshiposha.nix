@@ -1,7 +1,5 @@
-{ pkgs, ... }:
-with pkgs; 
-let home = ../../../common/home; in {
+common-home: username: stateVersion: { pkgs, ... }: with pkgs; {
   imports = [
-    (import "${home}/base.nix" "mrshiposha")
+    (import "${common-home}/base.nix" username stateVersion)
   ];
 }

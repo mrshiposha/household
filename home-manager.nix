@@ -1,5 +1,6 @@
 host: { pkgs, lib, ... }:
-let 
+let
+  common-home = ./common/home;
   userhomes = lib.filesystem.listFilesRecursive ./host/${host}/home; 
   system-version = import ./common/system-version.nix;
 in let
@@ -14,7 +15,7 @@ in {
     map
       (userhome: let user = lib.removeSuffix ".nix" (baseNameOf userhome); in {
         name = user;
-        value = import userhome;
+        value = import userhome common-home user system-version;
       })
       userhomes
   );

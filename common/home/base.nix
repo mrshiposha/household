@@ -1,7 +1,7 @@
-username: { pkgs, ... }: with pkgs; {
+username: stateVersion: { pkgs, ... }: with pkgs; {
   home.username = username;
   home.homeDirectory = "/home/${username}";
-  home.stateVersion = import ./../system-version.nix;
+  home.stateVersion = stateVersion;
 
   home.packages = [meslo-lgs-nf];
   fonts.fontconfig.enable = true;
