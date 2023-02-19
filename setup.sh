@@ -17,7 +17,7 @@ fi
 
 host=$1
 
-hostconf=host/$host.nix
+hostconf=host/$host/configuration.nix
 
 if [ ! -f $rootdir/household-conf/$hostconf ]; then
     echo "There no such host '$host'"

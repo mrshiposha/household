@@ -10,7 +10,7 @@ let root = ./..; in {
     "${root}/system.nix"
     "${root}/timezone.nix"
     "${root}/shell.nix"
-    "${root}/dev-related.nix"
+    "${root}/base-sysenv.nix"
     "${root}/users.nix"
     "${root}/home-manager.nix"
   ];

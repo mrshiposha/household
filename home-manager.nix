@@ -1,9 +1,8 @@
-{ pkgs, lib, ... }:
+host: { pkgs, lib, ... }:
 let 
-  userfiles = lib.filesystem.listFilesRecursive ./users; 
+  userhomes = lib.filesystem.listFilesRecursive ./host/${host}/home; 
   system-version = import ./common/system-version.nix;
 in let
-  users = map (userfile: lib.removeSuffix ".nix" (baseNameOf userfile)) userfiles;
   home-manager = builtins.fetchTarball "https://github.com/nix-community/home-manager/archive/release-${system-version}.tar.gz";
 in {
   imports = [(import "${home-manager}/nixos")];
@@ -13,11 +12,11 @@ in {
 
   home-manager.users = lib.listToAttrs (
     map
-      (user: {
+      (userhome: let user = lib.removeSuffix ".nix" (baseNameOf userhome); in {
         name = user;
-        value = import ./common/setup-home.nix user;
+        value = import userhome;
       })
-      users
+      userhomes
   );
 
   environment.systemPackages = [

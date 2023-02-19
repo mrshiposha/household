@@ -1,6 +1,4 @@
-username: { pkgs, ... }: with pkgs;
-let cp-local-home-nix = ./scripts/cp-local-home-nix.sh;
-in {
+username: { pkgs, ... }: with pkgs; {
   home.username = username;
   home.homeDirectory = "/home/${username}";
   home.stateVersion = import ./system-version.nix;
@@ -21,7 +19,6 @@ in {
       ];
       initExtra = ''
         source ~/.p10k.zsh
-        ${cp-local-home-nix}
       '';
     };
   };
