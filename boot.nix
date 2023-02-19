@@ -11,7 +11,7 @@
         version = 2;
         efiSupport = true;
         device = "nodev";
-        gxfmodeEfi = resolution;
+        gfxmodeEfi = resolution;
       };
     };
   } // (if silentBoot then {
