@@ -13,9 +13,13 @@ in {
 
   home-manager.users = lib.listToAttrs (
     map
-      (userhome: let user = lib.removeSuffix ".nix" (baseNameOf userhome); in {
-        name = user;
-        value = import userhome common-home user system-version;
+      (userhome: let username = lib.removeSuffix ".nix" (baseNameOf userhome); in {
+        name = username;
+        value = import userhome {
+          inherit common-home username;
+          person = (import ./users/${username}.nix).users.users.${username}.description;
+          stateVersion = system-version;
+        };
       })
       userhomes
   );
