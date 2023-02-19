@@ -19,8 +19,4 @@ in {
       })
       userhomes
   );
-
-  environment.systemPackages = [
-    pkgs.home-manager
-  ];
 }

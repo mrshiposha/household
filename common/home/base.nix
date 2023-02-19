@@ -6,8 +6,6 @@ username: stateVersion: { pkgs, ... }: with pkgs; {
   home.packages = [meslo-lgs-nf];
   fonts.fontconfig.enable = true;
   programs = {
-    home-manager.enable = true;
-
     zsh = {
       enable = true;
       plugins = [
