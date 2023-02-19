@@ -14,6 +14,7 @@ in {
     "${root}/timezone.nix"
     "${root}/shell.nix"
     "${root}/base-sysenv.nix"
+    "${root}/displaymanager.nix"
     "${root}/users.nix"
     (import "${root}/home-manager.nix" host)
   ];
