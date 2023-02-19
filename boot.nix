@@ -1,4 +1,4 @@
-let silentBoot = import ./common/silent-boot.nix; in {
+{ silentBoot, resolution }: {
   boot = {
     loader = {
       efi = {
@@ -11,6 +11,7 @@ let silentBoot = import ./common/silent-boot.nix; in {
         version = 2;
         efiSupport = true;
         device = "nodev";
+        gxfmodeEfi = resolution;
       };
     };
   } // (if silentBoot then {

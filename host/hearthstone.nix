@@ -1,6 +1,11 @@
 let root = ./..; in {
   imports = [
-    "${root}/boot.nix"
+    (
+      import "${root}/boot.nix" {
+        silentBoot = true;
+        resolution = "1920x1080";
+      }
+    )
     "${root}/kernel.nix"
     "${root}/system.nix"
     "${root}/timezone.nix"
