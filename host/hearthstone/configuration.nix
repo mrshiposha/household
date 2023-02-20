@@ -17,6 +17,7 @@ in {
     "${root}/displaymanager.nix"
     "${root}/users.nix"
     (import "${root}/home-manager.nix" host)
+    "${root}/compositor.nix"
   ];
 
   networking.hostName = host;

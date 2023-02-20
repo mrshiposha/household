@@ -7,6 +7,5 @@
 { pkgs, ... }: with pkgs; {
   imports = [
     (import "${common-home}/base.nix" username stateVersion)
-    "${common-home}/compositor.nix"
   ];
 }

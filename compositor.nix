@@ -5,12 +5,18 @@
     src = builtins.fetchTarball "https://github.com/hyprwm/Hyprland/archive/master.tar.gz";
   }).defaultNix;
 in {
-  imports = [
-    hyprland.homeManagerModules.default
-  ];
+  imports = [hyprland.nixosModules.default];
 
-  wayland.windowManager.hyprland = {
+  programs.hyprland = {
     enable = true;
-    systemdIntegration = true;
+
+    package = hyprland.packages.${pkgs.system}.default;
+
+    xwayland = {
+      enable = true;
+      hidpi = true;
+    };
+
+    nvidiaPatches = false;
   };
 }

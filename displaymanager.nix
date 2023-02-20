@@ -1,6 +1,6 @@
 {
-  services.xserver.displayManager.gdm = {
+  services.xserver.displayManager.sddm = {
     enable = true;
-    wayland = true;
   };
+  services.xserver.enable = true;
 }
