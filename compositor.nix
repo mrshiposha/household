@@ -1,4 +1,4 @@
-{pkgs, ...}: let
+{config, pkgs, ...}: let
   flake-compat = builtins.fetchTarball "https://github.com/edolstra/flake-compat/archive/master.tar.gz";
 
   hyprland = (import flake-compat {
