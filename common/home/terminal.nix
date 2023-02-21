@@ -1,3 +1,3 @@
-name: email: { pkgs, ... }: with pkgs; {
+{ pkgs, ... }: with pkgs; {
   programs.alacritty.enable = true;
 }
