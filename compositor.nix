@@ -24,6 +24,4 @@ in {
     WLR_NO_HARDWARE_CURSORS = "1";
     WLR_RENDERER_ALLOW_SOFTWARE = "1";
   } else {};
-
-  environment.systemPackages = [ pkgs.wofi ];
 }
