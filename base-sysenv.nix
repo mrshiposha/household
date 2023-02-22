@@ -4,7 +4,7 @@
     curl
     pciutils
     nix-prefetch-git
-    qt5
+    qt-5
     gtk3
   ];
 }
