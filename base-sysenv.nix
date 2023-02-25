@@ -4,7 +4,7 @@
     curl
     pciutils
     nix-prefetch-git
-    qt-5
-    gtk3
   ];
+
+  services.dbus.enable = true;
 }

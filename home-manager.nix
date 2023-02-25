@@ -8,19 +8,27 @@ in let
 in {
   imports = [(import "${home-manager}/nixos")];
 
-  home-manager.useUserPackages = true;
-  home-manager.useGlobalPkgs = true;
+  home-manager = {
+    useUserPackages = true;
+    useGlobalPkgs = true;
 
-  home-manager.users = lib.listToAttrs (
-    map
-      (userhome: let username = lib.removeSuffix ".nix" (baseNameOf userhome); in {
-        name = username;
-        value = import userhome {
-          inherit common-home username;
-          person = (import ./users/${username}.nix).users.users.${username}.description;
-          stateVersion = system-version;
-        };
-      })
-      userhomes
-  );
+    users = lib.listToAttrs (
+      map
+        (userhome: let username = lib.removeSuffix ".nix" (baseNameOf userhome); in {
+          name = username;
+          value = import userhome {
+            inherit common-home username;
+            person = (import ./users/${username}.nix).users.users.${username}.description;
+            stateVersion = system-version;
+          };
+        })
+        userhomes
+    );
+
+    home.file.config = {
+      target = ".config";
+      source = ./common/home/.config;
+      recursive = true;
+    };
+  };
 }
