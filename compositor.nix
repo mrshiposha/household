@@ -54,6 +54,11 @@ in {
     mako # notification system developed by swaywm maintainer
   ];
 
+  environment.sessionVariables = if config.virtualisation.virtualbox.guest.enable then {
+    WLR_NO_HARDWARE_CURSORS = "1";
+    WLR_RENDERER_ALLOW_SOFTWARE = "1";
+  } else {};
+
   programs.sway = {
     enable = true;
     wrapperFeatures.gtk = true;
@@ -71,5 +76,4 @@ in {
     # gtk portal needed to make gtk apps happy
     extraPortals = [ pkgs.xdg-desktop-portal-gtk ];
   };
-
 }
