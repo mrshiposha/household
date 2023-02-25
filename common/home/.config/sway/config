@@ -15,6 +15,10 @@ set $mod Mod4
 
     bindsym $mod+Shift+c reload
 
+    bindsym $mod+l exec swaylock
+
+    bindsym $mod+Shift+e exit
+
 # Moving:
     # Move focus around
     bindsym $mod+Left focus left
