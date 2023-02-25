@@ -7,7 +7,7 @@
 { pkgs, ... }: with pkgs; {
   imports = [
     (import "${common-home}/base.nix" username stateVersion)
-    "${common-home}/config.nix"
+    (import "${common-home}/config.nix" common-home)
     "${common-home}/terminal.nix"
   ];
 }

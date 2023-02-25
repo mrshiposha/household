@@ -8,7 +8,7 @@
   imports = [
     (import "${common-home}/base.nix" username stateVersion)
     (import "${common-home}/git.nix" person "${username}@gmail.com")
-    "${common-home}/config.nix"
+    (import "${common-home}/config.nix" common-home)
     "${common-home}/terminal.nix"
   ];
 }
