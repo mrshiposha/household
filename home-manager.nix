@@ -1,7 +1,7 @@
 host: { pkgs, lib, ... }:
 let
   common = ./common;
-  userhomes = filter
+  userhomes = builtins.filter
     (file: lib.hasSuffix ".nix" file)
     (lib.filesystem.listFilesRecursive ./host/${host}/home); 
   system-version = import ./common/system-version.nix;
