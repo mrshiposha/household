@@ -20,6 +20,7 @@ in {
     (import "${root}/home-manager.nix" host)
     "${root}/compositor.nix"
     "${root}/audio.nix"
+    "${root}/virtualisation.nix"
   ];
 
   networking.hostName = host;
