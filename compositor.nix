@@ -59,6 +59,7 @@ in {
   environment.sessionVariables = if config.virtualisation.virtualbox.guest.enable then {
     WLR_NO_HARDWARE_CURSORS = "1";
     WLR_RENDERER_ALLOW_SOFTWARE = "1";
+    LIBGL_ALWAYS_SOFTWARE = "1";
   } else {};
 
   programs.sway = {
