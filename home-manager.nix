@@ -1,6 +1,6 @@
 host: { pkgs, lib, ... }:
 let
-  common-home = ./common/home;
+  common = ./common;
   userhomes = lib.filesystem.listFilesRecursive ./host/${host}/home; 
   system-version = import ./common/system-version.nix;
 in let
@@ -17,7 +17,7 @@ in {
         (userhome: let username = lib.removeSuffix ".nix" (baseNameOf userhome); in {
           name = username;
           value = import userhome {
-            inherit common-home username;
+            inherit common username;
             person = (import ./users/${username}.nix).users.users.${username}.description;
             stateVersion = system-version;
           };
