@@ -38,6 +38,8 @@ let
         '';
   };
 in {
+  imports = [ ./polkit.nix ];
+
   environment.systemPackages = with pkgs; [
     sway
     dbus-sway-environment
