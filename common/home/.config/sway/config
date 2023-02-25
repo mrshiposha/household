@@ -15,7 +15,7 @@ set $mod Mod4
 
     bindsym $mod+Shift+c reload
 
-# Moving around:
+# Moving:
     # Move focus around
     bindsym $mod+Left focus left
     bindsym $mod+Down focus down
@@ -27,5 +27,9 @@ set $mod Mod4
     bindsym $mod+Shift+Down move down
     bindsym $mod+Shift+Up move up
     bindsym $mod+Shift+Right move right
+
+# Layout:
+    bindsym $mod+h splith
+    bindsym $mod+v splitv
 
 include @sysconfdir@/sway/config.d/*
