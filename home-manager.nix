@@ -1,7 +1,9 @@
 host: { pkgs, lib, ... }:
 let
   common = ./common;
-  userhomes = lib.filesystem.listFilesRecursive ./host/${host}/home; 
+  userhomes = filter
+    (file: lib.hasSuffix ".nix" file)
+    (lib.filesystem.listFilesRecursive ./host/${host}/home); 
   system-version = import ./common/system-version.nix;
 in let
   home-manager = builtins.fetchTarball "https://github.com/nix-community/home-manager/archive/release-${system-version}.tar.gz";

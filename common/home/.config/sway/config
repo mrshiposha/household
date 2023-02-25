@@ -39,4 +39,7 @@ set $mod Mod4
 
     bindsym $mod+Shift+f floating toggle
 
+# User-specific:
+include /household-conf/host/$HOST/home/$USER/.config/compositor/config
+
 include @sysconfdir@/sway/config.d/*
