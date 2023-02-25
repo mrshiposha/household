@@ -3,6 +3,8 @@ exec configure-gtk
 
 set $term alacritty
 
+set $mod Mod4
+
 ### Key bindings
 # Basics:
     bindsym $mod+Return exec $term
