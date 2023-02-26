@@ -5,6 +5,7 @@
     pciutils
     nix-prefetch-git
     gnupg
+    pinentry
   ];
 
   programs = {
