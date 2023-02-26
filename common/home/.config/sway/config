@@ -6,7 +6,8 @@ set $term alacritty
 set $mod Mod4
 
 # User-specific:
-include /household-conf/host/$HOST/home/$USER/.config/compositor/config
+# include /household-conf/host/$HOST/home/$USER/.config/compositor/config
+output * bg /household-conf/common/images/1920x1080/korcula.jpg fill
 
 ### Key bindings
 # Basics:
