@@ -1,1 +1,1 @@
-set $wallpaper /household-conf/common/images/1920x1080/korcula.jpg
+output * bg /household-conf/common/images/1920x1080/korcula.jpg fill

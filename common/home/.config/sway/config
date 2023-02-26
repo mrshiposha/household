@@ -1,14 +1,9 @@
-# User-specific:
-include /household-conf/host/`hostname`/home/$USER/.config/compositor/config
-
 exec dbus-sway-environment
 exec configure-gtk
 
 set $term alacritty
 
 set $mod Mod4
-
-output * bg $wallpaper fill
 
 ### Key bindings
 # Basics:
@@ -48,4 +43,8 @@ output * bg $wallpaper fill
 
     bindsym $mod+Shift+f floating toggle
 
+# User-specific:
+include /household-conf/host/`hostname`/home/$USER/.config/compositor/config
+
+# System-specific:
 include @sysconfdir@/sway/config.d/*
