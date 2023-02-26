@@ -14,7 +14,7 @@
       source-root = "${common}/home";
       path = ".config/sway/config";
     })
-    "${common}/home/terminal.nix"
+    (import "${common}/home/terminal.nix" { inherit common; })
     "${common}/home/vscode.nix"
     "${common}/home/firefox.nix"
   ];
