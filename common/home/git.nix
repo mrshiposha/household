@@ -1,4 +1,7 @@
-name: email: { pkgs, ... }: with pkgs; {
+{
+  name,
+  email
+}: { pkgs, ... }: with pkgs; {
   programs.git = {
     enable = true;
     userName = name;

@@ -1,4 +1,12 @@
-username: stateVersion: { pkgs, ... }: with pkgs; {
+{
+  common,
+  username,
+  stateVersion
+}: { pkgs, ... }: with pkgs;
+let
+  p10k-normal = "${common}/home/p10k/normal.zsh";
+  p10k-minimal = "${common}/home/p10k/minimal.zsh";
+in {
   home.username = username;
   home.homeDirectory = "/home/${username}";
   home.stateVersion = stateVersion;
@@ -16,7 +24,11 @@ username: stateVersion: { pkgs, ... }: with pkgs; {
         }
       ];
       initExtra = ''
-        source ~/.p10k.zsh
+        if zmodload zsh/terminfo && (( terminfo[colors] >= 256 )); then
+          source ${p10k-normal}
+        else
+          source ${p10k-minimal}
+        fi
       '';
     };
   };

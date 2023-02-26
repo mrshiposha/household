@@ -1,5 +1,9 @@
-filename: source-root: path: {
-  home.file.${filename} = {
+{
+  name,
+  source-root,
+  path
+}: {
+  home.file.${name} = {
     target = path;
     source = "${source-root}/${path}";
   };
