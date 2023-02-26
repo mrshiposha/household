@@ -43,7 +43,7 @@ set $mod Mod4
 
     bindsym $mod+Shift+f floating toggle
 
-    for_window [app_id="floating"] floating enable
+    for_window [app_id="floating"] floating enable; splitv
 
 # User-specific:
 include /household-conf/host/`hostname`/home/$USER/.config/compositor/config
