@@ -6,6 +6,7 @@
       bbenoist.nix
       matklad.rust-analyzer
       bungcip.better-toml
+      shd101wyy.markdown-preview-enhanced
     ] ++ vscode-utils.extensionsFromVscodeMarketplace [
       {
         name = "yuck";
