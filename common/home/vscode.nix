@@ -10,7 +10,7 @@
         name = "yuck";
         publisher = "eww-yuck";
         version = "0.0.3";
-        sha256 = "0000000000000000000000000000000000000000000000000000";
+        sha256 = "DITgLedaO0Ifrttu+ZXkiaVA7Ua5RXc4jXQHPYLqrcM=";
       }
     ];
     userSettings = {
