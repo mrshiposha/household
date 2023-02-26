@@ -1,5 +1,5 @@
 # User-specific:
-include /household-conf/host/$HOST/home/$USER/.config/compositor/config
+include /household-conf/host/`hostname`/home/$USER/.config/compositor/config
 
 exec dbus-sway-environment
 exec configure-gtk

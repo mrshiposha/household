@@ -1,7 +1,7 @@
 host: { pkgs, lib, ... }:
 let
   common = ./common;
-  userhomes = builtins.filter
+  usernixes = builtins.filter
     (file: lib.hasSuffix ".nix" file)
     (lib.filesystem.listFilesRecursive ./host/${host}/home); 
   system-version = import ./common/system-version.nix;
@@ -16,15 +16,19 @@ in {
 
     users = lib.listToAttrs (
       map
-        (userhome: let username = lib.removeSuffix ".nix" (baseNameOf userhome); in {
+        (usernix: 
+          let
+            username = lib.removeSuffix ".nix" (baseNameOf usernix);
+            private = dirOf usernix;
+          in {
           name = username;
-          value = import userhome {
-            inherit common username;
+          value = import usernix {
+            inherit common private username;
             person = (import ./users/${username}.nix).users.users.${username}.description;
             stateVersion = system-version;
           };
         })
-        userhomes
+        usernixes
     );
   };
 }

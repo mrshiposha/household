@@ -1,6 +1,6 @@
-filename: common-home: path: {
+filename: source-root: path: {
   home.file.${filename} = {
     target = path;
-    source = "${common-home}/${path}";
+    source = "${source-root}/${path}";
   };
 }
