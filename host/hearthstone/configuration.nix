@@ -15,7 +15,6 @@ in {
     "${root}/timezone.nix"
     "${root}/shell.nix"
     "${root}/base-sysenv.nix"
-    "${root}/dev.nix"
     (import "${root}/displaymanager.nix" resolution)
     "${root}/users.nix"
     (import "${root}/home-manager.nix" host)

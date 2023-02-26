@@ -1,5 +1,5 @@
 { pkgs, ... }: with pkgs; {
-  environment.systemPackages = [
+  home.packages = [
     gcc
     rustup
   ];

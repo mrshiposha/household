@@ -15,7 +15,9 @@
       path = ".config/sway/config";
     })
     (import "${common}/home/terminal.nix" { inherit common; })
+    "${common}/home/dev.nix"
     "${common}/home/vscode.nix"
     "${common}/home/firefox.nix"
+    "${common}/home/telegram.nix"
   ];
 }
