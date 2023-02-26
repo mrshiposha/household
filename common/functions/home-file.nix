@@ -6,5 +6,6 @@
   home.file.${name} = {
     target = path;
     source = "${source-root}/${path}";
+    recursive = true;
   };
 }

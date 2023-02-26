@@ -4,6 +4,9 @@
     curl
     pciutils
     nix-prefetch-git
+    gcc
+    glib
+    glibc
     # gnupg
     # pinentry
   ];

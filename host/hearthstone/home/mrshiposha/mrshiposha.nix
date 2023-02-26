@@ -14,6 +14,11 @@
       source-root = "${common}/home";
       path = ".config/sway/config";
     })
+    (import "${common}/functions/home-file.nix" {
+      name = "eww-common";
+      source-root = "${common}/home";
+      path = ".config/eww";
+    })
     (import "${common}/home/terminal.nix" { inherit common; })
     "${common}/home/dev.nix"
     "${common}/home/vscode.nix"

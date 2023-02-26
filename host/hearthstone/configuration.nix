@@ -19,6 +19,7 @@ in {
     "${root}/users.nix"
     (import "${root}/home-manager.nix" host)
     "${root}/compositor.nix"
+    "${root}/widgets.nix"
     "${root}/audio.nix"
   ];
 
