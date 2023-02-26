@@ -6,5 +6,8 @@
       vscode-extensions.matklad.rust-analyzer
       vscode-extensions.bungcip.better-toml
     ];
+    userSettings = {
+      "terminal.integrated.fontFamily" = "MesloLGS NF";
+    };
   };
 }
