@@ -8,7 +8,7 @@
   ];
 
   programs = {
-    gnupg = {
+    gnupg.agent = {
       enable = true;
       pinentryFlavor = "qt";
     };
