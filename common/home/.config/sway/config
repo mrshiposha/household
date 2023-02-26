@@ -5,6 +5,9 @@ set $term alacritty
 
 set $mod Mod4
 
+# User-specific:
+include /household-conf/host/$HOST/home/$USER/.config/compositor/config
+
 ### Key bindings
 # Basics:
     bindsym $mod+Return exec $term
@@ -42,8 +45,5 @@ set $mod Mod4
     bindsym $mod+f fullscreen
 
     bindsym $mod+Shift+f floating toggle
-
-# User-specific:
-include /household-conf/host/$HOST/home/$USER/.config/compositor/config
 
 include @sysconfdir@/sway/config.d/*
