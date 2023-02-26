@@ -7,8 +7,7 @@ set $mod Mod4
 
 ### Key bindings
 # Basics:
-    bindsym $mod+Return exec $term
-    bindsym $mod+Shift+Return exec $term --class=floating
+    bindsym $mod+Return exec $term --class=floating
 
     bindsym $mod+q kill
 
