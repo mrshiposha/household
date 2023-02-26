@@ -3,8 +3,9 @@
     enable = true;
     package = vscodium;
     extensions = with pkgs.vscode-extensions; [
-      vscode-extensions.matklad.rust-analyzer
-      vscode-extensions.bungcip.better-toml
+      bbenoist.nix
+      matklad.rust-analyzer
+      bungcip.better-toml
     ] ++ vscode-utils.extensionsFromVscodeMarketplace [
       {
         name = "yuck";
