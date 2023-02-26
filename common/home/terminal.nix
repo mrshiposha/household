@@ -2,7 +2,7 @@
   programs.alacritty = {
     enable = true;
     settings = {
-      import = "${common}/home/.config/alacritty/theme";
+      import = ["${common}/home/.config/alacritty/theme"];
     };
   };
 }
