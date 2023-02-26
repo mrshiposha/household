@@ -23,5 +23,4 @@ in {
   ];
 
   networking.hostName = host;
-  users.mutableUsers = false;
 }
