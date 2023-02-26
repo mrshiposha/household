@@ -1,12 +1,12 @@
+# User-specific:
+include /household-conf/host/$HOST/home/$USER/.config/compositor/config
+
 exec dbus-sway-environment
 exec configure-gtk
 
 set $term alacritty
 
 set $mod Mod4
-
-# User-specific:
-include /household-conf/host/$HOST/home/$USER/.config/compositor/config
 
 output * bg $wallpaper fill
 
