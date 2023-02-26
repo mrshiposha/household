@@ -12,6 +12,13 @@
         version = "0.0.3";
         sha256 = "DITgLedaO0Ifrttu+ZXkiaVA7Ua5RXc4jXQHPYLqrcM=";
       }
+
+      {
+        name = "vscode-parinfer";
+        publisher = "shaunlebron";
+        version = "0.6.2";
+        sha256 = "00000000000000000000000000000000000000000000";
+      }
     ];
     userSettings = {
       "terminal.integrated.fontFamily" = "MesloLGS NF";
