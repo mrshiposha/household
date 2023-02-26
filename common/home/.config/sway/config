@@ -45,8 +45,6 @@ set $mod Mod4
 
 # Gaps
 gaps inner 28
-gaps outer -8
-default_border none
 
 # User-specific:
 include /household-conf/host/`hostname`/home/$USER/.config/compositor/config
