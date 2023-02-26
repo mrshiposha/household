@@ -45,6 +45,8 @@ set $mod Mod4
 
     for_window [app_id="floating"] floating enable; splitv
 
+    bindsym $mod+p focus parent
+
 # User-specific:
 include /household-conf/host/`hostname`/home/$USER/.config/compositor/config
 
