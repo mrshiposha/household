@@ -34,7 +34,8 @@ let
       in ''
         export XDG_DATA_DIRS=${datadir}:$XDG_DATA_DIRS
         gnome_schema=org.gnome.desktop.interface
-        gsettings set $gnome_schema gtk-theme 'Dracula'
+        gsettings set $gnome_schema gtk-theme 'Orchis-Grey-Dark'
+        gsettings set $gnome_schema cursor-theme 'Quintom_Ink'
         '';
   };
 in {
@@ -47,8 +48,8 @@ in {
     wayland
     xdg-utils # for opening default programs when clicking links
     glib # gsettings
-    dracula-theme # gtk theme
-    gnome3.adwaita-icon-theme  # default gnome cursors
+    orchis-theme # gtk theme
+    quintom-cursor-theme
     swaylock
     swayidle
     wl-clipboard # wl-copy and wl-paste for copy/paste from stdin / stdout
