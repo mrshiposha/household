@@ -6,5 +6,8 @@
     pango
     gdk-pixbuf
     cairo
+    glib
+    glibc
+    gcc
   ];
 }
