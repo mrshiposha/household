@@ -18,6 +18,9 @@ let
       '';
   };
 
+  schema = pkgs.gsettings-desktop-schemas;
+  datadir = "${schema}/share/gsettings-schemas/${schema.name}";
+
   # currently, there is some friction between sway and gtk:
   # https://github.com/swaywm/sway/wiki/GTK-3-settings-on-Wayland
   # the suggested way to set gtk settings is with gsettings
@@ -34,7 +37,7 @@ let
       in ''
         export XDG_DATA_DIRS=${datadir}:$XDG_DATA_DIRS
         gnome_schema=org.gnome.desktop.interface
-        gsettings set $gnome_schema gtk-theme 'Orchis-Grey-Dark'
+        gsettings set $gnome_schema gtk-theme 'Orchis-Green-Dark'
         gsettings set $gnome_schema cursor-theme 'Quintom_Ink'
         '';
   };
@@ -58,15 +61,22 @@ in {
     libnotify
   ];
 
-  environment.sessionVariables = if config.virtualisation.virtualbox.guest.enable then {
+  services.gvfs.enable = true;
+
+  environment.sessionVariables = {
+    NIXOS_OZONE_WL = "1";
+  } // (if config.virtualisation.virtualbox.guest.enable then {
     WLR_NO_HARDWARE_CURSORS = "1";
     WLR_RENDERER_ALLOW_SOFTWARE = "1";
     LIBGL_ALWAYS_SOFTWARE = "1";
-  } else {};
+  } else {});
 
   programs.sway = {
     enable = true;
-    wrapperFeatures.gtk = true;
+    wrapperFeatures = {
+      base = true;
+      gtk = true;
+    };
   };
 
   # xdg-desktop-portal works by exposing a series of D-Bus interfaces
