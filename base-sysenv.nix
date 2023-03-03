@@ -7,6 +7,7 @@
     gcc
     glib
     glibc
+    lshw
     # gnupg
     # pinentry
   ];
