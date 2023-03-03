@@ -1,13 +1,11 @@
-exec dbus-sway-environment
-exec configure-gtk
-
 set $term alacritty
 
 set $mod Mod4
 
 ### Key bindings
 # Basics:
-    bindsym $mod+Return exec $term --class=floating
+    bindsym $mod+Return exec $term
+    bindsym $mod+Shift+Return exec $term --class=floating
 
     bindsym $mod+q kill
 
@@ -47,8 +45,19 @@ set $mod Mod4
 
     bindsym $mod+p focus parent
 
+# Styling:
+    # TODO colors (and vscode colors too)
+    client.focused #82AC5D #4CAF50 #FFFFFF #82AC5D #4CAF50
+
+    hide_edge_borders both
+
 # User-specific:
 include /household-conf/host/`hostname`/home/$USER/.config/compositor/config
 
 # System-specific:
 include @sysconfdir@/sway/config.d/*
+
+seat seat0 xcursor_theme Quintom_Ink
+
+exec dbus-sway-environment
+exec configure-gtk
