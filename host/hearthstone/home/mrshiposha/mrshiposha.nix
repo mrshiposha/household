@@ -19,8 +19,9 @@
       source-root = "${common}/home";
       path = ".config/eww";
     })
-    (import "${common}/home/terminal.nix" { inherit common; })
     "${common}/home/dev.nix"
+    "${common}/home/launcher.nix"
+    (import "${common}/home/terminal.nix" { inherit common; })
     "${common}/home/vscode.nix"
     "${common}/home/firefox.nix"
     "${common}/home/telegram.nix"
