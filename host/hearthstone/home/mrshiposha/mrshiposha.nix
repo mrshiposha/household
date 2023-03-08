@@ -25,6 +25,7 @@
     "${common}/home/vscode.nix"
     "${common}/home/firefox.nix"
     "${common}/home/telegram.nix"
+    "${common}/home/image-view.nix"
     "${common}/home/vlc.nix"
   ];
 }
