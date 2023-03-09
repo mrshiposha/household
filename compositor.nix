@@ -72,9 +72,9 @@ in {
   programs.sway = {
     enable = true;
     wrapperFeatures = {
-      base = true;
       gtk = true;
     };
+    extraPackages = [];
   };
 
   # xdg-desktop-portal works by exposing a series of D-Bus interfaces
