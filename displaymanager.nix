@@ -8,7 +8,6 @@ let theme = "simplicity"; in {
         enable = true;
         inherit theme;
       };
-      xterm.enable = false;
     };
   };
 
