@@ -1,10 +1,16 @@
 resolution: {pkgs, ...}:
 let theme = "simplicity"; in {
-  services.xserver.displayManager.sddm = {
+  services.xserver = {
     enable = true;
-    inherit theme;
+    excludePackages = [ pkgs.xterm ];
+    displayManager = {
+      sddm = {
+        enable = true;
+        inherit theme;
+      };
+      xterm.enable = false;
+    };
   };
-  services.xserver.enable = true;
 
   environment.systemPackages = [
     (pkgs.callPackage ./common/packages/sddm-theme/${theme}.nix { inherit resolution; })
