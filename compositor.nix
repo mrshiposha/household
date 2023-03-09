@@ -39,6 +39,7 @@ let
         gnome_schema=org.gnome.desktop.interface
         gsettings set $gnome_schema gtk-theme 'Orchis-Green-Dark'
         gsettings set $gnome_schema cursor-theme 'Quintom_Ink'
+        gsettings set $gnome_schema icon-theme 'Papirus-Dark'
         '';
   };
 in {
@@ -51,12 +52,16 @@ in {
     wayland
     xdg-utils # for opening default programs when clicking links
     glib # gsettings
-    orchis-theme # gtk theme
+
+    # gtk theme
+    orchis-theme
     quintom-cursor-theme
+    (papirus-icon-theme.override { color = "green"; })
+
     swaylock
     swayidle
     wl-clipboard # wl-copy and wl-paste for copy/paste from stdin / stdout
-    bemenu # wayland clone of dmenu
+
     mako # notification system developed by swaywm maintainer
     libnotify
   ];
