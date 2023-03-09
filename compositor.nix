@@ -61,8 +61,6 @@ in {
     libnotify
   ];
 
-  services.gvfs.enable = true;
-
   environment.sessionVariables = {
     NIXOS_OZONE_WL = "1";
   } // (if config.virtualisation.virtualbox.guest.enable then {
