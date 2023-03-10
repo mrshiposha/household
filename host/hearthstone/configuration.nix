@@ -15,6 +15,7 @@ in {
     "${root}/timezone.nix"
     "${root}/shell.nix"
     "${root}/base-sysenv.nix"
+    "${root}/unfree-pkgs.nix"
     (import "${root}/displaymanager.nix" resolution)
     "${root}/users.nix"
     (import "${root}/home-manager.nix" host)

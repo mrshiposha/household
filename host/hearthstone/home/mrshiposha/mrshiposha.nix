@@ -27,5 +27,6 @@
     "${common}/home/telegram.nix"
     "${common}/home/image-view.nix"
     "${common}/home/vlc.nix"
+    "${common}/home/games.nix"
   ];
 }
