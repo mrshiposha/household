@@ -24,6 +24,7 @@
     ];
     userSettings = {
       "terminal.integrated.fontFamily" = "MesloLGS NF";
+      "files.insertFinalNewline" = true;
     };
   };
 }
