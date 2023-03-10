@@ -22,6 +22,7 @@ in {
     "${root}/widgets.nix"
     "${root}/file-manager.nix"
     "${root}/audio.nix"
+    "${root}/openrgb.nix"
   ];
 
   networking.hostName = host;
