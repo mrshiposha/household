@@ -8,18 +8,8 @@
     glib
     glibc
     lshw
-    # gnupg
-    # pinentry
+    fwupd
   ];
-
-  programs = {
-    # gnupg.agent = {
-    #   enable = true;
-    #   pinentryFlavor = "qt";
-    # };
-
-    ssh.askPassword = "";
-  };
 
   services.dbus.enable = true;
 }
