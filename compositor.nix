@@ -68,6 +68,8 @@ in {
 
   environment.sessionVariables = {
     NIXOS_OZONE_WL = "1";
+    MOZ_ENABLE_WAYLAND = "1";
+    XDG_CURRENT_DESKTOP = "sway";
   } // (if config.virtualisation.virtualbox.guest.enable then {
     WLR_NO_HARDWARE_CURSORS = "1";
     WLR_RENDERER_ALLOW_SOFTWARE = "1";
@@ -92,6 +94,9 @@ in {
     enable = true;
     wlr.enable = true;
     # gtk portal needed to make gtk apps happy
-    extraPortals = [ pkgs.xdg-desktop-portal-gtk ];
+    extraPortals = [
+      pkgs.xdg-desktop-portal-wlr
+      pkgs.xdg-desktop-portal-gtk
+    ];
   };
 }
