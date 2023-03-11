@@ -1,5 +1,5 @@
 { resolution, stdenv, fetchFromGitLab, rsync }:
-let login-screen = ../../images/${resolution}/samtisersee.png; in
+let login-screen = ../../images/${resolution}/mountain-range.jpg; in
 stdenv.mkDerivation rec {
   pname = "simplicity-sddm-theme";
   version = "1.0";
