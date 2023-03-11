@@ -9,6 +9,7 @@
     glibc
     lshw
     fwupd
+    smartmontools
   ];
 
   services.dbus.enable = true;
