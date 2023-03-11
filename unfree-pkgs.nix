@@ -1,6 +1,7 @@
 let unfreePkgs = [
     "steam"
     "steam-original"
+    "slack"
     "discord"
 ]; in
 { lib, ... }: {
