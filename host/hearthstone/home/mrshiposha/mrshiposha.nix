@@ -5,19 +5,13 @@
   stateVersion,
   ...
 }:
-{ pkgs, ... }: with pkgs; {
+{ pkgs, lib, ... }: with pkgs; {
   imports = [
     (import "${common}/home/base.nix" { inherit common username stateVersion; })
     (import "${common}/home/git.nix" { name = person; email = "${username}@gmail.com"; })
-    (import "${common}/functions/home-file.nix" {
-      name = "sway-common";
-      source-root = "${common}/home";
-      path = ".config/sway/config";
-    })
-    (import "${common}/functions/home-file.nix" {
-      name = "eww-common";
-      source-root = "${common}/home";
-      path = ".config/eww";
+    (import "${common}/functions/setup-common-config.nix" {
+      inherit lib;
+      config-dir = "${common}/home/.config";
     })
     "${common}/home/dev.nix"
     "${common}/home/launcher.nix"

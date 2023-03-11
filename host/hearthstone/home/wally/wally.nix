@@ -4,13 +4,12 @@
   stateVersion,
   ...
 }:
-{ pkgs, ... }: with pkgs; {
+{ pkgs, lib, ... }: with pkgs; {
   imports = [
     (import "${common}/home/base.nix" { inherit common username stateVersion; })
-    (import "${common}/functions/home-file.nix" {
-      name = "sway-common";
-      source-root = "${common}/home";
-      path = ".config/sway/config";
+    (import "${common}/functions/setup-common-config.nix" {
+      inherit lib;
+      config-dir = "${common}/home/.config";
     })
     "${common}/home/launcher.nix"
     (import "${common}/home/terminal.nix" { inherit common; })
