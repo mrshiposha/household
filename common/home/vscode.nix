@@ -23,6 +23,7 @@
       }
     ];
     userSettings = {
+      "update.mode" = "none";
       "terminal.integrated.fontFamily" = "MesloLGS NF";
       "files.insertFinalNewline" = true;
     };
