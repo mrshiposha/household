@@ -31,16 +31,12 @@ let
       name = "configure-gtk";
       destination = "/bin/configure-gtk";
       executable = true;
-      text = let
-        schema = pkgs.gsettings-desktop-schemas;
-        datadir = "${schema}/share/gsettings-schemas/${schema.name}";
-      in ''
-        export XDG_DATA_DIRS=${datadir}:$XDG_DATA_DIRS
+      text = ''
         gnome_schema=org.gnome.desktop.interface
         gsettings set $gnome_schema gtk-theme 'Orchis-Green-Dark'
         gsettings set $gnome_schema cursor-theme 'Quintom_Ink'
         gsettings set $gnome_schema icon-theme 'Papirus-Dark'
-        '';
+      '';
   };
 in {
   imports = [ ./polkit.nix ];
@@ -52,6 +48,9 @@ in {
     wayland
     xdg-utils # for opening default programs when clicking links
     glib # gsettings
+
+    # for rendering SVG icons
+    librsvg
 
     # gtk theme
     orchis-theme
@@ -67,9 +66,13 @@ in {
   ];
 
   environment.sessionVariables = {
+    XDG_DATA_DIRS = [ datadir ];
+
     NIXOS_OZONE_WL = "1";
     MOZ_ENABLE_WAYLAND = "1";
     XDG_CURRENT_DESKTOP = "sway";
+
+    GDK_PIXBUF_MODULE_FILE = "$(echo ${pkgs.librsvg.out}/lib/gdk-pixbuf-*/*/loaders.cache)";
   } // (if config.virtualisation.virtualbox.guest.enable then {
     WLR_NO_HARDWARE_CURSORS = "1";
     WLR_RENDERER_ALLOW_SOFTWARE = "1";
