@@ -10,7 +10,11 @@
     lshw
     fwupd
     smartmontools
+    unzip
   ];
 
-  services.dbus.enable = true;
+  services = {
+    dbus.enable = true;
+    fwupd.enable = true;
+  };
 }
