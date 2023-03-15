@@ -1,7 +1,8 @@
 {
   common,
   username,
-  stateVersion
+  stateVersion,
+  zshExtras ? ""
 }: { pkgs, ... }: with pkgs;
 let
   p10k-normal = "${common}/home/p10k/normal.zsh";
@@ -29,6 +30,8 @@ in {
         else
           source ${p10k-minimal}
         fi
+
+        ${zshExtras}
       '';
     };
   };
