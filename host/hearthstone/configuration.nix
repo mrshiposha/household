@@ -1,7 +1,7 @@
 let 
   root = ./../..;
   host = "hearthstone";
-  resolution = "1920x1080";
+  resolution = "2560x1440";
 in {
   imports = [
     (
@@ -15,7 +15,9 @@ in {
     "${root}/timezone.nix"
     "${root}/shell.nix"
     "${root}/base-sysenv.nix"
+    "${root}/polkit.nix"
     "${root}/unfree-pkgs.nix"
+    "${root}/3d-graphics.nix"
     (import "${root}/displaymanager.nix" resolution)
     "${root}/users.nix"
     (import "${root}/home-manager.nix" host)
@@ -24,7 +26,12 @@ in {
     "${root}/file-manager.nix"
     "${root}/audio.nix"
     "${root}/openrgb.nix"
+    "${root}/games.nix"
   ];
+
+  environment.sessionVariables = {
+    SWAYLOCK_IMAGE = "${root}/common/images/${resolution}/mountain-range.jpg";
+  };
 
   networking.hostName = host;
 }
