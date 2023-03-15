@@ -13,11 +13,11 @@
     })
     "${common}/home/launcher.nix"
     (import "${common}/home/terminal.nix" { inherit common; })
+    "${common}/home/sys-monitor.nix"
     "${common}/home/firefox.nix"
     "${common}/home/telegram.nix"
     "${common}/home/discord.nix"
     "${common}/home/image-view.nix"
     "${common}/home/vlc.nix"
-    "${common}/home/games.nix"
   ];
 }
