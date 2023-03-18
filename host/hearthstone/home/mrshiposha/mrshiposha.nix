@@ -21,6 +21,7 @@
     "${common}/home/dev.nix"
     "${common}/home/launcher.nix"
     (import "${common}/home/terminal.nix" { inherit common; })
+    "${common}/home/graphviz.nix"
     "${common}/home/hardinfo.nix"
     "${common}/home/sys-monitor.nix"
     "${common}/home/gparted.nix"

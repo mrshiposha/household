@@ -12,7 +12,10 @@ in {
   home.homeDirectory = "/home/${username}";
   home.stateVersion = stateVersion;
 
-  home.packages = [meslo-lgs-nf];
+  home.packages = [
+    nix-du
+    meslo-lgs-nf
+  ];
   fonts.fontconfig.enable = true;
   programs = {
     zsh = {
