@@ -17,4 +17,6 @@
     dbus.enable = true;
     fwupd.enable = true;
   };
+
+  nix.settings.auto-optimise-store = true;
 }
