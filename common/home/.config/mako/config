@@ -1,0 +1,10 @@
+default-timeout=2500
+
+outer-margin=40,10
+
+background-color=#82AC5D
+border-color=#4CAF50
+
+border-radius=10
+
+icon-path=/run/current-system/sw/share/icons/Papirus-Dark
