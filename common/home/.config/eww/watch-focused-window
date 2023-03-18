@@ -1,0 +1,3 @@
+#!/bin/sh
+swaymsg -t get_tree | jq --unbuffered -r '.. | select(.focused?==true).name'
+swaymsg -mt subscribe '["workspace", "window"]' | jq --unbuffered -r '.. | select(.focused?==true).name'

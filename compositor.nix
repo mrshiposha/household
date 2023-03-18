@@ -63,6 +63,8 @@ in {
 
     mako # notification system developed by swaywm maintainer
     libnotify
+
+    jq
   ];
 
   environment.sessionVariables = {

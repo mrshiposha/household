@@ -13,6 +13,11 @@ workspace Down
 workspace Left
 workspace Right
 
+### Global layout
+gaps top 30
+default_border pixel 2
+
+### Keyboard layout
 input * {
     xkb_layout "us,ru"
     xkb_options "altwin:swap_alt_win,grp:win_space_toggle"
@@ -76,7 +81,7 @@ input * {
     # TODO colors (and vscode colors too)
     client.focused #82AC5D #4CAF50 #FFFFFF #82AC5D #4CAF50
 
-    hide_edge_borders both
+    hide_edge_borders vertical
 
 # User-specific:
 include /household-conf/host/`hostname`/home/$USER/.config/compositor/config
@@ -89,4 +94,8 @@ seat seat0 xcursor_theme Quintom_Ink
 exec dbus-sway-environment
 exec configure-gtk
 
+# Default workspace
 workspace Down
+
+# Widgets
+exec eww open bar 
