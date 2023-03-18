@@ -1,0 +1,30 @@
+#app-list {
+    background: #2d362d;
+}
+
+#root-box {
+    margin: 100px 0 130px 0;
+}
+
+#search {
+    background: #406340;
+    border-radius: 15px 0 0 0;
+    padding-left: 1em;
+}
+
+.app-row:hover:selected {
+    background-color: alpha(#4CAF50, 0.1);
+}
+
+.app-row:hover {
+    background-color: alpha(#4CAF50, 0.035);
+}
+
+.app-row:selected {
+    background-color: alpha(#4CAF50, 0.05);
+}
+
+
+.app-row:hover.selected {
+    background-color: alpha(#4CAF50, 0.1);
+}

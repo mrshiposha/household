@@ -1,4 +1,4 @@
-exclusive = true  # push all windows aside or appear above existing windows
+exclusive = false  # push all windows aside or appear above existing windows
 icon_size = 64  # icon size in pixels
 lines = 2  # maximum number of lines of app labels
 
@@ -9,7 +9,7 @@ lines = 2  # maximum number of lines of app labels
 markup_default = ''
 # an extra field is appended to the app name (e.g., evince calls itself just "Document Viewer")
 markup_extra = 'font_style="italic" font_size="smaller"'
-markup_highlight = 'foreground="red" underline="double"'  # highlight matched characters
+markup_highlight = 'foreground="#82AC5D" underline="double"'  # highlight matched characters
 
 # anchor window to screen edge
 anchor_left = false
@@ -33,7 +33,9 @@ hide_extra_if_contained = true # hide extra field if it is already contained in 
 
 hidden_fields = [] # list of fields considered for search but hidden
 
-exclude = [] # list of regexes for excluded app ids (name of the .desktop file)
+exclude = [
+    "gparted"
+]
 
 # prefix for running commands instead of launching an app (e.g., `:xeyes` to launch xeyes)
 # use "" to disable launching commands
