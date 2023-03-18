@@ -77,6 +77,8 @@ input * {
 
     bindsym $mod+p focus parent
 
+    for_window [class="Steam"] floating enable
+
 # Styling:
     # TODO colors (and vscode colors too)
     client.focused #82AC5D #4CAF50 #FFFFFF #82AC5D #4CAF50
