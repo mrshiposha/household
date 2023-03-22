@@ -7,7 +7,8 @@
     pulse.enable = true;
   };
 
-  environment.systemPackages = [
-    pkgs.pulseaudio
+  environment.systemPackages = with pkgs; [
+    pulseaudio
+    alsa-utils
   ];
 }
