@@ -20,6 +20,12 @@
           url = "https://addons.mozilla.org/firefox/downloads/file/4073640/ether_metamask-10.25.0.xpi";
           hash = "sha256-lTs4QdtoVe+CffsB5abf4q4BbWJmM7SGl2e1fgPwUqA=";
         })
+
+        (fetchFirefoxAddon {
+          name = "yt-video-downloader";
+          url = "https://addons.mozilla.org/firefox/downloads/file/4024278/easy_youtube_video_download-18.3.xpi";
+          hash = "sha256-cOJu3S3NFQdswHj8156jqlPUijotnBMij/3ThhgnwvQ=";
+        })
       ];
 
       extraPolicies = {
