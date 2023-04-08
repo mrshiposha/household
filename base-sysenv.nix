@@ -19,4 +19,12 @@
   };
 
   nix.settings.auto-optimise-store = true;
+
+  hardware.enableRedistributableFirmware = true;
+
+  nixpkgs.overlays = [
+    (self: super: {
+      fcitx-engines = fcitx5;
+    })
+  ];
 }
