@@ -26,5 +26,14 @@
       "rd.udev.log_level=4"
       "udev.log_priority=4"
     ];
-  } else {});
+  } else {
+    plymouth.enable = false;
+    consoleLogLevel = 8;
+    initrd.verbose = true;
+    kernelParams = [
+      "loglevel=8"
+      "rd.udev.log_level=8"
+      "udev.log_priority=8"
+    ];
+  });
 }
