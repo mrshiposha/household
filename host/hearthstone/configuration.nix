@@ -26,6 +26,7 @@ in {
     "${root}/widgets.nix"
     "${root}/file-manager.nix"
     "${root}/audio.nix"
+    "${root}/bluetooth.nix"
     "${root}/openrgb.nix"
     "${root}/games.nix"
   ];
