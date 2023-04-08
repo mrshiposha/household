@@ -16,6 +16,7 @@ in {
     "${root}/shell.nix"
     "${root}/base-sysenv.nix"
     "${root}/polkit.nix"
+    "${root}/docker.nix"
     "${root}/unfree-pkgs.nix"
     "${root}/3d-graphics.nix"
     (import "${root}/displaymanager.nix" resolution)
@@ -28,6 +29,8 @@ in {
     "${root}/openrgb.nix"
     "${root}/games.nix"
   ];
+
+  boot.kernelModules = [ "amdgpu" ];
 
   environment.sessionVariables = {
     SWAYLOCK_IMAGE = "${root}/common/images/${resolution}/mountain-range.jpg";
