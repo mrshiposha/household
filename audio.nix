@@ -10,5 +10,6 @@
   environment.systemPackages = with pkgs; [
     pulseaudio
     alsa-utils
+    pavucontrol
   ];
 }
