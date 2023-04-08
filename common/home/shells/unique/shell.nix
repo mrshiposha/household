@@ -8,6 +8,7 @@
         clang_11
         llvm
         nodejs-16_x
+        j2cli
         (yarn.override {nodejs = nodejs-16_x;})
     ];
     LIBCLANG_PATH = "${pkgs.llvmPackages.libclang.lib}/lib";
