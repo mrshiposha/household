@@ -5,6 +5,7 @@
     gnumake
     cmake
     nodejs
+    (agda.withPackages (p: [ p.standard-library ]))
 
     nodePackages.mermaid-cli
   ];
