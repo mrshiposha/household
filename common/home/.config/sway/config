@@ -78,6 +78,7 @@ input * {
     bindsym $mod+p focus parent
 
     for_window [class="Steam"] floating enable
+    for_window [app_id="org.gnome.Calculator"] floating enable
 
 # Styling:
     # TODO colors (and vscode colors too)
