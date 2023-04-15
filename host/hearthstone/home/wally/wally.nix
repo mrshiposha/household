@@ -19,5 +19,6 @@
     "${common}/home/discord.nix"
     "${common}/home/image-view.nix"
     "${common}/home/vlc.nix"
+    "${common}/home/blender.nix"
   ];
 }
