@@ -29,6 +29,7 @@
     "${common}/home/vscode.nix"
     "${common}/home/firefox.nix"
     "${common}/home/telegram.nix"
+    "${common}/home/gedit.nix"
     "${common}/home/slack.nix"
     "${common}/home/discord.nix"
     "${common}/home/image-view.nix"
