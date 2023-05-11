@@ -15,6 +15,7 @@ in {
     "${root}/timezone.nix"
     "${root}/shell.nix"
     "${root}/base-sysenv.nix"
+    "${root}/ssh.nix"
     "${root}/polkit.nix"
     "${root}/docker.nix"
     "${root}/unfree-pkgs.nix"
