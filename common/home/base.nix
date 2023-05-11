@@ -15,6 +15,7 @@ in {
   home.packages = [
     nix-du
     meslo-lgs-nf
+    noto-fonts
   ];
   fonts.fontconfig.enable = true;
   programs = {
