@@ -92,8 +92,6 @@ include /household-conf/host/`hostname`/home/$USER/.config/compositor/config
 # System-specific:
 include @sysconfdir@/sway/config.d/*
 
-seat seat0 xcursor_theme Quintom_Ink
-
 exec dbus-sway-environment
 exec configure-gtk
 

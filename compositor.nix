@@ -74,6 +74,8 @@ in {
     MOZ_ENABLE_WAYLAND = "1";
     XDG_CURRENT_DESKTOP = "sway";
 
+    XCURSOR_THEME = "Quintom_Ink";
+
     GDK_PIXBUF_MODULE_FILE = "$(echo ${pkgs.librsvg.out}/lib/gdk-pixbuf-*/*/loaders.cache)";
   } // (if config.virtualisation.virtualbox.guest.enable then {
     WLR_NO_HARDWARE_CURSORS = "1";
