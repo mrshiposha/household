@@ -35,5 +35,6 @@
     "${common}/home/image-view.nix"
     "${common}/home/vlc.nix"
     "${common}/home/calc.nix"
+    "${common}/home/libresprite.nix"
   ];
 }
