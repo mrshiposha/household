@@ -86,6 +86,8 @@ input * {
 
     hide_edge_borders vertical
 
+    exec --no-startup-id xsettingsd
+
 # User-specific:
 include /household-conf/host/`hostname`/home/$USER/.config/compositor/config
 
