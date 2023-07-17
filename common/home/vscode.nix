@@ -58,7 +58,7 @@
       "nixEnvSelector.suggestion" = true;
       "lldb.suppressUpdateNotifications" = true;
       "editor.unicodeHighlight.ambiguousCharacters" = false;
-      "editor.fontFamily" = "Noto Sans Math";
+      "editor.fontFamily" = "mononoki, Cambria Math";
       "editor.fontSize" = 18;
       "workbench.colorTheme" = "sabye";
     };
