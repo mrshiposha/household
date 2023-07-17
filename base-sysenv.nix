@@ -11,6 +11,7 @@
     fwupd
     smartmontools
     unzip
+    unrar-wrapper
   ];
 
   services = {
