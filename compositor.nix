@@ -42,6 +42,8 @@ in {
   imports = [ ./polkit.nix ];
 
   environment.systemPackages = with pkgs; [
+    (callPackage ./common/packages/jay.nix {})
+
     sway
     dbus-sway-environment
     configure-gtk
@@ -65,12 +67,13 @@ in {
     libnotify
 
     jq
+    xsettingsd
   ];
 
   environment.sessionVariables = {
     XDG_DATA_DIRS = [ datadir ];
 
-    NIXOS_OZONE_WL = "1";
+    # NIXOS_OZONE_WL = "1";
     MOZ_ENABLE_WAYLAND = "1";
     XDG_CURRENT_DESKTOP = "sway";
 
