@@ -16,7 +16,8 @@ in {
     "${root}/shell.nix"
     "${root}/base-sysenv.nix"
     "${root}/ssh.nix"
-    "${root}/polkit.nix"
+    "${root}/security.nix"
+    ./vpn.nix
     "${root}/docker.nix"
     "${root}/unfree-pkgs.nix"
     "${root}/3d-graphics.nix"

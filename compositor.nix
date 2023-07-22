@@ -39,7 +39,7 @@ let
       '';
   };
 in {
-  imports = [ ./polkit.nix ];
+  imports = [ ./security.nix ];
 
   environment.systemPackages = with pkgs; [
     (callPackage ./common/packages/jay.nix {})

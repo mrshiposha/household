@@ -1,8 +1,15 @@
 { pkgs, ... }: {
   security.polkit.enable = true;
-  environment.systemPackages = [
-    pkgs.polkit_gnome
+  environment.systemPackages = with pkgs; [
+    polkit_gnome
+    pinentry
+    pass
   ];
+
+  programs.gnupg.agent = {
+    enable = true;
+    pinentryFlavor = "tty";
+  };
 
   systemd = {
     user.services.polkit-gnome-authentication-agent-1 = {
