@@ -12,6 +12,8 @@
         device = "nodev";
         gfxmodeEfi = resolution;
       };
+
+      timeout = 15;
     };
   } // (if silentBoot then {
     plymouth.enable = true;
