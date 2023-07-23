@@ -1,7 +1,9 @@
+{ config, lib, ... }:
 let 
   root = ./../..;
   host = "hearthstone";
   resolution = "2560x1440";
+  greeterImage = "${root}/common/images/${resolution}/mountain-range.jpg";
 in {
   imports = [
     (
@@ -21,7 +23,7 @@ in {
     "${root}/docker.nix"
     "${root}/unfree-pkgs.nix"
     "${root}/3d-graphics.nix"
-    (import "${root}/displaymanager.nix" resolution)
+    (import "${root}/greeter.nix" { background-image = greeterImage; })
     "${root}/users.nix"
     (import "${root}/home-manager.nix" host)
     "${root}/compositor.nix"
@@ -36,8 +38,17 @@ in {
   boot.kernelModules = [ "amdgpu" ];
 
   environment.sessionVariables = {
-    SWAYLOCK_IMAGE = "${root}/common/images/${resolution}/mountain-range.jpg";
+    SWAYLOCK_IMAGE = greeterImage;
   };
 
   networking.hostName = host;
+  system.nixos.label = lib.mkForce "single-seat:${config.system.stateVersion}";
+
+  specialisation = {
+    multi-seat.configuration = {
+      imports = [
+        ./multiseat/udev/video.nix
+      ];
+    };
+  };
 }

@@ -11,6 +11,10 @@
       inherit common username stateVersion;
       zshExtras = ''
         eval "$(direnv hook zsh)"
+
+        system-rebuild() {
+          sudo VPN_SERVER_KEY=$(pass show vpn/server-key) nixos-rebuild "$@"
+        }
       '';
     })
     (import "${common}/home/git.nix" { name = person; email = "${username}@gmail.com"; })
