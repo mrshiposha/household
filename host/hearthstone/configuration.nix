@@ -19,7 +19,11 @@ in {
     "${root}/base-sysenv.nix"
     "${root}/ssh.nix"
     "${root}/security.nix"
-    ./vpn.nix
+    (
+      import "${root}/vpns.nix" {
+        externalIface = "eno1";
+      }
+    )
     "${root}/docker.nix"
     "${root}/unfree-pkgs.nix"
     "${root}/3d-graphics.nix"
