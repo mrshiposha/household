@@ -7,8 +7,7 @@ let
         xkb_options "altwin:swap_alt_win,grp:win_space_toggle"
     }
 
-    exec dbus-sway-environment
-    exec configure-gtk
+    exec systemctl --user import-environment SWAYSOCK WAYLAND_DISPLAY
 
     # `-l` activates layer-shell mode. Notice that `swaymsg exit` will run after gtkgreet.
     exec "${pkgs.greetd.gtkgreet}/bin/gtkgreet -l -s /etc/greetd/gtkgreet.css; swaymsg exit"
