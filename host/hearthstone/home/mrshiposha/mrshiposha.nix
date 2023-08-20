@@ -5,6 +5,8 @@
   stateVersion,
   ...
 }:
+let cfg-vars = "VPN_SERVER_KEY=$(pass show vpn/server-key)";
+in
 { pkgs, lib, ... }: with pkgs; {
   imports = [
     (import "${common}/home/base.nix" {
@@ -13,7 +15,11 @@
         eval "$(direnv hook zsh)"
 
         system-rebuild() {
-          sudo VPN_SERVER_KEY=$(pass show vpn/server-key) nixos-rebuild "$@"
+          sudo ${cfg-vars} nixos-rebuild "$@"
+        }
+
+        system-cfg-repl() {
+          ${cfg-vars} nix repl --file '<nixpkgs/nixos>'
         }
       '';
     })
