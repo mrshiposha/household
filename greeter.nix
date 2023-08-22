@@ -9,13 +9,7 @@ let
 
     exec systemctl --user import-environment SWAYSOCK WAYLAND_DISPLAY
 
-    # `-l` activates layer-shell mode. Notice that `swaymsg exit` will run after gtkgreet.
-    exec "${pkgs.greetd.gtkgreet}/bin/gtkgreet -l -s /etc/greetd/gtkgreet.css; swaymsg exit"
-    bindsym Mod4+shift+e exec swaynag \
-      -t warning \
-      -m 'What do you want to do?' \
-      -b 'Poweroff' 'systemctl poweroff' \
-      -b 'Reboot' 'systemctl reboot'
+    exec "${pkgs.greetd.regreet}/bin/regreet; swaymsg exit"
   '';
 in
 {
@@ -32,21 +26,25 @@ in
     sway
   '';
 
-  environment.etc."greetd/gtkgreet.css".text = ''
-    window {
-      background-image: url("file:///${background-image}");
-      background-size: cover;
-      background-position: center;
-    }
+  programs.regreet = {
+    enable = true;
+    settings = {
+      background = {
+        path = background-image;
+        fit = "Contain";
+      };
 
-    window label {
-      color: #FFFFFF;
-    }
+      GTK = {
+        application_prefer_dark_theme = true;
+        theme_name = "Orchis-Green-Dark";
+        cursor_theme_name = "Quintom_Ink";
+        icon_theme_name = "Papirus-Dark";
+      };
 
-    entry {
-      color: #FFFFFF;
-      border-color: #4CAF50;
-      background-color: rgba(50, 50, 50, 0.5);
-    }
-  '';
+      commands = {
+        reboot = ["systemctl" "reboot"];
+        poweroff = ["systemctl" "poweroff"];
+      };
+    };
+  };
 }
