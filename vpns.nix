@@ -85,6 +85,18 @@ assert server-key != "";
         };
       };
     })
+
+    (vpn {
+      iface = "vpn.shiposha.sr";
+      ipBase = "10.30.0";
+      vpnPort = 51821;
+      peers = {
+        "macbook.shiposha.home" = {
+          ip = 7;
+          publicKey = "t1Bn5hor5eqaTie2gACMjMp7jTJEzryemB2hwx3TsDY=";
+        };
+      };
+    })
   ];
 
   networking.nat.enable = true;
