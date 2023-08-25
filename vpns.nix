@@ -57,6 +57,8 @@ let
     networking.hosts = {
       "${serverIp}" = [ "${config.networking.hostName}.home" ];
     } // dnsHosts;
+
+    services.fail2ban.ignoreIP = [ "${serverIp}/24" ];
   };
 in
 
