@@ -20,8 +20,8 @@ in {
     "${root}/ssh.nix"
     "${root}/security.nix"
     (
-      import "${root}/vpns.nix" {
-        externalIface = "eno1";
+      import "${root}/net" {
+        vpnExternalIface = "eno1";
       }
     )
     "${root}/docker.nix"

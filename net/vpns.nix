@@ -25,9 +25,11 @@ let
     dnsHosts = lib.attrsets.mapAttrs' (
       name: peerInfo: lib.nameValuePair (peerIp peerInfo) [ name ]
     ) peers;
+    net = "${ipBase}.0/24";
+    nftAdd = "${pkgs.nftables}/bin/nft add";
+    nftDel = "${pkgs.nftables}/bin/nft delete";
   in
   {
-    networking.nat.internalInterfaces = [ iface ];
     networking.firewall = {
       allowedUDPPorts = [ vpnPort ];
       interfaces."${iface}" = {
@@ -42,11 +44,15 @@ let
         listenPort = vpnPort;
 
         postSetup = ''
-          ${pkgs.iptables}/bin/iptables -t nat -A POSTROUTING -s ${serverIp} -o ${externalIface} -j MASQUERADE
+          ${nftAdd} element ip vpn ifaces { ${iface} }
+          ${nftAdd} element ip vpn nets { ${net} }
+          ${nftAdd} element ip vpn net-forward-accept { ${net} . ${net} : accept }
         '';
 
         postShutdown = ''
-          ${pkgs.iptables}/bin/iptables -t nat -D POSTROUTING -s ${serverIp} -o ${externalIface} -j MASQUERADE
+          ${nftDel} element ip vpn ifaces { ${iface} }
+          ${nftDel} element ip vpn nets { ${net} }
+          ${nftDel} element ip vpn net-forward-accept { ${net} . ${net} }
         '';
 
         privateKey = server-key;
@@ -69,6 +75,37 @@ assert server-key != "";
     wireguard-tools
     pass
   ];
+
+  networking.nftables.ruleset = ''
+    table ip vpn {
+      set ifaces {
+        type ifname
+      }
+
+      set nets {
+        type ipv4_addr
+        flags interval
+      }
+
+      map net-forward-accept {
+        type ipv4_addr . ipv4_addr : verdict
+        flags interval
+      }
+
+      chain nat {
+        type nat hook postrouting priority srcnat; policy accept;
+
+        meta iifname @ifaces meta oifname ${externalIface} masquerade
+      }
+
+      chain forward {
+        type filter hook forward priority filter; policy accept;
+
+        ip saddr . ip daddr vmap @net-forward-accept
+        ip saddr @nets ip daddr @nets drop
+      }
+    }
+  '';
 
   imports = [
     (vpn {
@@ -100,9 +137,6 @@ assert server-key != "";
       };
     })
   ];
-
-  networking.nat.enable = true;
-  networking.nat.externalInterface = externalIface;
 
   services.dnsmasq = {
     enable = true;
