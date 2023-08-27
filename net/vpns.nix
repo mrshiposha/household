@@ -102,6 +102,7 @@ assert server-key != "";
         type filter hook forward priority filter; policy accept;
 
         ip saddr . ip daddr vmap @net-forward-accept
+        ip saddr @nets ip daddr 192.168.0.0/16 drop
         ip saddr @nets ip daddr @nets drop
       }
     }
