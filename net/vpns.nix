@@ -30,9 +30,39 @@
       ipBase = "10.30.0";
       vpnPort = 51821;
       peers = {
-        "macbook.shiposha.home" = {
-          ip = 7;
-          publicKey = "t1Bn5hor5eqaTie2gACMjMp7jTJEzryemB2hwx3TsDY=";
+        "mbp.shiposha.home" = {
+          ip = 2;
+          publicKey = "qn4klDZpLYBT13p0h5ICY7kBy1UoKvqzhzt5HnTdaUM=";
+        };
+
+        "dachamac.shiposha.home" = {
+          ip = 3;
+          publicKey = "crQjlzFABJniGvX+txwbZIabOgdtm1XFxBfc3Cl+eXw=";
+        };
+
+        "phone.shiposha.home" = {
+          ip = 4;
+          publicKey = "JSHiEmdPT/6IIUAH0T65PwuMNds+mVov02A4xcq4VCg=";
+        };
+
+        "hack.shiposha.home" = {
+          ip = 5;
+          publicKey = "a1/5TVe7e4eMYWwN1SRRVfYx7HMN1eyeffhiwIk2W3w=";
+        };
+
+        "phone.esina.home" = {
+          ip = 20;
+          publicKey = "5WrkANeWSE5VH2d0PWiw5LfxPGpbAuh95VfakOoXPAc=";
+        };
+
+        "ipad.esina.home" = {
+          ip = 21;
+          publicKey = "C8lQivi2s2uIrQYlfEINANCoC9r2yDR+WzM+xQ40iQA=";
+        };
+
+        "macbook.esina.home" = {
+          ip = 22;
+          publicKey = "fNXFNoqYP46JAK1We+4jbRDOjI0YJisPAidHk5kyiFQ=";
         };
       };
     })
