@@ -14,11 +14,7 @@ in {
 
   home.packages = [
     nix-du
-    meslo-lgs-nf
-    noto-fonts
-    mononoki
   ];
-  fonts.fontconfig.enable = true;
   programs = {
     zsh = {
       enable = true;

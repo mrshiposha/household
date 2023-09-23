@@ -5,6 +5,8 @@ let unfreePkgs = [
     "slack"
     "discord"
     "vscode-extension-ms-vscode-remote-remote-ssh"
+    "corefonts"
+    "vista-fonts"
 ]; in
 { lib, ... }: {
   nixpkgs.config.allowUnfreePredicate = pkg:

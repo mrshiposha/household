@@ -14,6 +14,18 @@
     unrar-wrapper
   ];
 
+  fonts = {
+    fonts = [
+      meslo-lgs-nf
+      noto-fonts
+      mononoki
+      corefonts
+      vistafonts
+    ];
+    fontconfig.enable = true;
+    fontDir.enable = true;
+  };
+
   services = {
     dbus.enable = true;
     fwupd.enable = true;
