@@ -46,5 +46,7 @@ in
     "${common}/home/vlc.nix"
     "${common}/home/calc.nix"
     "${common}/home/libresprite.nix"
+    "${common}/home/qpwgraph.nix"
+    "${common}/home/blender.nix"
   ];
 }
