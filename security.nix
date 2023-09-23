@@ -1,4 +1,9 @@
-{ pkgs, ... }: {
+{ pkgs, ... }:
+
+let pamNamespaceRequired = pkgs.lib.mkDefault (
+  pkgs.lib.mkAfter "session required pam_namespace.so\n"
+);
+in {
   security.polkit.enable = true;
   environment.systemPackages = with pkgs; [
     polkit_gnome
@@ -26,5 +31,17 @@
           TimeoutStopSec = 10;
         };
     };
+  };
+
+  security.pam.services = {
+    login.text = pamNamespaceRequired;
+    greetd.text = pamNamespaceRequired;
+    sshd.text = pamNamespaceRequired;
+  };
+
+  environment.etc = {
+    "security/namespace.conf".text = ''
+      /tmp    /poly/tmp    tmpdir    root
+    '';
   };
 }
