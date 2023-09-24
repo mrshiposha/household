@@ -11,10 +11,16 @@ let
 
     exec "${pkgs.greetd.regreet}/bin/regreet; swaymsg exit"
   '';
+  greetdPackage = (pkgs.callPackage ./common/packages/greetd.nix {});
 in
 {
+  environment.systemPackages = [
+    greetdPackage
+  ];
+
   services.greetd = {
     enable = true;
+    package = greetdPackage;
     settings = {
       default_session = {
         command = "${pkgs.sway}/bin/sway --config ${swayConfig}";
