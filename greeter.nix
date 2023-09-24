@@ -1,6 +1,7 @@
-{ background-image }:
-{ config, lib, pkgs, ... }:
+{ config, lib, pkgs, ... }: with lib;
 let
+  cfg = config.greeter;
+  greetdPackage = (pkgs.callPackage ./common/packages/greetd.nix {});
   swayConfig = pkgs.writeText "greetd-sway-config" ''
     input * {
         xkb_layout "us,ru"
@@ -11,45 +12,53 @@ let
 
     exec "${pkgs.greetd.regreet}/bin/regreet; swaymsg exit"
   '';
-  greetdPackage = (pkgs.callPackage ./common/packages/greetd.nix {});
 in
 {
-  environment.systemPackages = [
-    greetdPackage
-  ];
-
-  services.greetd = {
-    enable = true;
-    package = greetdPackage;
-    settings = {
-      default_session = {
-        command = "${pkgs.sway}/bin/sway --config ${swayConfig}";
-      };
+  options.greeter = {
+    enable = mkEnableOption null;
+    backgroundImage = mkOption {
+      type = types.str;
     };
   };
 
-  environment.etc."greetd/environments".text = ''
-    sway
-  '';
+  config = mkIf cfg.enable {
+    environment.systemPackages = [
+      greetdPackage
+    ];
 
-  programs.regreet = {
-    enable = true;
-    settings = {
-      background = {
-        path = background-image;
-        fit = "Contain";
+    services.greetd = {
+      enable = true;
+      package = greetdPackage;
+      settings = {
+        default_session = {
+          command = "${pkgs.sway}/bin/sway --config ${swayConfig}";
+        };
       };
+    };
 
-      GTK = {
-        application_prefer_dark_theme = true;
-        theme_name = "Orchis-Green-Dark";
-        cursor_theme_name = "Quintom_Ink";
-        icon_theme_name = "Papirus-Dark";
-      };
+    environment.etc."greetd/environments".text = ''
+      sway
+    '';
 
-      commands = {
-        reboot = ["systemctl" "reboot"];
-        poweroff = ["systemctl" "poweroff"];
+    programs.regreet = {
+      enable = true;
+      settings = {
+        background = {
+          path = cfg.backgroundImage;
+          fit = "Contain";
+        };
+
+        GTK = {
+          application_prefer_dark_theme = true;
+          theme_name = "Orchis-Green-Dark";
+          cursor_theme_name = "Quintom_Ink";
+          icon_theme_name = "Papirus-Dark";
+        };
+
+        commands = {
+          reboot = ["systemctl" "reboot"];
+          poweroff = ["systemctl" "poweroff"];
+        };
       };
     };
   };

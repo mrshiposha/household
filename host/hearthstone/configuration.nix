@@ -27,7 +27,7 @@ in {
     "${root}/docker.nix"
     "${root}/unfree-pkgs.nix"
     "${root}/3d-graphics.nix"
-    (import "${root}/greeter.nix" { background-image = greeterImage; })
+    "${root}/greeter.nix"
     "${root}/users.nix"
     (import "${root}/home-manager.nix" host)
     "${root}/compositor.nix"
@@ -40,6 +40,11 @@ in {
   ];
 
   boot.kernelModules = [ "amdgpu" ];
+
+  greeter = {
+    enable = true;
+    backgroundImage = greeterImage;
+  };
 
   environment.sessionVariables = {
     SWAYLOCK_IMAGE = greeterImage;
