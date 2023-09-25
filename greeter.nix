@@ -1,7 +1,10 @@
-{ config, lib, pkgs, ... }: with lib;
+{ config, pkgs, lib, ... }: with lib;
 let
   cfg = config.greeter;
   greetdPackage = (pkgs.callPackage ./common/packages/greetd.nix {});
+  vt = "1";
+  tty = "tty${vt}";
+
   swayConfig = pkgs.writeText "greetd-sway-config" ''
     input * {
         xkb_layout "us,ru"
@@ -12,37 +15,100 @@ let
 
     exec "${pkgs.greetd.regreet}/bin/regreet; swaymsg exit"
   '';
-in
-{
+
+  greetdSettings = seat: {
+    terminal.vt = if seat == "seat0" then vt else "none";
+    default_session = {
+      user = "${seat}-greeter";
+      command = "${pkgs.sway}/bin/sway --config ${swayConfig}";
+    };
+  };
+
+  settingsFormat = pkgs.formats.toml {};
+in {
   options.greeter = {
     enable = mkEnableOption null;
+
     backgroundImage = mkOption {
       type = types.str;
+    };
+
+    seats = mkOption {
+      default = ["seat0"];
+      type = types.listOf types.str;
     };
   };
 
   config = mkIf cfg.enable {
-    environment.systemPackages = [
-      greetdPackage
-    ];
+    systemd.defaultUnit = "graphical.target";
 
-    services.greetd = {
-      enable = true;
-      package = greetdPackage;
-      settings = {
-        default_session = {
-          command = "${pkgs.sway}/bin/sway --config ${swayConfig}";
-        };
-      };
+    security.pam.services.greetd = {
+      allowNullPassword = false;
+      startSession = true;
     };
 
-    environment.etc."greetd/environments".text = ''
-      sway
-    '';
+    systemd.services = builtins.listToAttrs (
+      builtins.map (seat: {
+        name = "${seat}-greeter";
+        value = {
+          unitConfig = {
+          Wants = [
+            "systemd-user-sessions.service"
+          ];
+          After = [
+            "systemd-user-sessions.service"
+            "plymouth-quit-wait.service"
+            "getty@${tty}.service"
+          ];
+          Conflicts = [
+            "getty@${tty}.service"
+          ];
+        };
 
-    programs.regreet = {
-      enable = true;
-      settings = {
+        serviceConfig = {
+          ExecStart = "${greetdPackage}/bin/greetd --config ${settingsFormat.generate "${seat}-greetd.toml" (greetdSettings seat)}";
+
+          Restart = mkIf (!((greetdSettings seat) ? initial_session)) "always";
+
+          # Defaults from greetd upstream configuration
+          IgnoreSIGPIPE = false;
+          SendSIGHUP = true;
+          TimeoutStopSec = "30s";
+          KeyringMode = "shared";
+
+          Type = "idle";
+        };
+
+        # Don't kill a user session when using nixos-rebuild
+        restartIfChanged = false;
+
+        wantedBy = [ "graphical.target" ];    
+        };
+      }) cfg.seats
+    ) // {
+      "autovt@${tty}".enable = false;
+    };
+
+    users.users = builtins.listToAttrs (
+      builtins.map (seat: {
+        name = "${seat}-greeter";
+        value = {
+          isSystemUser = true;
+          group = "greeter";
+        };
+      }) cfg.seats
+    );
+
+    users.groups.greeter = {};
+
+    environment.etc = {
+      "greetd/environments".text = ''
+        sway
+      '';
+
+      "greetd/regreet.css".text = "";
+
+      "greetd/regreet.toml".source = settingsFormat.generate "regreet.toml" {
         background = {
           path = cfg.backgroundImage;
           fit = "Contain";
@@ -61,5 +127,10 @@ in
         };
       };
     };
+
+    systemd.tmpfiles.rules = builtins.concatMap (seat: [
+      "d /var/log/regreet 0755 greeter ${seat}-greeter - -"
+      "d /var/cache/regreet 0755 greeter ${seat}-greeter - -"
+    ]) cfg.seats;
   };
 }
