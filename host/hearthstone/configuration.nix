@@ -51,13 +51,19 @@ in {
   };
 
   networking.hostName = host;
-  system.nixos.label = lib.mkForce "single-seat:${config.system.stateVersion}";
 
   specialisation = {
     multi-seat.configuration = {
-      imports = [
-        ./multiseat/udev/video.nix
-      ];
+      imports = [./multiseat];
+
+      extraSeats.hall = {
+        devices = [
+          {
+            subsystem = "drm";
+            name = "card1";
+          }
+        ];
+      };
     };
   };
 }

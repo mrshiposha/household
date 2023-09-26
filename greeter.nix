@@ -33,13 +33,13 @@ in {
       type = types.str;
     };
 
-    seats = mkOption {
-      default = ["seat0"];
+    extraSeats = mkOption {
+      default = [];
       type = types.listOf types.str;
     };
   };
 
-  config = mkIf cfg.enable {
+  config = let seats = ["seat0"] ++ cfg.extraSeats; in mkIf cfg.enable {
     systemd.defaultUnit = "graphical.target";
 
     security.pam.services.greetd = {
@@ -84,7 +84,7 @@ in {
 
         wantedBy = [ "graphical.target" ];    
         };
-      }) cfg.seats
+      }) seats
     ) // {
       "autovt@${tty}".enable = false;
     };
@@ -96,7 +96,7 @@ in {
           isSystemUser = true;
           group = "greeter";
         };
-      }) cfg.seats
+      }) seats
     );
 
     users.groups.greeter = {};
@@ -129,8 +129,8 @@ in {
     };
 
     systemd.tmpfiles.rules = builtins.concatMap (seat: [
-      "d /var/log/regreet 0755 greeter ${seat}-greeter - -"
-      "d /var/cache/regreet 0755 greeter ${seat}-greeter - -"
-    ]) cfg.seats;
+      "d /var/log/regreet 0755 ${seat}-greeter greeter - -"
+      "d /var/cache/regreet 0755 ${seat}-greeter greeter - -"
+    ]) seats;
   };
 }
