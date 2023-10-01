@@ -66,6 +66,18 @@
         };
       };
     })
+
+    (import ./define-vpn.nix {
+      iface = "vpn.makhov";
+      ipBase = "10.60.0";
+      vpnPort = 51822;
+      peers = {
+        "alexander.makhov" = {
+          ip = 2;
+          publicKey = "pugiTqxafBmclY++zR7cjfquufOAkx+ykntmhzJdYxs=";
+        };
+      };
+    })
   ];
 
   services.dnsmasq = {
