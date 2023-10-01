@@ -7,7 +7,8 @@
       bungcip.better-toml
       matklad.rust-analyzer
       vadimcn.vscode-lldb
-      vscode-extensions.jock.svg
+      jock.svg
+      dbaeumer.vscode-eslint
     ] ++ vscode-utils.extensionsFromVscodeMarketplace [
       {
         name = "nix-env-selector";
@@ -40,8 +41,15 @@
       {
         name = "agda-mode";
         publisher = "banacorn";
-        version = "0.3.11";
+        version = "0.4.1";
         sha256 = "sha256-jnH3oNqvkO/+Oi+8MM1RqooPFrQZMDWLSEnrVLnc5VI=";
+      }
+
+      {
+        name = "agda";
+        publisher = "j-mueller";
+        version = "0.1.7";
+        sha256 = "sha256-S0svSulHJKN7JwznVj3KTLd341oeMainUiY/peQdPSY=";
       }
 
       {
