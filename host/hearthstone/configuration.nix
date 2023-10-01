@@ -56,11 +56,16 @@ in {
     multi-seat.configuration = {
       imports = [./multiseat];
 
-      extraSeats.hall = {
+      extraSeats.seat-hall = {
         devices = [
           {
             subsystem = "drm";
             name = "card1";
+          }
+
+          {
+            subsystem = "usb";
+            name = "5-5.3";
           }
         ];
       };

@@ -18,6 +18,7 @@ let
 
   greetdSettings = seat: {
     terminal.vt = if seat == "seat0" then vt else "none";
+    general.seat = seat;
     default_session = {
       user = "${seat}-greeter";
       command = "${pkgs.sway}/bin/sway --config ${swayConfig}";
