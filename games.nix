@@ -8,8 +8,8 @@ in {
       ];
     };
     systemPackages = [
-      nix-gaming.packages.${pkgs.hostPlatform.system}.wine-ge
-      winetricks
+      # nix-gaming.packages.${pkgs.hostPlatform.system}.wine-ge
+      # winetricks
       lutris
       transmission-gtk
       mangohud

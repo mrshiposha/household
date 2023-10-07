@@ -1,4 +1,4 @@
-{ config, lib, ... }:
+{ config, pkgs, lib, ... }:
 let 
   root = ./../..;
   host = "hearthstone";
@@ -28,7 +28,6 @@ in {
     "${root}/unfree-pkgs.nix"
     "${root}/3d-graphics.nix"
     "${root}/greeter.nix"
-    "${root}/users.nix"
     (import "${root}/home-manager.nix" host)
     "${root}/compositor.nix"
     "${root}/widgets.nix"
@@ -52,6 +51,41 @@ in {
 
   networking.hostName = host;
 
+  services.hardware.bolt.enable = true;
+
+  users = {
+    users = {
+      common = {
+        description = "The owner of the common directory";
+        group = "common";
+        isSystemUser = true;
+      };
+
+      mrshiposha = {
+        home = "/home/mrshiposha";
+        initialPassword = "helloworld";
+        description = "Daniel Shiposha";
+        extraGroups = [ "wheel" "common" ];
+        isNormalUser = true;
+        openssh.authorizedKeys.keyFiles = [];
+      };
+
+      wally = {
+        home = "/home/wally";
+        description = "Valentina Shiposha";
+        extraGroups = [ "common" ];
+        isNormalUser = true;
+      };
+    };
+    groups.common = {};
+  };
+
+  systemd = {
+    tmpfiles.rules = [
+      "d /media/steam-library 2770 common common -"
+    ];
+  };
+
   specialisation = {
     multi-seat.configuration = {
       imports = [./multiseat];
@@ -65,7 +99,7 @@ in {
 
           {
             subsystem = "usb";
-            name = "5-5.3";
+            name = "3-8.4";
           }
         ];
       };

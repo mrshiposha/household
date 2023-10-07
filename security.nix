@@ -33,6 +33,10 @@ in {
     };
   };
 
+  systemd.tmpfiles.rules = [
+    "d /poly 000 root root -"
+  ];
+
   security.pam.services = {
     login.text = pamNamespaceRequired;
     greetd.text = pamNamespaceRequired;
@@ -42,6 +46,7 @@ in {
   environment.etc = {
     "security/namespace.conf".text = ''
       /tmp    /poly/tmp    tmpdir    root
+      /media/steam-library/SteamLibrary/steamapps/compatdata    /poly/steam/compatdata    user    root
     '';
   };
 }

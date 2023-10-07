@@ -1,4 +1,4 @@
-host: { pkgs, lib, ... }:
+host: { config, pkgs, lib, ... }:
 let
   common = ./common;
   usernixes = builtins.filter
@@ -24,7 +24,7 @@ in {
           name = username;
           value = import usernix {
             inherit common private username;
-            person = (import ./users/${username}.nix).users.users.${username}.description;
+            person = config.users.users.${username}.description;
             stateVersion = system-version;
           };
         })
