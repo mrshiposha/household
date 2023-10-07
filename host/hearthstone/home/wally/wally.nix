@@ -1,12 +1,11 @@
 {
   common,
   username,
-  stateVersion,
   ...
 }:
 { pkgs, lib, ... }: with pkgs; {
   imports = [
-    (import "${common}/home/base.nix" { inherit common username stateVersion; })
+    (import "${common}/home/base.nix" { inherit common username; })
     (import "${common}/functions/setup-common-config.nix" {
       inherit lib;
       config-dir = "${common}/home/.config";

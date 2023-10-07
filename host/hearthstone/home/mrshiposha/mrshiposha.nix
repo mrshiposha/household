@@ -2,15 +2,14 @@
   common,
   username,
   person,
-  stateVersion,
   ...
 }:
+{ pkgs, lib, ... }:
 let cfg-vars = "VPN_SERVER_KEY=$(pass show vpn/server-key)";
-in
-{ pkgs, lib, ... }: with pkgs; {
+in with pkgs; {
   imports = [
     (import "${common}/home/base.nix" {
-      inherit common username stateVersion;
+      inherit common username;
       zshExtras = ''
         eval "$(direnv hook zsh)"
 

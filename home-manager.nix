@@ -1,14 +1,11 @@
-host: { config, pkgs, lib, ... }:
+tarball: { config, pkgs, lib, ... }:
 let
   common = ./common;
   usernixes = builtins.filter
     (file: lib.hasSuffix ".nix" file)
-    (lib.filesystem.listFilesRecursive ./host/${host}/home); 
-  system-version = import ./common/system-version.nix;
-in let
-  home-manager = builtins.fetchTarball "https://github.com/nix-community/home-manager/archive/release-${system-version}.tar.gz";
+    (lib.filesystem.listFilesRecursive ./host/${config.networking.hostName}/home);
 in {
-  imports = [(import "${home-manager}/nixos")];
+  imports = [(import "${tarball}/nixos")];
 
   home-manager = {
     useUserPackages = true;
@@ -25,7 +22,6 @@ in {
           value = import usernix {
             inherit common private username;
             person = config.users.users.${username}.description;
-            stateVersion = system-version;
           };
         })
         usernixes

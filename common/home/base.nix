@@ -1,16 +1,15 @@
 {
   common,
   username,
-  stateVersion,
   zshExtras ? ""
-}: { pkgs, ... }: with pkgs;
+}: { pkgs, osConfig, ... }: with pkgs;
 let
   p10k-normal = "${common}/home/p10k/normal.zsh";
   p10k-minimal = "${common}/home/p10k/minimal.zsh";
 in {
   home.username = username;
   home.homeDirectory = "/home/${username}";
-  home.stateVersion = stateVersion;
+  home.stateVersion = osConfig.system.stateVersion;
 
   home.packages = [
     nix-du

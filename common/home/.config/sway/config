@@ -20,7 +20,6 @@ default_border pixel 2
 ### Keyboard layout
 input * {
     xkb_layout "us,ru"
-    xkb_options "altwin:swap_alt_win,grp:win_space_toggle"
 }
 
 ### Key bindings

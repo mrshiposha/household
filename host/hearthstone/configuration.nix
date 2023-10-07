@@ -1,7 +1,7 @@
 { config, pkgs, lib, ... }:
 let 
   root = ./../..;
-  host = "hearthstone";
+  stateVersion = "23.05";
   resolution = "2560x1440";
   greeterImage = "${root}/common/images/${resolution}/mountain-range.jpg";
 in {
@@ -13,7 +13,6 @@ in {
       }
     )
     "${root}/kernel.nix"
-    "${root}/system.nix"
     "${root}/timezone.nix"
     "${root}/shell.nix"
     "${root}/base-sysenv.nix"
@@ -28,7 +27,7 @@ in {
     "${root}/unfree-pkgs.nix"
     "${root}/3d-graphics.nix"
     "${root}/greeter.nix"
-    (import "${root}/home-manager.nix" host)
+    (import "${root}/home-manager.nix" (builtins.fetchTarball "https://github.com/nix-community/home-manager/archive/release-${stateVersion}.tar.gz"))
     "${root}/compositor.nix"
     "${root}/widgets.nix"
     "${root}/file-manager.nix"
@@ -36,8 +35,13 @@ in {
     "${root}/bluetooth.nix"
     "${root}/openrgb.nix"
     "${root}/games.nix"
+
+    "${root}/openrazer.nix"
+    "${root}/common/modules/identities.nix"
   ];
 
+  system.stateVersion = stateVersion;
+  networking.hostName = "hearthstone";
   boot.kernelModules = [ "amdgpu" ];
 
   greeter = {
@@ -49,35 +53,32 @@ in {
     SWAYLOCK_IMAGE = greeterImage;
   };
 
-  networking.hostName = host;
-
   services.hardware.bolt.enable = true;
 
-  users = {
-    users = {
-      common = {
-        description = "The owner of the common directory";
-        group = "common";
-        isSystemUser = true;
-      };
-
+  identities = {
+    users.normal = {
       mrshiposha = {
-        home = "/home/mrshiposha";
         initialPassword = "helloworld";
         description = "Daniel Shiposha";
-        extraGroups = [ "wheel" "common" ];
-        isNormalUser = true;
-        openssh.authorizedKeys.keyFiles = [];
       };
 
       wally = {
-        home = "/home/wally";
         description = "Valentina Shiposha";
-        extraGroups = [ "common" ];
-        isNormalUser = true;
       };
     };
-    groups.common = {};
+
+    users.system = {
+      common = {
+        description = "The owner of common directories";
+        primaryGroup = "common";
+      };
+    };
+
+    groups = {
+      wheel.members = ["mrshiposha"];
+      openrazer.members = ["mrshiposha" "wally"];
+      common.members = ["common" "mrshiposha" "wally"];
+    };
   };
 
   systemd = {

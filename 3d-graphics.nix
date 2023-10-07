@@ -12,4 +12,7 @@
         "L+    /opt/rocm/hip   -    -    -     -    ${pkgs.hip}"
     ];
 
+    environment.systemPackages = [
+        corectrl
+    ];
 }
