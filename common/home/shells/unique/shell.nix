@@ -7,9 +7,9 @@
         llvmPackages.bintools
         clang_11
         llvm
-        nodejs-16_x
+        nodejs
+        yarn
         j2cli
-        (yarn.override {nodejs = nodejs-16_x;})
     ];
     LIBCLANG_PATH = "${pkgs.llvmPackages.libclang.lib}/lib";
     PROTOC = "${pkgs.protobuf}/bin/protoc";
