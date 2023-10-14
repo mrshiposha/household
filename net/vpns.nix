@@ -80,6 +80,8 @@
     })
   ];
 
+  services.fail2ban.ignoreIP = [ "10.0.0.0/24" ];
+
   services.dnsmasq = {
     enable = true;
     settings = {
