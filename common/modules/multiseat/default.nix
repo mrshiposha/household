@@ -14,7 +14,7 @@ in with lib; {
     };
 
     config = {
-        system.nixos.label = "multi-seat:${config.system.stateVersion}";
+        system.nixos.label = "multiseat:${config.system.stateVersion}";
 
         services.udev.packages = builtins.attrValues (
             builtins.mapAttrs (_: extraSeat: extraSeat.rules) config.extraSeats
