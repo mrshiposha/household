@@ -47,5 +47,6 @@ in with pkgs; {
     "${common}/home/libresprite.nix"
     "${common}/home/qpwgraph.nix"
     "${common}/home/blender.nix"
+    "${common}/home/mime-defaultapps.nix"
   ];
 }

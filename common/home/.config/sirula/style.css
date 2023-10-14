@@ -1,5 +1,5 @@
 #app-list {
-    background: #2d362d;
+    background: #434c5e;
 }
 
 #root-box {
@@ -7,24 +7,23 @@
 }
 
 #search {
-    background: #406340;
+    background: #5e81ac;
     border-radius: 15px 0 0 0;
     padding-left: 1em;
 }
 
 .app-row:hover:selected {
-    background-color: alpha(#4CAF50, 0.1);
+    background-color: #8fbcbb;
 }
 
 .app-row:hover {
-    background-color: alpha(#4CAF50, 0.035);
+    background-color: #8fbcbb;
 }
 
 .app-row:selected {
-    background-color: alpha(#4CAF50, 0.05);
+    background-color: #8fbcbb;
 }
 
-
 .app-row:hover.selected {
-    background-color: alpha(#4CAF50, 0.1);
+    background-color: #8fbcbb;
 }

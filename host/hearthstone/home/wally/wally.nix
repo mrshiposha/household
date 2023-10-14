@@ -21,5 +21,6 @@
     "${common}/home/blender.nix"
     "${common}/home/gedit.nix"
     "${common}/home/calc.nix"
+    "${common}/home/mime-defaultapps.nix"
   ];
 }

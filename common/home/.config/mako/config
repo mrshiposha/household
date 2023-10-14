@@ -2,9 +2,16 @@ default-timeout=3500
 
 outer-margin=40,10
 
-background-color=#82AC5D
-border-color=#4CAF50
+background-color=#8fbcbb9d
+border-color=#8fbcbb9d
+progress-color=source #b48ead9d
+
+layer=overlay
+anchor=bottom-left
 
 border-radius=10
 
-icon-path=/run/current-system/sw/share/icons/Papirus-Dark
+icon-path=/run/current-system/sw/share/icons/Zafiro-icons-Dark
+
+[mode=dont-disturb]
+invisible=1

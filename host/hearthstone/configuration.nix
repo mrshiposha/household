@@ -76,6 +76,8 @@ in {
 
     groups = {
       wheel.members = ["mrshiposha"];
+      video.members = ["mrshiposha" "wally"];
+      render.members = ["mrshiposha" "wally"];
       openrazer.members = ["mrshiposha" "wally"];
       common.members = ["common" "mrshiposha" "wally"];
     };
@@ -88,8 +90,8 @@ in {
   };
 
   specialisation = {
-    multi-seat.configuration = {
-      imports = [./multiseat];
+    multiseat.configuration = {
+      imports = ["${root}/common/modules/multiseat"];
 
       extraSeats.seat-hall = {
         devices = [

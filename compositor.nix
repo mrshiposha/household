@@ -12,12 +12,12 @@ let
     executable = true;
 
     text = ''
-  dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP=sway
+  systemctl --user import-environment DISPLAY WAYLAND_DISPLAY SWAYSOCK
+  dbus-update-activation-environment --systemd DISPLAY WAYLAND_DISPLAY SWAYSOCK
   systemctl --user stop pipewire pipewire-media-session xdg-desktop-portal xdg-desktop-portal-wlr
   systemctl --user start pipewire pipewire-media-session xdg-desktop-portal xdg-desktop-portal-wlr
       '';
   };
-
   schema = pkgs.gsettings-desktop-schemas;
   datadir = "${schema}/share/gsettings-schemas/${schema.name}";
 
@@ -33,18 +33,19 @@ let
       executable = true;
       text = ''
         gnome_schema=org.gnome.desktop.interface
-        gsettings set $gnome_schema gtk-theme 'Orchis-Green-Dark'
+        gsettings set $gnome_schema gtk-theme 'Nordic'
         gsettings set $gnome_schema cursor-theme 'Quintom_Ink'
-        gsettings set $gnome_schema icon-theme 'Papirus-Dark'
+        gsettings set $gnome_schema icon-theme 'Zafiro-icons-Dark'
       '';
   };
 in {
-  imports = [ ./security.nix ];
+  imports = [ ./security.nix ./json.nix ];
 
   environment.systemPackages = with pkgs; [
     (callPackage ./common/packages/jay.nix {})
 
     sway
+    dbus
     dbus-sway-environment
     configure-gtk
     wayland
@@ -55,9 +56,9 @@ in {
     librsvg
 
     # gtk theme
-    orchis-theme
+    nordic
+    zafiro-icons
     quintom-cursor-theme
-    (papirus-icon-theme.override { color = "green"; })
 
     swaylock
     swayidle
@@ -66,7 +67,9 @@ in {
     mako # notification system developed by swaywm maintainer
     libnotify
 
-    jq
+    # Screenshots
+    # grim
+
     xsettingsd
   ];
 
@@ -75,7 +78,12 @@ in {
 
     # NIXOS_OZONE_WL = "1";
     MOZ_ENABLE_WAYLAND = "1";
+
+    SDL_VIDEODRIVER="wayland";
+    _JAVA_AWT_WM_NONREPARENTING="1";
+    QT_QPA_PLATFORM="wayland";
     XDG_CURRENT_DESKTOP = "sway";
+    XDG_SESSION_DESKTOP="sway";
 
     XCURSOR_THEME = "Quintom_Ink";
 
