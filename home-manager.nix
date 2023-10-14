@@ -4,6 +4,7 @@ let
   usernixes = builtins.filter
     (file: lib.hasSuffix ".nix" file)
     (lib.filesystem.listFilesRecursive ./host/${config.networking.hostName}/home);
+  homeManagerSessionVars = "/etc/profiles/per-user/$USER/etc/profile.d/hm-session-vars.sh";
 in {
   imports = [(import "${tarball}/nixos")];
 
@@ -27,4 +28,6 @@ in {
         usernixes
     );
   };
+
+  environment.extraInit = "[[ -f ${homeManagerSessionVars} ]] && source ${homeManagerSessionVars}";
 }

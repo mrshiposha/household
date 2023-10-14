@@ -21,7 +21,7 @@ let
             };
             primaryGroup = lib.mkOption {
                 type = lib.types.str;
-            }; 
+            };
         };
     };
 

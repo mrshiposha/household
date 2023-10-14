@@ -5,4 +5,8 @@
       import = ["${common}/home/.config/alacritty/theme"];
     };
   };
+  home.sessionVariables = {
+    TERM = "alacritty";
+    TERMINAL = "alacritty";
+  };
 }
