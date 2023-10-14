@@ -1,6 +1,7 @@
 { pkgs, ... }: with pkgs; {
     hardware.opengl = {
         extraPackages = [
+            rocm-runtime
             rocm-opencl-icd
             rocm-opencl-runtime
         ];
@@ -14,5 +15,6 @@
 
     environment.systemPackages = [
         corectrl
+        rocminfo
     ];
 }
