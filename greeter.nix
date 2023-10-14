@@ -2,26 +2,31 @@
 let
   cfg = config.greeter;
   greetdPackage = (pkgs.callPackage ./common/packages/greetd.nix {});
-  vt = "1";
-  tty = "tty${vt}";
+  
+  seat0-vt = "1";
+  seat0-tty = "tty${seat0-vt}";
+  gettyService = seat: lib.lists.optional (seat == "seat0") "getty@${seat0-tty}.service";
+  
+  seatLogDir = seat: "/var/log/regreet/${seat}";
+  seatCacheDir = seat: "/var/cache/regreet/${seat}";
 
   swayConfig = pkgs.writeText "greetd-sway-config" ''
     input * {
-        xkb_layout "us,ru"
-        xkb_options "altwin:swap_alt_win,grp:win_space_toggle"
+        xkb_layout "us"
     }
 
+    exec systemctl --user set-environment XDG_CURRENT_DESKTOP=sway
     exec systemctl --user import-environment SWAYSOCK WAYLAND_DISPLAY
 
     exec "${pkgs.greetd.regreet}/bin/regreet; swaymsg exit"
   '';
 
   greetdSettings = seat: {
-    terminal.vt = if seat == "seat0" then vt else "none";
+    terminal.vt = if seat == "seat0" then seat0-vt else "none";
     general.seat = seat;
     default_session = {
       user = "${seat}-greeter";
-      command = "${pkgs.sway}/bin/sway --config ${swayConfig}";
+      command = "$(export LOG_DIR=${seatLogDir seat}; export CACHE_DIR=${seatCacheDir seat}; ${pkgs.sway}/bin/sway --config ${swayConfig})";
     };
   };
 
@@ -52,42 +57,35 @@ in {
       builtins.map (seat: {
         name = "${seat}-greeter";
         value = {
-          unitConfig = {
-          Wants = [
-            "systemd-user-sessions.service"
-          ];
-          After = [
+          description = "${seat}-greeter";
+          wants = ["systemd-user-sessions.service"];
+          wantedBy = [ "graphical.target" ];
+          after = [
             "systemd-user-sessions.service"
             "plymouth-quit-wait.service"
-            "getty@${tty}.service"
           ];
-          Conflicts = [
-            "getty@${tty}.service"
-          ];
-        };
+          conflicts = gettyService seat;
 
-        serviceConfig = {
-          ExecStart = "${greetdPackage}/bin/greetd --config ${settingsFormat.generate "${seat}-greetd.toml" (greetdSettings seat)}";
+          serviceConfig = {
+            ExecStart = "${greetdPackage}/bin/greetd --config ${settingsFormat.generate "${seat}-greetd.toml" (greetdSettings seat)}";
 
-          Restart = mkIf (!((greetdSettings seat) ? initial_session)) "always";
+            Restart = mkIf (!((greetdSettings seat) ? initial_session)) "always";
 
-          # Defaults from greetd upstream configuration
-          IgnoreSIGPIPE = false;
-          SendSIGHUP = true;
-          TimeoutStopSec = "30s";
-          KeyringMode = "shared";
+            # Defaults from greetd upstream configuration
+            IgnoreSIGPIPE = false;
+            SendSIGHUP = true;
+            TimeoutStopSec = "30s";
+            KeyringMode = "shared";
 
-          Type = "idle";
-        };
+            Type = "idle";
+          };
 
-        # Don't kill a user session when using nixos-rebuild
-        restartIfChanged = false;
-
-        wantedBy = [ "graphical.target" ];    
+          # Don't kill a user session when using nixos-rebuild
+          restartIfChanged = false;  
         };
       }) seats
     ) // {
-      "autovt@${tty}".enable = false;
+      "autovt@${seat0-tty}".enable = false;
     };
 
     users.users = builtins.listToAttrs (
@@ -117,9 +115,9 @@ in {
 
         GTK = {
           application_prefer_dark_theme = true;
-          theme_name = "Orchis-Green-Dark";
+          theme_name = "Nordic";
           cursor_theme_name = "Quintom_Ink";
-          icon_theme_name = "Papirus-Dark";
+          icon_theme_name = "Zafiro-icons-Dark";
         };
 
         commands = {
@@ -130,8 +128,8 @@ in {
     };
 
     systemd.tmpfiles.rules = builtins.concatMap (seat: [
-      "d /var/log/regreet 0755 ${seat}-greeter greeter - -"
-      "d /var/cache/regreet 0755 ${seat}-greeter greeter - -"
+      "d ${seatLogDir seat} 0665 ${seat}-greeter greeter - -"
+      "d ${seatCacheDir seat} 0665 ${seat}-greeter greeter - -"
     ]) seats;
   };
 }
