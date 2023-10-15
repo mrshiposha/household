@@ -14,7 +14,7 @@ let
     text = ''
   # systemctl --user import-environment DISPLAY WAYLAND_DISPLAY SWAYSOCK
   # dbus-update-activation-environment --systemd DISPLAY WAYLAND_DISPLAY SWAYSOCK
-  dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP=sway
+  dbus-update-activation-environment --systemd DISPLAY WAYLAND_DISPLAY SWAYSOCK XDG_CURRENT_DESKTOP=sway
   systemctl --user stop pipewire pipewire-media-session xdg-desktop-portal xdg-desktop-portal-wlr
   systemctl --user start pipewire pipewire-media-session xdg-desktop-portal xdg-desktop-portal-wlr
       '';
@@ -80,11 +80,11 @@ in {
     # NIXOS_OZONE_WL = "1";
     MOZ_ENABLE_WAYLAND = "1";
 
-    SDL_VIDEODRIVER="wayland";
-    _JAVA_AWT_WM_NONREPARENTING="1";
-    QT_QPA_PLATFORM="wayland";
+    SDL_VIDEODRIVER = "wayland";
+    _JAVA_AWT_WM_NONREPARENTING = "1";
+    QT_QPA_PLATFORM = "wayland";
     XDG_CURRENT_DESKTOP = "sway";
-    XDG_SESSION_DESKTOP="sway";
+    XDG_SESSION_DESKTOP = "sway";
 
     XCURSOR_THEME = "Quintom_Ink";
 
