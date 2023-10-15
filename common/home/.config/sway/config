@@ -75,9 +75,16 @@ input * {
     bindsym $mod+Shift+f floating toggle
 
     for_window [app_id="Alacritty"] floating enable
-    for_window [app_id="nemo"] floating enable
+    for_window [app_id="thunar"] {
+        floating enable
+        resize set 1420 640
+    }
+    for_window [app_id="xarchiver"] {
+        floating enable
+        resize set 1200 480
+    }
     for_window [app_id="qalculate-gtk"] floating enable
-    for_window [instance="steamwebhelper"] floating enable
+    for_window [app_id="steam"] floating enable
 
 # Styling:
     # <title border> <title background> <title text> <new window indicator> <view border>
