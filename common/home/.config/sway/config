@@ -17,7 +17,6 @@ workspace Left
 workspace Right
 
 ### Global layout
-gaps top 30
 default_border pixel 2
 
 ### Keyboard layout
@@ -102,4 +101,4 @@ exec configure-gtk
 workspace Down
 
 # Widgets
-exec eww open bar 
+exec_always eww open dock

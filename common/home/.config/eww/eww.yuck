@@ -1,36 +1,14 @@
 (defpoll clock_time :interval "1s" "date +\%H:\%M:\%S")
-(deflisten focused_window_name `./watch-focused-window`)
 
-(defvar eww "$HOME/.local/bin/eww/eww -c $HOME/.config/eww/bar")
+(defwidget time-widget []
+    (label 
+        :text "${clock_time}"
+        :class "time_didget"))
 
-(defwidget clock []
-    (box 
-        :class "module"
-        :orientation "h"
-        :spacing "3"
-        :class "clock_time_class" 
-        (label :text "${clock_time}")
-    ))
-
-(defwidget time-and-resources []
-    (box :orientation "h" 
-        :halign "end"
-        (clock)))
-
-(defwidget title-bar []
-    (box :orientation "h"
-        :halign "center"
-        (label :text "${focused_window_name}")))
-
-(defwindow bar
+(defwindow dock
     :monitor 0
-    :geometry (geometry :x "0%"
-                        :y "0px"
-                        :width "100%"
-                        :height "30px"
-                        :anchor "top center")
-    :stacking "fg"
+    :geometry (geometry :anchor "bottom center")
     (box
-        :orientation "h"
-        (title-bar)
-        (time-and-resources)))
+        :class "dock"
+        :orientation "v"
+        (time-widget)))
