@@ -2,13 +2,15 @@
   programs.vscode = {
     enable = true;
     package = vscodium;
+    mutableExtensionsDir = false;
     extensions = with pkgs.vscode-extensions; [
       bbenoist.nix
-      bungcip.better-toml
+      tamasfe.even-better-toml
       matklad.rust-analyzer
       vadimcn.vscode-lldb
       jock.svg
       dbaeumer.vscode-eslint
+      ms-vscode.hexeditor
     ] ++ vscode-utils.extensionsFromVscodeMarketplace [
       {
         name = "nix-env-selector";
@@ -29,6 +31,34 @@
         publisher = "shaunlebron";
         version = "0.6.2";
         sha256 = "zev0oomPf9B+TaNRnp4xcmEWJBaa+IHgysbX2G0mm0A=";
+      }
+
+      {
+        name = "jq-syntax-highlighting";
+        publisher = "jq-syntax-highlighting";
+        version = "0.0.2";
+        sha256 = "sha256-Bwq+aZuDmzjHw+ZnIWlL4aGz6UnqxaKm5WUko0yuIWE=";
+      }
+
+      {
+        name = "jsonnet-format";
+        publisher = "itspngu";
+        version = "0.4.0";
+        sha256 = "sha256-ZfEwVt1xXAgF0nmqStC5hi8KY2cBjeqRSgTCskHuq4I=";
+      }
+
+      {
+        name = "jsonnet";
+        publisher = "heptio";
+        version = "0.1.0";
+        sha256 = "sha256-AwiVkUNyKTTCzzsS0XoQRFeW/e+iOsXxeLANi8/kEdQ=";
+      }
+
+      {
+        name = "language-x86-64-assembly";
+        publisher = "13xforever";
+        version = "3.1.4";
+        sha256 = "sha256-FJRDm1H3GLBfSKBSFgVspCjByy9m+j9OStlU+/pMfs8=";
       }
 
       {
@@ -53,10 +83,10 @@
       }
 
       {
-        name = "sabye";
-        publisher = "izcream";
-        version = "0.1.42";
-        sha256 = "sha256-w757yGHq0jBDb7IdS0wkD8PIHlKt73VLuzpdgy3mlM8=";
+        name = "nord-visual-studio-code";
+        publisher = "arcticicestudio";
+        version = "0.19.0";
+        sha256 = "sha256-awbqFv6YuYI0tzM/QbHRTUl4B2vNUdy52F4nPmv+dRU=";
       }
     ];
     userSettings = {
@@ -68,7 +98,7 @@
       "editor.unicodeHighlight.ambiguousCharacters" = false;
       "editor.fontFamily" = "mononoki, Cambria Math";
       "editor.fontSize" = 18;
-      "workbench.colorTheme" = "sabye";
+      "workbench.colorTheme" = "Nord";
     };
   };
 
