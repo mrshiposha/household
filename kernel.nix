@@ -2,5 +2,5 @@
   boot.kernelPackages =
     if config.virtualisation.virtualbox.guest.enable
     then pkgs.linuxPackages
-    else pkgs.linuxPackages_6_1;
+    else pkgs.linuxPackages_6_6;
 }
