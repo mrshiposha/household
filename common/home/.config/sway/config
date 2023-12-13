@@ -11,10 +11,10 @@ output DP-3 mode 2560x1440@143.856Hz
 output DP-3 subpixel rgb
 
 ### Workspaces
-workspace Up
-workspace Down
-workspace Left
-workspace Right
+workspace ws-up
+workspace ws-down
+workspace ws-left
+workspace ws-right
 
 ### Global layout
 default_border pixel 2
@@ -54,16 +54,16 @@ input * {
     bindsym $mod+Alt+Right move right
 
     # Move the focused window to the workspace
-    bindsym $mod+Ctrl+Up move window to workspace Up
-    bindsym $mod+Ctrl+Down move window to workspace Down
-    bindsym $mod+Ctrl+Left move window to workspace Left
-    bindsym $mod+Ctrl+Right move window to workspace Right
+    bindsym $mod+Ctrl+Up move window to workspace ws-up
+    bindsym $mod+Ctrl+Down move window to workspace ws-down
+    bindsym $mod+Ctrl+Left move window to workspace ws-left
+    bindsym $mod+Ctrl+Right move window to workspace ws-right
 
     # Switch to workspace
-    bindsym $mod+Shift+Up workspace Up
-    bindsym $mod+Shift+Down workspace Down
-    bindsym $mod+Shift+Left workspace Left
-    bindsym $mod+Shift+Right workspace Right
+    bindsym $mod+Shift+Up workspace ws-up
+    bindsym $mod+Shift+Down workspace ws-down
+    bindsym $mod+Shift+Left workspace ws-left
+    bindsym $mod+Shift+Right workspace ws-right
 
 # Layout:
     bindsym $mod+h splith
@@ -83,6 +83,8 @@ input * {
         floating enable
         resize set 1200 480
     }
+    for_window [app_id="virt-manager"] floating enable
+    for_window [app_id="qemu"] floating enable
     for_window [app_id="qalculate-gtk"] floating enable
     for_window [app_id="steam"] floating enable
 
@@ -105,7 +107,7 @@ exec dbus-sway-environment
 exec configure-gtk
 
 # Default workspace
-workspace Down
+workspace ws-down
 
 # Widgets
 exec_always eww open dock
