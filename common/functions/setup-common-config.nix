@@ -7,6 +7,7 @@ let cfg-files = lib.filesystem.listFilesRecursive config-dir;
           config-name = baseNameOf (dirOf cfg-file);
           filename = baseNameOf cfg-file;
         in {
+          # TODO replace all '/'
           name = (builtins.unsafeDiscardStringContext "${config-name}-${filename}-config");
           value = {
             target = (builtins.unsafeDiscardStringContext ".config/${config-name}/${filename}");
