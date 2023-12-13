@@ -5,6 +5,7 @@
       xfce.thunar-volman
       xfce.thunar-archive-plugin
       xarchiver
+      nnn
     ];
   };
 
