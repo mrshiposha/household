@@ -50,6 +50,11 @@
           publicKey = "a1/5TVe7e4eMYWwN1SRRVfYx7HMN1eyeffhiwIk2W3w=";
         };
 
+        "win10.shiposha.home" = {
+          ip = 6;
+          publicKey = "4iBvIv0fwRpfAKAmpgcwPB2gdhEGZjTlupDCcrdQ700=";
+        };
+
         "phone.esina.home" = {
           ip = 20;
           publicKey = "5WrkANeWSE5VH2d0PWiw5LfxPGpbAuh95VfakOoXPAc=";
