@@ -1,0 +1,29 @@
+(defpoll clock_time :interval "1s" "date +\%H:\%M:\%S")
+
+(defwidget time-widget []
+    (label
+        :class "time_widget"
+        :text {clock_time}))
+
+(deflisten compositor-info "./compositor-info.sh")    
+
+(defwidget focused-app []
+    (label :text {compositor-info.focused_app}))
+
+(defwidget current-workspace []
+    (label :text {compositor-info.workspace}))
+
+(defwidget basic-info-container []
+    (box
+        :orientation "h"
+        (current-workspace)
+        (time-widget)
+        (focused-app)))
+
+(defwindow dock
+    :monitor 0
+    :geometry (geometry :anchor "bottom center")
+    (box
+        :class "dock"
+        :orientation "v"
+        (basic-info-container)))
