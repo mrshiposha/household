@@ -76,6 +76,7 @@ in {
 
     groups = {
       wheel.members = ["mrshiposha"];
+      docker.members = ["mrshiposha"];
       video.members = ["mrshiposha" "wally"];
       render.members = ["mrshiposha" "wally"];
       openrazer.members = ["mrshiposha" "wally"];
