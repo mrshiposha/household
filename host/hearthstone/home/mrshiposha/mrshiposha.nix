@@ -20,6 +20,8 @@ in with pkgs; {
         system-cfg-repl() {
           ${cfg-vars} nix repl --file '<nixpkgs/nixos>'
         }
+
+        export PATH=$PATH:$HOME/.cargo/bin
       '';
     })
     (import "${common}/home/git.nix" { name = person; email = "${username}@gmail.com"; })
@@ -46,6 +48,7 @@ in with pkgs; {
     "${common}/home/libresprite.nix"
     "${common}/home/qpwgraph.nix"
     "${common}/home/blender.nix"
+    "${common}/home/musescore.nix"
     "${common}/home/mime-defaultapps.nix"
   ];
 }
