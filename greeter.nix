@@ -2,6 +2,7 @@
 let
   cfg = config.greeter;
   greetdPackage = (pkgs.callPackage ./common/packages/greetd.nix {});
+  regreetPackage = (pkgs.callPackage ./common/packages/regreet.nix {});
   
   seat0-vt = "1";
   seat0-tty = "tty${seat0-vt}";
@@ -18,7 +19,7 @@ let
     exec systemctl --user set-environment XDG_CURRENT_DESKTOP=sway
     exec systemctl --user import-environment SWAYSOCK WAYLAND_DISPLAY
 
-    exec "${pkgs.greetd.regreet}/bin/regreet; swaymsg exit"
+    exec "${regreetPackage}/bin/regreet; swaymsg exit"
   '';
 
   greetdSettings = seat: {
@@ -26,7 +27,7 @@ let
     general.seat = seat;
     default_session = {
       user = "${seat}-greeter";
-      command = "$(export LOG_DIR=${seatLogDir seat}; export CACHE_DIR=${seatCacheDir seat}; ${pkgs.sway}/bin/sway --config ${swayConfig})";
+      command = "${pkgs.sway}/bin/sway --config ${swayConfig} > ${seatLogDir seat}/sway.log 2>&1";
     };
   };
 
@@ -128,8 +129,8 @@ in {
     };
 
     systemd.tmpfiles.rules = builtins.concatMap (seat: [
-      "d ${seatLogDir seat} 0665 ${seat}-greeter greeter - -"
-      "d ${seatCacheDir seat} 0665 ${seat}-greeter greeter - -"
+      "d ${seatLogDir seat} 0775 ${seat}-greeter greeter - -"
+      "d ${seatCacheDir seat} 0775 ${seat}-greeter greeter - -"
     ]) seats;
   };
 }
