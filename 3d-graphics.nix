@@ -1,7 +1,7 @@
 { pkgs, ... }: with pkgs; {
     hardware.opengl = {
         extraPackages = [
-            rocm-runtime
+            rocmPackages.rocm-runtime
             rocm-opencl-icd
             rocm-opencl-runtime
         ];
@@ -10,11 +10,12 @@
     };
 
     systemd.tmpfiles.rules = [
-        "L+    /opt/rocm/hip   -    -    -     -    ${pkgs.hip}"
+        "L+    /opt/rocm/hip   -    -    -     -    ${pkgs.rocmPackages.clr}"
     ];
 
     environment.systemPackages = [
         corectrl
-        rocminfo
+        rocmPackages.clr
+        rocmPackages.rocminfo
     ];
 }

@@ -20,8 +20,7 @@
     "${common}/home/image-view.nix"
     "${common}/home/vlc.nix"
     "${common}/home/blender.nix"
-    "${common}/home/pureref.nix"
-    "${common}/home/gedit.nix"
+    "${common}/home/office.nix"
     "${common}/home/calc.nix"
     "${common}/home/mime-defaultapps.nix"
   ];

@@ -1,7 +1,7 @@
 { config, pkgs, lib, ... }:
 let 
   root = ./../..;
-  stateVersion = "23.05";
+  stateVersion = "23.11";
   resolution = "2560x1440";
   greeterImage = "${root}/common/images/${resolution}/mountain-range.jpg";
 in {

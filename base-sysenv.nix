@@ -15,7 +15,7 @@
   ];
 
   fonts = {
-    fonts = [
+    packages = [
       meslo-lgs-nf
       noto-fonts
       mononoki
