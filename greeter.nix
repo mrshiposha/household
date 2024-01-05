@@ -59,10 +59,10 @@ in {
         name = "${seat}-greeter";
         value = {
           description = "${seat}-greeter";
-          wants = ["systemd-user-sessions.service"];
+          wants = ["multi-user.target"];
           wantedBy = [ "graphical.target" ];
           after = [
-            "systemd-user-sessions.service"
+            "multi-user.target"
             "plymouth-quit-wait.service"
           ];
           conflicts = gettyService seat;
