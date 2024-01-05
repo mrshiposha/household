@@ -24,7 +24,7 @@ in {
       }
     )
     "${root}/docker.nix"
-    "${root}/unfree-pkgs.nix"
+    "${root}/certain-permitted-pkgs.nix"
     "${root}/3d-graphics.nix"
     "${root}/greeter.nix"
     (import "${root}/home-manager.nix" (builtins.fetchTarball "https://github.com/nix-community/home-manager/archive/release-${stateVersion}.tar.gz"))
