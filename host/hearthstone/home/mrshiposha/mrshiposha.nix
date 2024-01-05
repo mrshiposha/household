@@ -49,6 +49,5 @@ in with pkgs; {
     "${common}/home/qpwgraph.nix"
     "${common}/home/blender.nix"
     "${common}/home/musescore.nix"
-    "${common}/home/mime-defaultapps.nix"
   ];
 }
