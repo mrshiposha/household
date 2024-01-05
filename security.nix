@@ -45,7 +45,7 @@ in {
 
   environment.etc = {
     "security/namespace.conf".text = ''
-      /tmp    /poly/tmp    tmpdir    root
+      /tmp    /poly/tmp    tmpfs    root
       /media/steam-library/SteamLibrary/steamapps/compatdata    /poly/steam/compatdata    user    root
     '';
   };
