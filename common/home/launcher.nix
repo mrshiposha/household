@@ -1,5 +1,5 @@
 { pkgs, ... }: with pkgs; {
   home.packages = [
-    sirula
+    rofi
   ];
 }

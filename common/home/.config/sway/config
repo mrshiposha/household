@@ -1,5 +1,5 @@
 set $term alacritty
-set $launcher sirula 
+set $launcher 'rofi -show drun -show-icons'
 
 set $mod Mod4
 
