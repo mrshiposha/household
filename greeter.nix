@@ -102,10 +102,6 @@ in {
     users.groups.greeter = {};
 
     environment.etc = {
-      "greetd/environments".text = ''
-        sway
-      '';
-
       "greetd/regreet.css".text = "";
 
       "greetd/regreet.toml".source = settingsFormat.generate "regreet.toml" {
