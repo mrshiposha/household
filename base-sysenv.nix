@@ -16,7 +16,7 @@
 
   fonts = {
     packages = [
-      meslo-lgs-nf # needed for zsh
+      meslo-lgs-nf # needed for zsh (by VSCode, see the corresponding config)
       mononoki
     ];
     fontconfig.enable = true;
