@@ -16,6 +16,7 @@
 
   fonts = {
     packages = [
+      meslo-lgs-nf # needed for zsh
       mononoki
     ];
     fontconfig.enable = true;
