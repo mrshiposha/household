@@ -4,13 +4,13 @@
     package = vscodium;
     mutableExtensionsDir = false;
     extensions = with pkgs.vscode-extensions; [
-      bbenoist.nix
       tamasfe.even-better-toml
       matklad.rust-analyzer
       vadimcn.vscode-lldb
       jock.svg
       dbaeumer.vscode-eslint
       ms-vscode.hexeditor
+      jnoortheen.nix-ide
     ] ++ vscode-utils.extensionsFromVscodeMarketplace [
       {
         name = "nix-env-selector";
@@ -93,14 +93,23 @@
       "update.mode" = "none";
       "terminal.integrated.fontFamily" = "MesloLGS NF";
       "files.insertFinalNewline" = true;
-      "nixEnvSelector.suggestion" = true;
+      "nixEnvSelector.suggestion" = false;
       "lldb.suppressUpdateNotifications" = true;
       "editor.unicodeHighlight.ambiguousCharacters" = false;
       "editor.fontFamily" = "mononoki, Cambria Math";
       "editor.fontSize" = 18;
       "workbench.colorTheme" = "Nord";
+
+      nix = {
+        enableLanguageServer = true;
+        serverPath = "nixd";
+      };
     };
   };
+
+  home.packages = [
+    nixd
+  ];
 
   imports = [
     "${fetchTarball "https://github.com/msteen/nixos-vscode-server/tarball/master"}/modules/vscode-server/home.nix"
