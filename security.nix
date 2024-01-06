@@ -1,9 +1,4 @@
-{ pkgs, ... }:
-
-let pamNamespaceRequired = pkgs.lib.mkDefault (
-  pkgs.lib.mkAfter "session required pam_namespace.so\n"
-);
-in {
+{ pkgs, ... }: {
   security.polkit.enable = true;
   environment.systemPackages = with pkgs; [
     polkit_gnome
@@ -31,22 +26,5 @@ in {
           TimeoutStopSec = 10;
         };
     };
-  };
-
-  systemd.tmpfiles.rules = [
-    "d /poly 000 root root -"
-  ];
-
-  security.pam.services = {
-    login.text = pamNamespaceRequired;
-    greetd.text = pamNamespaceRequired;
-    sshd.text = pamNamespaceRequired;
-  };
-
-  environment.etc = {
-    "security/namespace.conf".text = ''
-      /tmp    /poly/tmp    tmpfs    root
-      /media/steam-library/SteamLibrary/steamapps/compatdata    /poly/steam/compatdata    user    root
-    '';
   };
 }

@@ -38,6 +38,7 @@ in {
 
     "${root}/openrazer.nix"
     "${root}/common/modules/identities.nix"
+    "${root}/common/modules/poly.nix"
   ];
 
   system.stateVersion = stateVersion;
@@ -81,6 +82,28 @@ in {
       render.members = ["mrshiposha" "wally"];
       openrazer.members = ["mrshiposha" "wally"];
       common.members = ["common" "mrshiposha" "wally"];
+    };
+  };
+
+  security.poly = {
+    enable = true;
+
+    services = [
+      "login"
+      "greetd"
+      "sshd"
+    ];
+
+    instances = {
+      tmp = {
+        mount = /tmp;
+        type = "tmpfs";
+      };
+
+      "steam/compatdata" = {
+        mount = /media/steam-library/SteamLibrary/steamapps/compatdata;
+        type = "user";
+      };
     };
   };
 
