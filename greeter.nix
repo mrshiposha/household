@@ -71,6 +71,7 @@ in {
             ExecStart = "${greetdPackage}/bin/greetd --config ${settingsFormat.generate "${seat}-greetd.toml" (greetdSettings seat)}";
 
             Restart = mkIf (!((greetdSettings seat) ? initial_session)) "always";
+            RestartSec = 5;
 
             # Defaults from greetd upstream configuration
             IgnoreSIGPIPE = false;
