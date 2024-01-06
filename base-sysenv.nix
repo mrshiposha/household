@@ -16,11 +16,7 @@
 
   fonts = {
     packages = [
-      meslo-lgs-nf
-      noto-fonts
       mononoki
-      corefonts
-      vistafonts
     ];
     fontconfig.enable = true;
     fontDir.enable = true;
@@ -39,10 +35,4 @@
   ];
 
   hardware.enableRedistributableFirmware = true;
-
-  nixpkgs.overlays = [
-    (self: super: {
-      fcitx-engines = fcitx5;
-    })
-  ];
 }
