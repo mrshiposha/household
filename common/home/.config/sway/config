@@ -3,18 +3,12 @@ set $launcher 'rofi -show drun -show-icons'
 
 set $mod Mod4
 
-### I/O
+### Outputs
 output DP-1 mode 2560x1440@165.080Hz
 output DP-1 subpixel rgb
 
 output DP-3 mode 2560x1440@143.856Hz
 output DP-3 subpixel rgb
-
-### Workspaces
-workspace ws-up
-workspace ws-down
-workspace ws-left
-workspace ws-right
 
 ### Global layout
 default_border pixel 2
