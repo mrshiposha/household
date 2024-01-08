@@ -10,7 +10,6 @@ let
       "vista-fonts"
       "teamspeak-client"
       # "pureref-1.11.1"
-      "obsidian"
   ];
   eolPkgs = [
     "electron-25.9.0"
