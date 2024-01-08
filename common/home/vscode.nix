@@ -102,13 +102,17 @@
 
       nix = {
         enableLanguageServer = true;
-        serverPath = "nixd";
+        serverPath = "nil";
+        serverSettings = {
+          nil.formatting.command = ["nixpkgs-fmt"];
+        };
       };
     };
   };
 
   home.packages = [
-    nixd
+    nil
+    nixpkgs-fmt
   ];
 
   imports = [
