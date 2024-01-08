@@ -84,8 +84,6 @@ input * {
     # The title values are arbitrary sine the title bar is hidden due to `hide_edge_borders vertical`
     client.focused #8fbcbb #8fbcbb #FFFFFF #d08770
 
-    hide_edge_borders vertical
-
     exec --no-startup-id xsettingsd
 
 # User-specific:
