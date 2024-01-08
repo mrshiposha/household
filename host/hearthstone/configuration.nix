@@ -126,7 +126,7 @@ in {
 
           {
             subsystem = "usb";
-            name = "3-8.4";
+            name = "3-8";
           }
         ];
       };
