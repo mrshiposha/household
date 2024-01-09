@@ -84,7 +84,8 @@ input * {
     # The title values are arbitrary sine the title bar is hidden due to `hide_edge_borders vertical`
     client.focused #8fbcbb #8fbcbb #FFFFFF #d08770
 
-    exec --no-startup-id xsettingsd
+    # XWayland GTK apps theme
+    exec xsettingsd
 
 # User-specific:
 include /household-conf/host/`hostname`/home/$USER/.config/compositor/config
