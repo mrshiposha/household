@@ -32,12 +32,6 @@ input * {
     bindsym $mod+Shift+e exit
 
 # Moving:
-    # Move focus around
-    bindsym $mod+Left focus left
-    bindsym $mod+Down focus down
-    bindsym $mod+Up focus up
-    bindsym $mod+Right focus right
-
     # Move the focused window to the workspace
     bindsym $mod+Ctrl+Up move window to workspace ws-up
     bindsym $mod+Ctrl+Down move window to workspace ws-down
