@@ -45,10 +45,6 @@ input * {
     bindsym $mod+Shift+Right workspace ws-right
 
 # Layout:
-    bindsym $mod+h splith
-    bindsym $mod+v splitv
-    bindsym $mod+n split none
-
     bindsym $mod+f fullscreen
 
     bindsym $mod+Shift+f floating toggle
