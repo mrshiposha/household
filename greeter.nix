@@ -11,23 +11,12 @@ let
   seatLogDir = seat: "/var/log/regreet/${seat}";
   seatCacheDir = seat: "/var/cache/regreet/${seat}";
 
-  swayConfig = pkgs.writeText "greetd-sway-config" ''
-    input * {
-        xkb_layout "us"
-    }
-
-    exec systemctl --user set-environment XDG_CURRENT_DESKTOP=sway
-    exec systemctl --user import-environment SWAYSOCK WAYLAND_DISPLAY
-
-    exec "${regreetPackage}/bin/regreet; swaymsg exit"
-  '';
-
   greetdSettings = seat: {
     terminal.vt = if seat == "seat0" then seat0-vt else "none";
     general.seat = seat;
     default_session = {
       user = "${seat}-greeter";
-      command = "${pkgs.sway}/bin/sway --config ${swayConfig} > ${seatLogDir seat}/sway.log 2>&1";
+      command = "${pkgs.cage}/bin/cage ${regreetPackage}/bin/regreet > ${seatLogDir seat}/cage.log 2>&1";
     };
   };
 
