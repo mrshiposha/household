@@ -9,7 +9,7 @@ let
       "corefonts"
       "vista-fonts"
       "teamspeak-client"
-      # "pureref-1.11.1"
+      "skypeforlinux"
   ];
   eolPkgs = [
     "electron-25.9.0"
