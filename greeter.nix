@@ -16,7 +16,7 @@ let
     general.seat = seat;
     default_session = {
       user = "${seat}-greeter";
-      command = "${pkgs.cage}/bin/cage ${regreetPackage}/bin/regreet > ${seatLogDir seat}/cage.log 2>&1";
+      command = "${pkgs.cage}/bin/cage -s -- ${regreetPackage}/bin/regreet > ${seatLogDir seat}/cage.log 2>&1";
     };
   };
 
