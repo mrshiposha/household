@@ -69,7 +69,8 @@ in {
     libnotify
 
     # Screenshots
-    # grim
+    grim
+    slurp
 
     xsettingsd
   ];
@@ -102,6 +103,8 @@ in {
     };
     extraPackages = [];
   };
+
+  programs.wshowkeys.enable = true;
 
   # xdg-desktop-portal works by exposing a series of D-Bus interfaces
   # known as portals under a well-known name
