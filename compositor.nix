@@ -43,8 +43,6 @@ in {
   imports = [ ./security.nix ./json.nix ];
 
   environment.systemPackages = with pkgs; [
-    (callPackage ./common/packages/jay.nix {})
-
     sway
     dbus
     dbus-sway-environment
