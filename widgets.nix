@@ -1,6 +1,6 @@
 { pkgs, ... }: with pkgs; {
   environment.systemPackages = [
-    eww-wayland
+    eww
     gtk3
     gtk-layer-shell
     pango

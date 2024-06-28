@@ -9,7 +9,7 @@ in with lib; {
 
         driPrime = mkOption {
             type = types.str;
-            default = "0";
+            default = "pci-0000_03_00_0";
         };
     };
 

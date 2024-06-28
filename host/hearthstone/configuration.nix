@@ -27,7 +27,7 @@ in {
     "${root}/certain-permitted-pkgs.nix"
     "${root}/3d-graphics.nix"
     "${root}/greeter.nix"
-    (import "${root}/home-manager.nix" (builtins.fetchTarball "https://github.com/nix-community/home-manager/archive/release-23.11.tar.gz"))
+    (import "${root}/home-manager.nix" (builtins.fetchTarball "https://github.com/nix-community/home-manager/archive/release-24.05.tar.gz"))
     "${root}/compositor.nix"
     "${root}/widgets.nix"
     "${root}/file-manager.nix"
@@ -121,7 +121,7 @@ in {
         devices = [
           {
             subsystem = "drm";
-            name = "card1";
+            name = "card0";
           }
 
           {

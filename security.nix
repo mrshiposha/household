@@ -6,10 +6,7 @@
     pass
   ];
 
-  programs.gnupg.agent = {
-    enable = true;
-    pinentryFlavor = "tty";
-  };
+  programs.gnupg.agent.enable = true;
 
   systemd = {
     user.services.polkit-gnome-authentication-agent-1 = {

@@ -54,7 +54,10 @@ input * {
 
     bindsym $mod+Shift+f floating toggle
 
-    for_window [app_id="Alacritty"] floating enable
+    for_window [app_id="Alacritty"] {
+        floating enable
+        resize set 1000 640
+    }
     for_window [app_id="thunar"] {
         floating enable
         resize set 1420 640
