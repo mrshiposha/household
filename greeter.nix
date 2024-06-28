@@ -43,6 +43,9 @@ in {
       startSession = true;
     };
 
+    # Enable desktop session data
+    services.displayManager.enable = lib.mkDefault true;
+
     systemd.services = builtins.listToAttrs (
       builtins.map (seat: {
         name = "${seat}-greeter";
