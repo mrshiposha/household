@@ -62,7 +62,7 @@
 
         "ipad.esina.home" = {
           ip = 21;
-          publicKey = "C8lQivi2s2uIrQYlfEINANCoC9r2yDR+WzM+xQ40iQA=";
+          publicKey = "F7xrgq3hlBb8EpdzFcDoWpUZf9YThrkkzr0+/IaGshc=";
         };
 
         "macbook.esina.home" = {
