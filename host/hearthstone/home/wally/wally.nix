@@ -19,7 +19,7 @@
     "${common}/home/discord.nix"
     "${common}/home/image-view.nix"
     "${common}/home/vlc.nix"
-    "${common}/home/blender.nix"
+    "${common}/home/3d.nix"
     "${common}/home/office.nix"
     "${common}/home/calc.nix"
   ];
