@@ -1,6 +1,5 @@
 { pkgs, ... }: with pkgs; {
   home.packages = [
-    direnv
     rustup
     gnumake
     cmake
@@ -11,4 +10,9 @@
   ];
 
   services.lorri.enable = true;
+
+  programs.direnv = {
+    enable = true;
+    nix-direnv.enable = true;
+  };
 }
