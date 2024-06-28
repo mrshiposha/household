@@ -27,13 +27,6 @@
       }
 
       {
-        name = "vscode-parinfer";
-        publisher = "shaunlebron";
-        version = "0.6.2";
-        sha256 = "zev0oomPf9B+TaNRnp4xcmEWJBaa+IHgysbX2G0mm0A=";
-      }
-
-      {
         name = "jq-syntax-highlighting";
         publisher = "jq-syntax-highlighting";
         version = "0.0.2";
@@ -66,20 +59,6 @@
         publisher = "shd101wyy";
         version = "0.6.8";
         sha256 = "sha256-9NRaHgtyiZJ0ic6h1B01MWzYhDABAl3Jm2IUPogYWr0=";
-      }
-
-      {
-        name = "agda-mode";
-        publisher = "banacorn";
-        version = "0.4.1";
-        sha256 = "sha256-jnH3oNqvkO/+Oi+8MM1RqooPFrQZMDWLSEnrVLnc5VI=";
-      }
-
-      {
-        name = "agda";
-        publisher = "j-mueller";
-        version = "0.1.7";
-        sha256 = "sha256-S0svSulHJKN7JwznVj3KTLd341oeMainUiY/peQdPSY=";
       }
 
       {
