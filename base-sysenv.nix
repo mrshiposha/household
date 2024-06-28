@@ -19,13 +19,18 @@
       meslo-lgs-nf # needed for zsh (by VSCode, see the corresponding config)
       mononoki
     ];
-    fontconfig.enable = true;
+    fontconfig = {
+      enable = true;
+      defaultFonts.monospace = ["MesloLGS NF"];
+    };
+
     fontDir.enable = true;
   };
 
   services = {
     dbus.enable = true;
     fwupd.enable = true;
+    logind.killUserProcesses = true;
   };
 
   nix.settings.auto-optimise-store = true;
