@@ -47,7 +47,6 @@ in with pkgs; {
     "${common}/home/calc.nix"
     "${common}/home/libresprite.nix"
     "${common}/home/qpwgraph.nix"
-    "${common}/home/blender.nix"
     "${common}/home/musescore.nix"
   ];
 }
