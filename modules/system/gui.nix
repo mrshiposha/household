@@ -154,6 +154,12 @@ in {
       programs = {
         steam = {
           enable = true;
+          package = pkgs.steam.override {
+            # Workaround for DRI_PRIME issue
+            # See https://github.com/ValveSoftware/steam-for-linux/issues/9383
+            # See https://github.com/ValveSoftware/steam-for-linux/issues/11113
+            extraArgs = "-no-cef-sandbox -cef-disable-gpu";
+          };
           extraPackages = with pkgs; [
             mangohud
             # TODO obs-studio-plugins.obs-vkcapture
@@ -209,8 +215,8 @@ in {
       systemd.tmpfiles.rules = lists.flatten (builtins.map (options: [
         "d /home/${options.ownerName}/.local/share/Steam 0755 ${options.ownerName} users - -"
         "d /home/${options.ownerName}/.local/share/Steam/steamapps 0755 ${options.ownerName} users - -"
-        "L+ /home/${options.ownerName}/.local/share/Steam/steamapps/common/Steam.dll - - - - ../../legacycompat/Steam.dll"
       ]) cfg.games.mountSharedLibraryFor) ++ [
+        "L+ /shared/steam/library/common/Steam.dll - - - - ../../legacycompat/Steam.dll"
       ];
       security.poly = {
         instances = [{
