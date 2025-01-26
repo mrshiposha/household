@@ -1,6 +1,7 @@
 {
 	inputs = {
 		nixpkgs.url = "github:NixOS/nixpkgs/release-24.11";
+		unstable-nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
 		flake-parts.url = "github:hercules-ci/flake-parts";
 		home-manager = {
 			url = "github:nix-community/home-manager/release-24.11";
@@ -16,7 +17,15 @@
 		};
 	};
 
-	outputs = inputs@{ nixpkgs, flake-parts, home-manager, fleet, multiseat, ... }:
+	outputs = inputs@{
+		nixpkgs,
+		unstable-nixpkgs,
+		flake-parts,
+		home-manager,
+		fleet,
+		multiseat,
+		...
+	}:
 	let
 		household = (import ./lib).household;
 		navigatorUser = import ./navigator.nix;
@@ -26,7 +35,10 @@
 
 			systems = [ "x86_64-linux" ];
 			perSystem = { pkgs, config, system, ... }: {
-				_module.args.pkgs = import nixpkgs { inherit system; };
+				_module.args = {
+					pkgs = import nixpkgs { inherit system; };
+					unstablePkgs = import unstable-nixpkgs { inherit system; };
+				};
 
 				devShells.default = pkgs.mkShell {
 					packages = [ fleet.packages.${system}.fleet ];
@@ -49,7 +61,7 @@
 					multiseat.nixosModules.multiseat
 					home-manager.nixosModules.home-manager
 					navigatorUser
-					{
+					({ pkgs, ... }: {
 						disabledModules = [
 							"services/display-managers/greetd.nix"
 							"programs/regreet.nix"
@@ -84,6 +96,10 @@
 						home-manager = {
 							useGlobalPkgs = true;
 							useUserPackages = true;
+							extraSpecialArgs = {
+								inherit household;
+								unstablePkgs = import unstable-nixpkgs { system = pkgs.system; };
+							};
 						};
 
 						programs.nix-ld.enable = true;
@@ -93,7 +109,7 @@
 						security.sudo.extraConfig = ''
 							Defaults:root,%wheel timestamp_timeout=0
 						'';
-					}
+					})
 				];
 
 				hosts = {

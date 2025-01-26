@@ -1,4 +1,4 @@
-{ config, lib, pkgs, household, ... }:
+{ config, lib, pkgs, unstablePkgs, household, ... }:
 with lib;
 let
 	cfg = config.preset.wally;
@@ -15,9 +15,7 @@ in
 
 		home.packages = with pkgs; [
 			pureref
-			(blender-hip.overrideAttrs {
-				version = "4.2.3";
-			})
+			unstablePkgs.blender-hip
 			blockbench
 		];
 

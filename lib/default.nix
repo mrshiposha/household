@@ -1,9 +1,7 @@
 {
-	household = rec {
+	household = {
 		modules.system = ../modules/system;
-		modules.user = import ../modules/user {
-			inherit image;
-		};
+		modules.user = ../modules/user;
 		image = path: ../images + path;
 
 		usersGid = 100;
