@@ -1,1 +1,1 @@
-# satellite
+# Household NixOS Configuration
