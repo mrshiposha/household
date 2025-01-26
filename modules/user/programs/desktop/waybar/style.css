@@ -1,0 +1,141 @@
+/* Nord */
+@define-color bg #2E3440;
+@define-color lightbg #4c566a;
+@define-color warning #d08770;
+@define-color critical #BF616A;
+@define-color workspaceactive #8fbcbb;
+@define-color workspacehover #a3be8c;
+@define-color workspaceicon #434C5E;
+@define-color nord_bg #434C5E;
+@define-color nord_bg_blue #546484;
+@define-color nord_light #D8DEE9;
+@define-color nord_light_font #D8DEE9;
+@define-color nord_dark_font #434C5E;
+@define-color nord_light_marine #88c0d0;
+@define-color nord_light_green #a3be8c;
+
+* {
+	padding: 0;
+	font-family: "serif", "Font Awesome 6 Brands", "Font Awesome 6 Free", "Symbols Nerd Font Mono";
+	/*
+		These fonts are required to properly render the icons.
+		The choice of fonts and their order matters.
+		This font setup ensures proper icon alignment.
+
+		- serif: good regular text (digits, letters, etc)
+		- Font Awesome 6 Brands: for brands (like Firefox, Telegram, etc)
+		- Font Awesome 6 Free: for general icons (like clock, sound, wifi, battery, etc)
+		- Symbols Nerd Font Mono: for dev icons (like vscode and terminal)
+	*/
+}
+
+window#waybar {
+	background-color: @bg;
+	border-radius: 2em;
+	padding: 0;
+	margin: 0;
+}
+
+#workspaces {
+	background: @lightbg;
+	margin: 0;
+	border-radius: 2em;
+	border: 0;
+	font-weight: bold;
+	font-style: normal;
+	opacity: 0.8;
+	font-size: 16px;
+	color: @workspaceicon;
+}
+
+#workspaces button {
+	margin: 0.2em;
+	padding: 0.15em 0.6em;
+	border-radius: 2em;
+	border: 0;
+	color: @workspaceicon;
+	background-color: @workspaceactive;
+	transition: all 0.3s ease-in-out;
+	opacity: 0.4;
+}
+
+#workspaces button.active {
+	color: @workspaceicon;
+	background: @workspaceactive;
+	border-radius: 2em;
+	min-width: 4em;
+	transition: all 0.3s ease-in-out;
+	opacity: 1.0;
+}
+
+#workspaces button:hover {
+	color: @workspaceicon;
+	background: @workspacehover;
+	border-radius: 2em;
+}
+
+#clock,
+#backlight,
+#pulseaudio,
+#cpu,
+#memory,
+#disk,
+#battery,
+#custom-power
+{
+	background-color: @nord_bg;
+	font-size: 16px;
+	color: @nord_light_font;
+	border-radius: 2em;
+	padding: 0.5em 1em;
+	margin: 0.1em 0.2em;
+}
+
+/*
+	Bluetooth icon isn't a part of the Font Awesome Free.
+	It appears smaller by default. This separate setting fixes that.
+*/
+#bluetooth
+{
+	background-color: @nord_bg;
+	font-size: 18px;
+	color: @nord_light_font;
+	border-radius: 2em;
+	padding: 0.5em 1em;
+	margin: 0.1em 0.2em;
+}
+
+#battery.discharging.warning {
+  background-color: @warning;   
+}
+
+#battery.discharging.critical {
+	background-color: @critical;   
+}
+
+#bluetooth.on {
+	background-color: @nord_light_marine;
+}
+
+#bluetooth.connected {
+	background-color: @nord_light_green;
+}
+
+#network,
+#network.disabled,
+#network.disconnected {
+	background-color: @nord_bg;
+	font-size: 24px;
+	color: @nord_light_font;
+	border-radius: 2em;
+	padding: 0.05em 0.5em;
+	margin: 0.05em 0.2em;
+}
+
+#network.linked {
+	background-color: @nord_light_marine;
+}
+
+#network.wifi {
+	background-color: @nord_light_green;
+}

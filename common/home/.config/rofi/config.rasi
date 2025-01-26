@@ -1,5 +1,0 @@
-configuration {
-  modes: [ drun ];
-}
-
-@theme "rounded-nord-dark"

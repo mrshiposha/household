@@ -1,1 +1,1 @@
-# Household common configuration files
+# satellite
