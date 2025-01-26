@@ -239,6 +239,8 @@ in
 						"size 480 190,class:usbimager"
 
 						"float,class:steam"
+
+						"float,class:thunar,title:File Operation Progress"
 					];
 
 				exec-once = [ "wpaperd" ] ++ (
