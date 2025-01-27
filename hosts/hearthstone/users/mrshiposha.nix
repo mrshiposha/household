@@ -6,6 +6,7 @@ let uid = 1000; in {
 		description = "Daniel Shiposha";
 		extraGroups = [
 			"wheel"
+			"libvirtd"
 			"podman"
 			"openrazer"
 		];

@@ -140,6 +140,11 @@
 			};
 
 			flake.templates = {
+				basic = {
+					description = "Basic Template";
+					path = ./templates/basic;
+				};
+
 				rust = {
 					description = "Rust Template";
 					path = ./templates/rust;
