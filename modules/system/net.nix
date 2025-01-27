@@ -23,7 +23,6 @@ in
 		};
 
 		systemd.network.enable = true;
-		services.automatic-timezoned.enable = true;
 
 		services.openssh = {
 			enable = cfg.ssh.enable;

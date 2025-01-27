@@ -40,6 +40,8 @@
       };
 
       container-mgmt.enable = true;
+
+      services.localtimed.enable = true;
     })
   ];
 

@@ -21,6 +21,8 @@ options: {
 				services = {
 					"shiposha.com".enable = true;
 				};
+
+				time.timeZone = "Europe/Belgrade";
 			}
 		)
 	];

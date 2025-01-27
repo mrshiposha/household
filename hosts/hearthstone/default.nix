@@ -56,6 +56,8 @@ options: {
 				};
 
 				container-mgmt.enable = true;
+
+				time.timeZone = "Europe/Belgrade";
 			}
 		)
 	];
