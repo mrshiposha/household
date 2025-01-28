@@ -64,6 +64,13 @@ options: {
 				'';
 
 				time.timeZone = "Europe/Belgrade";
+
+				swapDevices = [
+					{
+						device = "/swapfile";
+						size = 64 * 1024; # 64 GiB
+					}
+				];
 			}
 		)
 	];
