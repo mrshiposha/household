@@ -19,6 +19,8 @@ let uid = 1001; in {
 
 		preset.wally.enable = true;
 
+		compositor.extraSettings.monitor = "DP-3,2560x1440@143.86Hz,auto,1";
+
 		obs.enable = true;
 
 		theming.gui.wallpapers = {

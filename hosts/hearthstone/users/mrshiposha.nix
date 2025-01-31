@@ -34,5 +34,7 @@ let uid = 1000; in {
 			enable = true;
 			# devEmail = true; # FIXME
 		};
+
+		compositor.extraSettings.monitor = "DP-1,2560x1440@165.08Hz,auto,1";
 	};
 }

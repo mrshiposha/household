@@ -1,5 +1,6 @@
 { nixosConfig, config, pkgs, lib, ... }:
 with lib;
+with types;
 let
 	swaylock = rec {
 		pkg = pkgs.swaylock-effects;
@@ -17,7 +18,13 @@ let
 	autoLock = "${pkgs.swayidle}/bin/swayidle -w lock '${screen.lock}' before-sleep '${screen.lock}; ${screen.off}' after-resume '${screen.on}' timeout 600 '${screen.lock}' timeout 900 '${hibernate}'";
 in
 {
-	options.compositor.enable = mkEnableOption "desktop (hyprland compositor and friends)";
+	options.compositor = {
+		enable = mkEnableOption "desktop (hyprland compositor and friends)";
+		extraSettings = mkOption {
+			type = attrs;
+			default = {};
+		};
+	};
 
 	config = mkIf config.compositor.enable {
 		wayland.windowManager.hyprland = {
@@ -253,7 +260,7 @@ in
 						(builtins.toString ./init-desktop-workspaces.sh)
 					]
 				);
-			};
+			} // config.compositor.extraSettings;
 		};
 
 		programs.wpaperd.enable = true;
