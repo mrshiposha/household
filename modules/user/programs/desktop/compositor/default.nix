@@ -251,7 +251,7 @@ in
 						"float,class:org.gnome.FileRoller"
 
 						"size 1440 660,class:thunar,title:.* - Thunar"
-						"size 1024 400,class:org.gnome.FileRoller"
+						"size 1024 400,class:org.gnome.FileRoller,initialTitle:File Roller"
 					];
 
 				exec-once = [ "wpaperd" ] ++ (
