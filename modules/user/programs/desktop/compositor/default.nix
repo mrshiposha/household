@@ -247,7 +247,8 @@ in
 
 						"float,class:steam"
 
-						"float,class:thunar,title:File Operation Progress"
+						"float,class:thunar"
+						"size 1440 660,class:thunar,title:.* - Thunar"
 					];
 
 				exec-once = [ "wpaperd" ] ++ (
