@@ -248,7 +248,10 @@ in
 						"float,class:steam"
 
 						"float,class:thunar"
+						"float,class:org.gnome.FileRoller"
+
 						"size 1440 660,class:thunar,title:.* - Thunar"
+						"size 1024 400,class:org.gnome.FileRoller"
 					];
 
 				exec-once = [ "wpaperd" ] ++ (
