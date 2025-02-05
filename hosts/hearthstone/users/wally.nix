@@ -30,10 +30,12 @@ let uid = 1001; in {
 
 		home.packages = with pkgs; [
 			teamspeak5_client
+			spotify
 		];
 
 		unfree.list = with pkgs; [
 			teamspeak5_client
+			spotify
 		];
 	};
 }
