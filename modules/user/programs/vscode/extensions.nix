@@ -8,6 +8,7 @@ pkgs:
     myriad-dreamin.tinymist
     vscodevim.vim
     mkhl.direnv
+    tauri-apps.tauri-vscode
   ]
   ++ pkgs.vscode-utils.extensionsFromVscodeMarketplace [
   {
