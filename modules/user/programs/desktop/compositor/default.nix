@@ -190,6 +190,8 @@ in
 
 					", XF86Calculator, exec, rofi -show calc"
 
+					"$mainMod, S, exec, wezterm start -- btop"
+
 					"Super_L+Shift_L, S, exec, ${printscreen}"
 					", XF86Tools, exec, ${printscreen}"
 					", Print, exec, ${printscreen}"
@@ -203,12 +205,15 @@ in
 					"$mainMod+Ctrl, Left, movewindow, l"
 					"$mainMod+Ctrl, Up, movewindow, u"
 					"$mainMod+Ctrl, Down, movewindow, d"
-
 				] ++ (
 					if nixosConfig.laptop.enable
 						then laptopRules
 						else desktopRules
 				);
+
+				bindr = [
+					"$mainMod, S, exec, pkill -n btop"
+				];
 
 				gestures = {
 					workspace_swipe = true;
