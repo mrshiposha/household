@@ -68,9 +68,14 @@ options: {
 				swapDevices = [
 					{
 						device = "/swapfile";
-						size = 64 * 1024; # 64 GiB
+						size = 128 * 1024; # 128 GiB
 					}
 				];
+
+				nix.settings = {
+					max-jobs = 4;
+					cores = 16;
+				};
 			}
 		)
 	];
