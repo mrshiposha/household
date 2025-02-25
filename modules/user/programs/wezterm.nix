@@ -13,6 +13,13 @@ with lib;
 
 				return {
 					enable_wayland = false, -- https://github.com/wez/wezterm/issues/4483 + https://github.com/wez/wezterm/issues/5990
+					keys = {
+						{
+							key = 'Enter',
+				      mods = 'ALT',
+				      action = wezterm.action.DisableDefaultAssignment,
+						}
+					},
 
 					color_scheme = "nord",
 					window_background_opacity = 0.7,

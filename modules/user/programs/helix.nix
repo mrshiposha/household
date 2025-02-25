@@ -1,6 +1,5 @@
 { config, pkgs, lib, ... }:
-with lib;
-{
+with lib; {
   options.helix.enable = mkEnableOption "helix editor";
 
   config.programs.helix = {
@@ -8,10 +7,14 @@ with lib;
     defaultEditor = true;
     settings = {
       theme = "nord_transparent";
-      editor.cursor-shape = {
-        normal = "block";
-        insert = "bar";
-        select = "underline";
+      editor = {
+        cursor-shape = {
+          normal = "block";
+          insert = "bar";
+          select = "underline";
+        };
+        file-picker.hidden = false;
+        whitespace.render = "all";
       };
     };
     languages.language = [{
