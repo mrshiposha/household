@@ -76,6 +76,13 @@ in {
         exec =
           "wezterm start --class org.wezfurlong.wezterm/dev -- hx /home/mrshiposha/dev/personal";
       };
+      household = {
+        name = "household dev session";
+        comment = "initiate household dev session";
+        categories = [ "Development" ];
+        exec =
+          "wezterm start --class org.wezfurlong.wezterm/dev -- hx /household";
+      };
     };
   };
 }
