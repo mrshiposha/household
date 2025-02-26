@@ -27,6 +27,7 @@ in
 				qview
 				switcheroo
 				gnome-decoder
+				vlc
 			])
 			[ trash-cli ]
 		];

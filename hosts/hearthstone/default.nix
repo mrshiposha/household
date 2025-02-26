@@ -1,85 +1,79 @@
 options: {
-	system = "x86_64-linux";
+  system = "x86_64-linux";
 
-	nixos.imports = [
-		./hardware-configuration.nix
-		./users
+  nixos.imports = [
+    ./hardware-configuration.nix
+    ./users
 
-		(
-			{ config, household, pkgs, ... }:
-			{
-				system.stateVersion = "24.11";
-				networking.hostName = "hearthstone";
+    ({ config, household, pkgs, ... }: {
+      system.stateVersion = "24.11";
+      networking.hostName = "hearthstone";
 
-				boot.initrd.kernelModules = [ "amdgpu" ];
-				systemd.tmpfiles.rules = [
-					"L+    /opt/rocm/hip   -    -    -     -    ${pkgs.rocmPackages.clr}"
-				];
+      boot.initrd.kernelModules = [ "amdgpu" ];
+      systemd.tmpfiles.rules = [
+        "L+    /opt/rocm/hip   -    -    -     -    ${pkgs.rocmPackages.clr}"
+      ];
 
-				networking.interfaces.enp3s0 = {
-					ipv6.addresses = options.ip.addr.v6;
-					ipv4.addresses = options.ip.addr.v4;
-					useDHCP = true;
-				};
+      networking.interfaces.enp3s0 = {
+        ipv6.addresses = options.ip.addr.v6;
+        ipv4.addresses = options.ip.addr.v4;
+        useDHCP = true;
+      };
 
-				gui = {
-					enable = true;
-					games.enable = true;
-					greeter.seat0.theme = household.greeterThemeFromUserTheme
-						config.home-manager.users.mrshiposha;
-				};
-				multiseat = {
-					enable = true;
+      gui = {
+        enable = true;
+        games.enable = true;
+        greeter.seat0.theme = household.greeterThemeFromUserTheme
+          config.home-manager.users.mrshiposha;
+      };
+      multiseat = {
+        enable = true;
 
-					driPrimePci = "0000:03:00.0";
+        driPrimePci = "0000:03:00.0";
 
-					extraSeats.seat-art.devices = [
-						{
-							subsystem = "drm";
-							pci = "0000:6c:00.0";
-						}
+        extraSeats.seat-art.devices = [
+          {
+            subsystem = "drm";
+            pci = "0000:6c:00.0";
+          }
 
-						{
-							subsystem = "pci";
-							pci = "0000:68:00.0";
-						}
-					];
-				};
-				security.poly = {
-					enable = true;
-					services = [ "greetd" ];
-					instances = [{
-						mount = "/tmp";
-						source = "/poly/tmp";
-						type = "tmpfs";
-					}];
-				};
+          {
+            subsystem = "usb";
+            pci = "0000:68:00.0";
+            kernel = "3-8";
+          }
+        ];
+      };
+      security.poly = {
+        enable = true;
+        services = [ "greetd" ];
+        instances = [{
+          mount = "/tmp";
+          source = "/poly/tmp";
+          type = "tmpfs";
+        }];
+      };
 
-				container-mgmt.enable = true;
+      container-mgmt.enable = true;
 
-				virtualisation.libvirtd.enable = true;
-				boot.extraModprobeConfig = ''
-					options kvm_amd nested=1
-					options kvm ignore_msrs=1 report_ignored_msrs=0
-				'';
+      virtualisation.libvirtd.enable = true;
+      boot.extraModprobeConfig =
+        "	options kvm_amd nested=1\n	options kvm ignore_msrs=1 report_ignored_msrs=0\n";
 
-				time.timeZone = "Europe/Belgrade";
+      time.timeZone = "Europe/Belgrade";
 
-				swapDevices = [
-					{
-						device = "/swapfile";
-						size = 128 * 1024; # 128 GiB
-					}
-				];
+      swapDevices = [{
+        device = "/swapfile";
+        size = 128 * 1024; # 128 GiB
+      }];
 
-				nix.settings = {
-					max-jobs = 4;
-					cores = 16;
-				};
-			}
-		)
-	];
-	# nixos.secrets = {
-	# 	dev-email.owner = "mrshiposha";
-	# };
+      nix.settings = {
+        max-jobs = 4;
+        cores = 16;
+      };
+    })
+  ];
+  # nixos.secrets = {
+  # 	dev-email.owner = "mrshiposha";
+  # };
 }
