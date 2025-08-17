@@ -253,7 +253,7 @@ in {
       } // config.compositor.extraSettings;
     };
 
-    programs.wpaperd.enable = true;
+    services.wpaperd.enable = true;
     programs.swaylock = {
       enable = true;
       package = swaylock.pkg;

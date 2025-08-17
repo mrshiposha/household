@@ -12,7 +12,7 @@ with lib;
 				local wezterm = require "wezterm"
 
 				return {
-					enable_wayland = false, -- https://github.com/wez/wezterm/issues/4483 + https://github.com/wez/wezterm/issues/5990
+					enable_wayland = true, -- was `false` due: https://github.com/wez/wezterm/issues/4483 + https://github.com/wez/wezterm/issues/5990
 					keys = {
 						{
 							key = 'Enter',

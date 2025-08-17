@@ -65,7 +65,6 @@ in {
             "class<discord>" = "";
             "class<Mattermost>" = "";
             "class<Element>" = "";
-            "class<Skype>" = "";
             "class<ghidra-Ghidra>" = "";
             "class<steam>" = "";
             "class<Logseq>" = "";

@@ -8,6 +8,7 @@ in
 
 	config = mkIf cfg.enable {
 		zsh.enable = mkDefault true;
+		programs.alacritty.enable = mkDefault true;
 
 		crypto.enable = mkDefault true;
 

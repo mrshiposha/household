@@ -1,16 +1,18 @@
 pkgs:
-  with pkgs.vscode-extensions; [
-    tamasfe.even-better-toml
-    rust-lang.rust-analyzer
-    vadimcn.vscode-lldb
-    dbaeumer.vscode-eslint
-    jnoortheen.nix-ide
-    myriad-dreamin.tinymist
-    vscodevim.vim
-    mkhl.direnv
-    tauri-apps.tauri-vscode
-  ]
-  ++ pkgs.vscode-utils.extensionsFromVscodeMarketplace [
+with pkgs.vscode-extensions;
+[
+  ms-vscode-remote.remote-ssh
+  ms-vscode-remote.remote-ssh-edit
+  tamasfe.even-better-toml
+  rust-lang.rust-analyzer
+  vadimcn.vscode-lldb
+  dbaeumer.vscode-eslint
+  jnoortheen.nix-ide
+  myriad-dreamin.tinymist
+  vscodevim.vim
+  mkhl.direnv
+  tauri-apps.tauri-vscode
+] ++ pkgs.vscode-utils.extensionsFromVscodeMarketplace [
   {
     name = "nord-visual-studio-code";
     publisher = "arcticicestudio";

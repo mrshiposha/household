@@ -4,6 +4,8 @@ options: {
   nixos.imports = [
     ./hardware-configuration.nix
     ./users
+    ./valheim.nix
+    ./bittensor/backup-service.nix
 
     ({ config, household, pkgs, ... }: {
       system.stateVersion = "24.11";
@@ -19,6 +21,8 @@ options: {
         ipv4.addresses = options.ip.addr.v4;
         useDHCP = true;
       };
+
+      amdgpu.enable = true;
 
       gui = {
         enable = true;
@@ -73,7 +77,5 @@ options: {
       };
     })
   ];
-  # nixos.secrets = {
-  # 	dev-email.owner = "mrshiposha";
-  # };
+  nixos.secrets = { valheim.owner = "valheim"; };
 }

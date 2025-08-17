@@ -4,14 +4,13 @@
 
 { config, pkgs, ... }:
 let
-  home-manager = builtins.fetchTarball "https://github.com/nix-community/home-manager/archive/release-24.11.tar.gz";
-in
-{
-  imports =
-    [ # Include the results of the hardware scan.
-      ./hardware-configuration.nix
-      (import "${home-manager}/nixos")
-    ];
+  home-manager = builtins.fetchTarball
+    "https://github.com/nix-community/home-manager/archive/release-25.05.tar.gz";
+in {
+  imports = [ # Include the results of the hardware scan.
+    ./hardware-configuration.nix
+    (import "${home-manager}/nixos")
+  ];
 
   # Bootloader.
   boot.loader.systemd-boot.enable = true;
@@ -29,10 +28,7 @@ in
   # Enable networking
   networking = {
     useNetworkd = true;
-    nameservers = [
-      "1.1.1.1"
-      "8.8.8.8"
-    ];
+    nameservers = [ "1.1.1.1" "8.8.8.8" ];
     nftables.enable = true;
   };
 
@@ -54,7 +50,7 @@ in
     uid = 1000;
     description = "Daniel Shiposha";
     extraGroups = [ "wheel" ];
-    packages = with pkgs; [];
+    packages = with pkgs; [ ];
   };
   users.users.navigator = {
     description = "fleet navigator";
@@ -69,11 +65,11 @@ in
   };
   home-manager.users = {
     mrshiposha = {
-      home.stateVersion = "24.11";
+      home.stateVersion = "25.05";
       programs.zsh.enable = true;
     };
     navigator = {
-      home.stateVersion = "24.11";
+      home.stateVersion = "25.05";
       programs.zsh.enable = true;
     };
   };
@@ -90,10 +86,11 @@ in
 
   # List packages installed in system profile. To search, run:
   # $ nix search wget
-  environment.systemPackages = with pkgs; [
-  #  vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
-  #  wget
-  ];
+  environment.systemPackages = with pkgs;
+    [
+      #  vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
+      #  wget
+    ];
 
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
@@ -109,7 +106,8 @@ in
   services.openssh.enable = true;
 
   nix.settings.trusted-users = [ "@wheel" ];
-  nix.settings.trusted-public-keys = [ "satellite-1:AAMTT4U2aR46/PhIa0HxcNnqN9IfTI6uCXICcxA1yQY=" ];
+  nix.settings.trusted-public-keys =
+    [ "satellite-1:AAMTT4U2aR46/PhIa0HxcNnqN9IfTI6uCXICcxA1yQY=" ];
   nix.extraOptions = ''
     experimental-features = nix-command flakes
   '';
@@ -126,5 +124,5 @@ in
   # this value at the release version of the first install of this system.
   # Before changing this value read the documentation for this option
   # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
-  system.stateVersion = "24.11"; # Did you read the comment?
+  system.stateVersion = "25.05"; # Did you read the comment?
 }

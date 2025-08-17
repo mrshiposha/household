@@ -4,10 +4,24 @@
   version = "0.1.0";
   gcRootPrefix = "fleet-gc-eT5oBjPe";
   hosts = {
+    hearthstone.encryptionKey = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIDXcYM8CidFpAdgqor2t0xYHvbOFdKeS0xBYGo3lJX3d root@nixos";
     satellite.encryptionKey = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIDWAjQXamZbDHbf0qDtjrUEljUJLMWL1AZQxEUy9wUIp root@satellite";
     sentinel.encryptionKey = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIAvG/Y3msJtoZiTZGNKZ+/hINXmO6saD606+DRpYGJK5 root@nixos";
   };
   hostSecrets = {
+    hearthstone.valheim = {
+      createdAt = "2025-04-23T18:59:59.769878024Z";
+      secret.raw = ''
+        <ENCRYPTED><BASE64-ENCODED>
+        YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IHNzaC1lZDI1NTE5IGp6VW1OQSAydzFE
+        bHhVbjRqZFd6Q2hLTy9xR2QvUFNuejhkSDc5SzdCK2tNRUpEVWpzCnp1ZDg5czUz
+        eU5mRDY4NnVQakp0c1hXc1kzV2x2SnlOL3VoemkyQW5hN0EKLT4gbicrNXJeNy1n
+        cmVhc2UgeiBZMDw/ZHhzOiB9YCEzJyJvIEV5SUAwCmtqdThZWGJGNFZVaDEvbVk4
+        NDh2WU8vK2pMd0gzN2M5dGI4Ci0tLSBxWHIyTElQRG9nMnpJWFZhc0p5SmEwUGdB
+        ZUx2WHZaR1Z3djAreVh6VlJRCiK/9ZnQOxNrAOjyeoWH//WD6nKfoId7Vr/1SW8+
+        +5BirxU+xT0SyD9Jtpk
+      '';
+    };
     satellite.dev-email = {
       createdAt = "2025-01-11T03:06:56.861673199Z";
       secret.raw = ''

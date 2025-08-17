@@ -1,7 +1,6 @@
 { config, lib, pkgs, ... }:
 with lib;
-with types;
-{
+with types; {
   options.razer = {
     enable = mkOption {
       type = bool;
