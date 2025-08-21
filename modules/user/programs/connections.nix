@@ -13,12 +13,12 @@ in {
   config = with pkgs; {
     home.packages = mkMerge [
       (mkIf cfg.telegram.enable [ telegram-desktop ])
-      (mkIf cfg.discord.enable [ discord-canary ])
+      (mkIf cfg.discord.enable [ discord ])
       (mkIf cfg.mattermost.enable [ mattermost-desktop ])
       (mkIf cfg.matrix.enable [ element-desktop ])
     ];
 
-    unfree.list = with pkgs; mkIf cfg.discord.enable [ discord-canary ];
+    unfree.list = with pkgs; mkIf cfg.discord.enable [ discord ];
   };
 
 }

@@ -159,11 +159,45 @@ in {
             # See https://github.com/ValveSoftware/steam-for-linux/issues/9383
             # See https://github.com/ValveSoftware/steam-for-linux/issues/11113
             extraArgs = "-no-cef-sandbox -cef-disable-gpu";
+
+            extraLibraries = p:
+              with p; [
+                # For Substance 3D Painter 2025
+                brotli
+                xorg.libSM
+                xorg.libICE
+                xorg.libxkbfile
+                xorg.libxcb
+                xorg.xcbutilwm # libxcb-icccm.so.4
+                xcb-util-cursor
+                (libtiff.overrideAttrs (final: prev: rec {
+                  version = "4.4.0";
+                  src = fetchFromGitLab {
+                    owner = "libtiff";
+                    repo = "libtiff";
+                    rev = "v${version}";
+                    hash =
+                      "sha256-VfC2HeQU49v8QuxjvABtRBEud898WDCMPC11Jo/GuI8=";
+                  };
+                  patches = [ ];
+                  cmakeFlags = [ ];
+
+                  postFixup = ''
+                    mkdir -p $dev_private/include
+                    mv -t $dev_private/include \
+                      libtiff/tif_config.h \
+                      ../libtiff/tif_dir.h \
+                      ../libtiff/tiffiop.h
+                  '';
+
+                }))
+              ];
           };
           extraPackages = with pkgs; [
             mangohud
             # TODO obs-studio-plugins.obs-vkcapture
 
+            # TODO some of this stuff should go to extraLibraries instead
             udev
             alsa-lib
             mono

@@ -2,6 +2,9 @@
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/release-25.05";
     unstable-nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
+
+    fixed-nix = { url = "github:CertainLach/nix/push-oyyysvytlnpr"; };
+
     flake-parts.url = "github:hercules-ci/flake-parts";
     home-manager = {
       url = "github:nix-community/home-manager/release-25.05";
@@ -36,8 +39,12 @@
           unstablePkgs = import unstable-nixpkgs { inherit system; };
         };
 
-        devShells.default =
-          pkgs.mkShell { packages = [ fleet.packages.${system}.fleet ]; };
+        devShells.default = pkgs.mkShell {
+          packages = [
+            fleet.packages.${system}.fleet
+            inputs.fixed-nix.packages.${system}.default
+          ];
+        };
       };
 
       fleetConfigurations.default = {
@@ -54,7 +61,7 @@
           multiseat.nixosModules.regreet
           multiseat.nixosModules.shared
           multiseat.nixosModules.multiseat
-          valheim-server.nixosModules.valheim
+          valheim-server.nixosModules.default
           home-manager.nixosModules.home-manager
           navigatorUser
           ({ pkgs, ... }: {
