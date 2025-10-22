@@ -10,7 +10,7 @@ in {
   config = mkIf config.waybar.enable {
     theming.gui.fonts.packages = with pkgs; [
       font-awesome
-      (nerdfonts.override { fonts = [ "NerdFontsSymbolsOnly" ]; })
+      nerd-fonts.symbols-only
     ];
     programs.waybar = {
       enable = true;

@@ -34,6 +34,7 @@
         greeter.seat0.theme = household.greeterThemeFromUserTheme
           config.home-manager.users.mrshiposha;
       };
+      audio.bluetooth.enable = true;
       security.poly = {
         enable = true;
         services = [ "greetd" ];
