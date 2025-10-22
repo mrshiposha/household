@@ -19,7 +19,8 @@ in {
       matrix.enable = mkDefault nixosConfig.gui.enable;
     };
 
-    firefox.addons = [ "grammarly-1" "polkadot-js-extension" "ether-metamask" ];
+    firefox.addons =
+      [ "polkadot-js-extension" "ether-metamask" "torproject-snowflake" ];
 
     programs = {
       zsh.initContent =
@@ -58,7 +59,10 @@ in {
     };
 
     home.packages = with pkgs;
-      mkMerge [ (mkIf nixosConfig.gui.enable [ usbimager ]) [ coturn jq fx ] ];
+      mkMerge [
+        (mkIf nixosConfig.gui.enable [ usbimager trilium-desktop ])
+        [ coturn jq fx ]
+      ];
 
     xdg.desktopEntries = {
       devWork = {

@@ -1,4 +1,4 @@
-{ nixosConfig, config, lib, pkgs, ... }:
+{ nixosConfig, config, lib, pkgs, pkgs20250902, ... }:
 with lib;
 with types;
 let cfg = config.theming;
@@ -70,7 +70,7 @@ in {
 
           packages = mkOption {
             type = listOf package;
-            default = with pkgs; [
+            default = with pkgs20250902; [
               (iosevka.override {
                 set = "Ship";
                 privateBuildPlan = {

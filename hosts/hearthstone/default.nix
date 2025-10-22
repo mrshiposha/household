@@ -51,11 +51,18 @@ options: {
       security.poly = {
         enable = true;
         services = [ "greetd" ];
-        instances = [{
-          mount = "/tmp";
-          source = "/poly/tmp";
-          type = "tmpfs";
-        }];
+        instances = [
+          {
+            mount = "/tmp";
+            source = "/poly/tmp";
+            type = "tmpfs";
+          }
+          {
+            mount = "/dev/shm";
+            source = "/poly/shm";
+            type = "tmpfs";
+          }
+        ];
       };
 
       container-mgmt.enable = true;
@@ -66,14 +73,15 @@ options: {
 
       time.timeZone = "Europe/Belgrade";
 
+      boot.kernel.sysctl."vm.swappiness" = 0; # prioritize RAM
       swapDevices = [{
         device = "/swapfile";
-        size = 128 * 1024; # 128 GiB
+        size = 32 * 1024; # 32 GiB
       }];
 
       nix.settings = {
-        max-jobs = 4;
-        cores = 16;
+        max-jobs = 2;
+        cores = 2;
       };
     })
   ];

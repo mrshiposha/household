@@ -1,6 +1,9 @@
 {
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/release-25.05";
+    nixpkgs20250902.url =
+      "github:NixOS/nixpkgs/adaa24fbf46737f3f1b5497bf64bae750f82942e";
+
     unstable-nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
 
     fixed-nix = { url = "github:CertainLach/nix/push-oyyysvytlnpr"; };
@@ -24,8 +27,8 @@
     };
   };
 
-  outputs = inputs@{ nixpkgs, unstable-nixpkgs, flake-parts, home-manager, fleet
-    , multiseat, valheim-server, ... }:
+  outputs = inputs@{ nixpkgs, nixpkgs20250902, unstable-nixpkgs, flake-parts
+    , home-manager, fleet, multiseat, valheim-server, ... }:
     let
       household = (import ./lib).household;
       navigatorUser = import ./navigator.nix;
@@ -36,6 +39,7 @@
       perSystem = { pkgs, config, system, ... }: {
         _module.args = {
           pkgs = import nixpkgs { inherit system; };
+          pkgs20250902 = import nixpkgs20250902 { inherit system; };
           unstablePkgs = import unstable-nixpkgs { inherit system; };
         };
 
@@ -96,6 +100,7 @@
               useUserPackages = true;
               extraSpecialArgs = {
                 inherit household;
+                pkgs20250902 = import nixpkgs20250902 { system = pkgs.system; };
                 unstablePkgs =
                   import unstable-nixpkgs { system = pkgs.system; };
               };

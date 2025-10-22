@@ -1,4 +1,4 @@
-{ nixosConfig, config, pkgs, unstablePkgs, lib, ... }:
+{ nixosConfig, config, pkgs, lib, ... }:
 with lib;
 with types;
 let
@@ -29,7 +29,6 @@ in {
   config = mkIf config.compositor.enable {
     wayland.windowManager.hyprland = {
       enable = true;
-      package = unstablePkgs.hyprland; # XWayland doesn't work in 25.05 pkgs
       systemd.enable = true;
       settings = {
         monitor = ",preferred,auto,1";
