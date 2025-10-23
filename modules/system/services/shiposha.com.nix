@@ -11,28 +11,21 @@ let
   idDomain = "id.shiposha.com";
   vpnDomain = "vpn.shiposha.com";
   relayDomain = "relay.shiposha.com";
-in
-{
+in {
   options.services."shiposha.com" = {
     enable = mkEnableOption "shiposha.com service";
   };
 
   config = mkIf cfg.enable {
     programs.mtr.enable = true;
-    networking.firewall.allowedTCPPorts = [
-      80
-      443
-    ];
+    networking.firewall.allowedTCPPorts = [ 80 443 ];
     security.acme = {
       acceptTerms = true;
       defaults = {
         email = "daniel@shiposha.com";
         webroot = "/var/lib/acme/acme-challenge";
       };
-      certs."shiposha.com".extraDomainNames = [
-        idDomain
-        vpnDomain
-      ];
+      certs."shiposha.com".extraDomainNames = [ idDomain vpnDomain ];
     };
     services.nginx = {
       enable = true;
@@ -83,11 +76,10 @@ in
       home = zitadelHome;
       group = "zitadel";
     };
-    users.groups.zitadel = {};
-    systemd.services.zitadel-setup =
-    let
+    users.groups.zitadel = { };
+    systemd.services.zitadel-setup = let
       secretPattern = "@ZITADEL_PASSWORD@";
-      secretTemplate = (pkgs.formats.yaml {}).generate "secret-template.yaml" {
+      secretTemplate = (pkgs.formats.yaml { }).generate "secret-template.yaml" {
         Database.postgres = {
           User = {
             Username = "zitadel";
@@ -133,8 +125,9 @@ in
           Database = "zitadel";
         };
       };
-      extraSettingsPaths = [zitadelSecrets];
-      steps = let orgName = "Shiposha Family Services"; in {
+      extraSettingsPaths = [ zitadelSecrets ];
+      steps = let orgName = "Shiposha Family Services";
+      in {
         FirstInstance = {
           InstanceName = orgName;
           Org = {
@@ -151,24 +144,23 @@ in
       masterKeyFile = config.secrets.zitadel.secret.path;
     };
 
-    services.netbird.server =
-    let
-      cliendId = "301336611243753502";
+    services.netbird.server = let cliendId = "301336611243753502";
     in {
       enable = true;
       domain = vpnDomain;
       enableNginx = true;
 
       management = {
-        oidcConfigEndpoint = "https://${idDomain}/.well-known/openid-configuration";
+        oidcConfigEndpoint =
+          "https://${idDomain}/.well-known/openid-configuration";
         turnDomain = mkForce relayDomain;
         settings = {
-          DataStoreEncryptionKey._secret = config.secrets.netbird-key.secret.path;
+          DataStoreEncryptionKey._secret =
+            config.secrets.netbird-key.secret.path;
           TURNConfig = {
             Secret._secret = config.secrets.netbird-turn.secret.path;
             Turns = [
-              (let
-                turnPort = config.services.coturn.tls-listening-port;
+              (let turnPort = config.services.coturn.tls-listening-port;
               in {
                 Proto = "udp";
                 URI = "turn:${relayDomain}:${builtins.toString turnPort}";
@@ -203,7 +195,8 @@ in
             ProviderConfig = {
               ClientID = cliendId;
               Audience = cliendId;
-              AuthorizationEndpoint = "https://${idDomain}/oauth/v2/device_authorization";
+              AuthorizationEndpoint =
+                "https://${idDomain}/oauth/v2/device_authorization";
               TokenEndpoint = "https://${idDomain}/oauth/v2/token";
               Scope = "openid profile email offline_access api";
             };

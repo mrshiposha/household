@@ -56,6 +56,7 @@
 
         nixos.config._module.args = {
           flakeInputs = inputs;
+          unstablePkgs = import unstable-nixpkgs { system = "x86_64-linux"; };
           inherit household;
         };
         nixos.imports = [
