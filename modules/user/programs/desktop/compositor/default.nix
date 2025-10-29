@@ -1,4 +1,4 @@
-{ nixosConfig, config, pkgs, lib, ... }:
+{ nixosConfig, config, pkgs, lib, unstablePkgs, ... }:
 with lib;
 with types;
 let
@@ -30,6 +30,7 @@ in {
     wayland.windowManager.hyprland = {
       enable = true;
       systemd.enable = true;
+      package = unstablePkgs.hyprland;
       settings = {
         monitor = ",preferred,auto,1";
 
@@ -203,10 +204,7 @@ in {
 
         bindr = [ "$mainMod, S, exec, pkill -n btop" ];
 
-        gestures = {
-          workspace_swipe = true;
-          workspace_swipe_distance = 150;
-        };
+        gestures = { gesture = [ "3, horizontal, workspace" ]; };
 
         bindm = [
           "$mainMod, mouse:272, movewindow"
