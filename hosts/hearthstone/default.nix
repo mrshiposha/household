@@ -22,6 +22,9 @@ options: {
         useDHCP = true;
       };
 
+      # Additional DE. Because Hyprland can't do XDnD properly
+      services.desktopManager.plasma6.enable = true;
+
       amdgpu.enable = true;
 
       gui = {
@@ -85,5 +88,5 @@ options: {
       };
     })
   ];
-  nixos.secrets = { valheim.owner = "valheim"; };
+  # nixos.secrets = { valheim.owner = "valheim"; };
 }
