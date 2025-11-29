@@ -1,9 +1,18 @@
 { pkgs, lib, config, ... }:
 let
+  cfg = config.lehatown;
   user = "lehatown-server";
   podman = "${pkgs.podman}/bin/podman";
 in {
-  options.lehatown = { enable = lib.mkEnableOption "Enable lehatown"; };
+  options.lehatown = {
+    enable = lib.mkEnableOption "Enable lehatown";
+    ports = with lib;
+      with lib.types; {
+        ui = mkOption { type = number; };
+        update = mkOption { type = number; };
+        game = mkOption { type = number; };
+      };
+  };
 
   config = lib.mkIf config.lehatown.enable {
     services.podman.enable = true;
@@ -13,6 +22,8 @@ in {
 
       image = "ghcr.io/steamserverui/stationeersserverui:latest";
       volumes = [
+        "/etc/passwd:/etc/passwd:ro"
+        "/etc/group:/etc/group:ro"
         "/home/${user}/stationeers-lehatown/UIMod/config:/app/UIMod/config:rw"
         "/home/${user}/stationeers-lehatown/UIMod/tls:/app/UIMod/tls:rw"
         "/home/${user}/stationeers-lehatown/saves:/app/saves:rw"
@@ -20,11 +31,11 @@ in {
       ];
 
       ports = [
-        "8443:8443/tcp"
-        "27016:27016/udp"
-        "27016:27016/tcp"
-        "27017:27017/udp"
-        "27017:27017/tcp"
+        "${builtins.toString cfg.ports.ui}:8443/tcp"
+        "${builtins.toString cfg.ports.update}:27015/tcp"
+        "${builtins.toString cfg.ports.update}:27015/udp"
+        "${builtins.toString cfg.ports.game}:27016/tcp"
+        "${builtins.toString cfg.ports.game}:27016/udp"
       ];
 
       extraPodmanArgs = [
@@ -32,25 +43,25 @@ in {
         "--memory=11811160064b"
         "--network-alias=stationeers-server-ui"
         "--network=lehatown_default"
+        "--userns=keep-id"
       ];
-    };
 
-    systemd.user.services."podman-stationeers-server-ui" = {
-      Unit = {
-        Description = "SSUI service";
-        PartOf = [ "podman-compose-lehatown-root.target" ];
-        Requires = [
-          "podman-network-lehatown_default.service"
-          "podman-volume-lehatown_app-data.service"
-        ];
-        After = [
-          "podman-network-lehatown_default.service"
-          "podman-volume-lehatown_app-data.service"
-        ];
+      extraConfig = {
+        Unit = {
+          Description = "SSUI service";
+          PartOf = [ "podman-compose-lehatown-root.target" ];
+          Requires = [
+            "podman-network-lehatown_default.service"
+            "podman-volume-lehatown_app-data.service"
+          ];
+          After = [
+            "podman-network-lehatown_default.service"
+            "podman-volume-lehatown_app-data.service"
+          ];
+        };
+
+        Install.WantedBy = [ "podman-compose-lehatown-root.target" ];
       };
-
-      Install.WantedBy = [ "podman-compose-lehatown-root.target" ];
-      Service.Restart = "always";
     };
 
     # Networks
@@ -62,7 +73,7 @@ in {
       Service = {
         Type = "oneshot";
         RemainAfterExit = true;
-        Exec = "${script}/bin/lehatown-network-create";
+        ExecStart = script;
         ExecStop = "podman network rm -f lehatown_default";
       };
 
@@ -79,7 +90,7 @@ in {
       Service = {
         Type = "oneshot";
         RemainAfterExit = true;
-        Exec = "${script}/bin/lehatown-volume-create";
+        ExecStart = script;
       };
 
       Install.WantedBy = [ "podman-compose-lehatown-root.target" ];

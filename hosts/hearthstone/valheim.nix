@@ -1,9 +1,9 @@
 { config, pkgs, ... }:
 with pkgs; {
-  unfree.list = [ valheim-server steamworks-sdk-redist ];
+  # unfree.list = [ valheim-server steamworks-sdk-redist ];
 
   services.valheim = {
-    enable = true;
+    enable = false;
     port = 40787;
     serverName = "Blenderast Server";
     worldName = "Blenderast";

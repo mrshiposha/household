@@ -34,6 +34,8 @@ in {
         extraConfig = { safe.directory = [ "/household" ]; };
       };
 
+      jujutsu.enable = true;
+
       lazygit.enable = true;
 
       direnv = {

@@ -18,7 +18,8 @@ in {
 
     preset.wally.enable = true;
 
-    compositor.extraSettings.monitor = "DP-3,2560x1440@143.86Hz,auto,1";
+    compositor.extraSettings.monitor =
+      "desc:GIGA-BYTE TECHNOLOGY CO. LTD. M32QC 0x01010101,2560x1440@143.86Hz,auto,1";
 
     obs.enable = true;
 

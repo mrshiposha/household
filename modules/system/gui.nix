@@ -267,21 +267,21 @@ in {
         enable32Bit = true;
       };
 
-      environment.systemPackages = with pkgs;
-        [
-          (lutris.override {
-            extraPkgs = pkgs:
-              with pkgs; [
-                wineWowPackages.stable
-                wine
-                (wine.override { wineBuild = "wine64"; })
-                wine64
-                wineWowPackages.staging
-                winetricks
-                wineWowPackages.waylandFull
-              ];
-          })
-        ];
+      # environment.systemPackages = with pkgs;
+      #   [
+      #     (lutris.override {
+      #       extraPkgs = pkgs:
+      #         with pkgs; [
+      #           wineWowPackages.stable
+      #           wine
+      #           (wine.override { wineBuild = "wine64"; })
+      #           wine64
+      #           wineWowPackages.staging
+      #           winetricks
+      #           wineWowPackages.waylandFull
+      #         ];
+      #     })
+      #   ];
     })
   ];
 }

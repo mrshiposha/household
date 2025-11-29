@@ -13,6 +13,7 @@ in {
       pureref
       unstablePkgs.blender-hip
       blockbench
+      mypaint
       pkgs20250902.krita
     ];
 

@@ -31,6 +31,7 @@ in {
       enable = true;
       systemd.enable = true;
       package = unstablePkgs.hyprland;
+      portalPackage = unstablePkgs.xdg-desktop-portal-hyprland;
       settings = {
         monitor = ",preferred,auto,1";
 
@@ -95,7 +96,10 @@ in {
           ];
         };
 
-        xwayland = { force_zero_scaling = true; };
+        xwayland = {
+          force_zero_scaling = true;
+          create_abstract_socket = true;
+        };
 
         workspace = let
           desktopRules = [
@@ -161,6 +165,7 @@ in {
             "$mainMod+Shift, Left, movetoworkspace, e-1"
           ];
           printscreen = ''grim -g "$(slurp -d)" - | wl-copy --type image/png'';
+          printscreenall = "grim - | wl-copy --type image/png";
         in [
           "$mainMod+Shift, Return, exec, $terminal"
           "Super_L, P, exec, $terminal"
@@ -188,6 +193,7 @@ in {
           "$mainMod, S, exec, wezterm start -- btop"
 
           "Super_L+Shift_L, S, exec, ${printscreen}"
+          "Super_L+Ctrl_L+Shift_L, S, exec,  ${printscreenall}"
           ", XF86Tools, exec, ${printscreen}"
           ", Print, exec, ${printscreen}"
 

@@ -1,11 +1,12 @@
 household: {
-	_module.args.household = household;
+  _module.args.household = household;
 
-	imports = [
-		./programs
-		./theming.nix
-		./unfree.nix
+  imports = [
+    ./programs
+    ./services
+    ./theming.nix
+    ./unfree.nix
 
-		./presets
-	];
+    ./presets
+  ];
 }
