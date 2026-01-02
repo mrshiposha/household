@@ -15,5 +15,6 @@
     ./laptop.nix
     ./crypto.nix
     ./obs.nix
+    ./zed.nix
   ];
 }

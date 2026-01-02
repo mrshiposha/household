@@ -1,4 +1,4 @@
-{ config, lib, unstablePkgs, ... }:
+{ config, lib, ... }:
 with lib;
 
 let cfg = config.net;
@@ -29,12 +29,12 @@ in {
     };
     services.netbird = {
       enable = cfg.netbird.enable;
-      package = unstablePkgs.netbird;
-      server = {
-        signal.package = unstablePkgs.netbird-signal;
-        management.package = unstablePkgs.netbird-management;
-        dashboard.package = unstablePkgs.netbird-dashboard;
-      };
+      # package = unstablePkgs.netbird;
+      # server = {
+      #   signal.package = unstablePkgs.netbird-signal;
+      #   management.package = unstablePkgs.netbird-management;
+      #   dashboard.package = unstablePkgs.netbird-dashboard;
+      # };
     };
 
     services.fail2ban.enable = cfg.ssh.enable;

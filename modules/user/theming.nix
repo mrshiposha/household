@@ -1,8 +1,17 @@
-{ nixosConfig, config, lib, pkgs, pkgs20250902, ... }:
+{
+  nixosConfig,
+  config,
+  lib,
+  pkgs,
+  pkgs20250902,
+  ...
+}:
 with lib;
 with types;
-let cfg = config.theming;
-in {
+let
+  cfg = config.theming;
+in
+{
   options = {
     theming.gui = {
       enable = mkOption {
@@ -114,7 +123,10 @@ in {
           };
           monospace = mkOption {
             type = listOf str;
-            default = [ "Iosevka Ship Term" "MesloLGS NF" ];
+            default = [
+              "Iosevka Ship Term"
+              "MesloLGS NF"
+            ];
           };
           emoji = mkOption {
             type = listOf str;
@@ -137,8 +149,7 @@ in {
     };
 
     xdg.dataFile."fonts" = mkIf cfg.gui.fonts.defaults.enable {
-      source = config.lib.file.mkOutOfStoreSymlink
-        "/run/current-system/sw/share/X11/fonts";
+      source = config.lib.file.mkOutOfStoreSymlink "/run/current-system/sw/share/X11/fonts";
     };
 
     home.pointerCursor = mkIf cfg.gui.enable {
@@ -162,9 +173,13 @@ in {
 
       font.name = "Regular";
 
-      gtk3.extraConfig = { gtk-application-prefer-dark-theme = 1; };
+      gtk3.extraConfig = {
+        gtk-application-prefer-dark-theme = 1;
+      };
 
-      gtk4.extraConfig = { gtk-application-prefer-dark-theme = 1; };
+      gtk4.extraConfig = {
+        gtk-application-prefer-dark-theme = 1;
+      };
 
       # FIXME use dconf
       # gtk4.extraConfig = {
@@ -173,18 +188,25 @@ in {
     };
 
     # FIXME see https://discourse.nixos.org/t/guide-to-installing-qt-theme/35523/2
-    # qt = {
-    #   enable = true;
-    #   platformTheme.name = "qtct";
-    #   style = {
-    #     package = pkgs.nordic;
-    #     name = "Nordic";
-    #   };
-    # };
+    qt =
+      let
+        qtctSettings = {
+          Appearance = {
+            style = "kvantum";
+            icon_theme = cfg.gui.icons.name;
+          };
+        };
+      in
+      {
+        enable = true;
+        platformTheme.name = "qtct";
+        style.package = pkgs.nordic;
+        qt5ctSettings = qtctSettings;
+        qt6ctSettings = qtctSettings;
+      };
 
     programs = mkIf cfg.gui.enable {
-      swaylock.settings.image =
-        builtins.toString cfg.gui.wallpapers.screensaver;
+      swaylock.settings.image = builtins.toString cfg.gui.wallpapers.screensaver;
     };
     services = mkIf cfg.gui.enable {
       wpaperd.settings.default.path = cfg.gui.wallpapers.active;

@@ -5,7 +5,7 @@
 { config, pkgs, ... }:
 let
   home-manager = builtins.fetchTarball
-    "https://github.com/nix-community/home-manager/archive/release-25.05.tar.gz";
+    "https://github.com/nix-community/home-manager/archive/release-25.11.tar.gz";
 in {
   imports = [ # Include the results of the hardware scan.
     ./hardware-configuration.nix
@@ -65,11 +65,11 @@ in {
   };
   home-manager.users = {
     mrshiposha = {
-      home.stateVersion = "25.05";
+      home.stateVersion = "25.11";
       programs.zsh.enable = true;
     };
     navigator = {
-      home.stateVersion = "25.05";
+      home.stateVersion = "25.11";
       programs.zsh.enable = true;
     };
   };
@@ -124,5 +124,5 @@ in {
   # this value at the release version of the first install of this system.
   # Before changing this value read the documentation for this option
   # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
-  system.stateVersion = "25.05"; # Did you read the comment?
+  system.stateVersion = "25.11"; # Did you read the comment?
 }

@@ -1,14 +1,21 @@
-{ config, pkgs, lib, ... }:
+{
+  config,
+  pkgs,
+  pkgs20250902,
+  lib,
+  ...
+}:
 with lib;
 let
   hyprland = config.wayland.windowManager.hyprland;
 
   gapsout = if hyprland.enable then hyprland.settings.general.gaps_out else 4;
-in {
+in
+{
   options.waybar.enable = mkEnableOption "waybar";
 
   config = mkIf config.waybar.enable {
-    theming.gui.fonts.packages = with pkgs; [
+    theming.gui.fonts.packages = with pkgs20250902; [
       font-awesome
       nerd-fonts.symbols-only
     ];
@@ -91,7 +98,11 @@ in {
 
         pulseaudio = {
           format = "{volume}% {icon} / {format_source}";
-          format-icons = [ "" "" "" ];
+          format-icons = [
+            ""
+            ""
+            ""
+          ];
           format-muted = " / {format_source}";
           format-source = "";
           format-source-muted = "";
@@ -106,8 +117,7 @@ in {
 
           tooltip-format = "Bluetooth {status}";
           tooltip-format-connected = "{device_alias}";
-          tooltip-format-connected-battery =
-            "{device_alias}<sub> {device_battery_percentage}%</sub>";
+          tooltip-format-connected-battery = "{device_alias}<sub> {device_battery_percentage}%</sub>";
 
           # See https://github.com/Alexays/Waybar/issues/1850#issuecomment-1573304549
           on-click = "sleep 0.1 && ${pkgs.rofi-bluetooth}/bin/rofi-bluetooth";
@@ -119,8 +129,7 @@ in {
           format-linked = "";
           format-disconnected = "";
 
-          tooltip-format-wifi =
-            "	{essid}\n	IP: {ipaddr}\n	Strength: {signalStrength}%\n";
+          tooltip-format-wifi = "	{essid}\n	IP: {ipaddr}\n	Strength: {signalStrength}%\n";
           tooltip-format-linked = "connecting to {essid}";
           tooltip-format-disconnected = "WiFi disconnected";
 
@@ -129,9 +138,15 @@ in {
 
         "group/stats" = {
           orientation = "inherit";
-          modules = [ "cpu" "disk" "memory" ];
+          modules = [
+            "cpu"
+            "disk"
+            "memory"
+          ];
 
-          drawer = { transition-duration = 500; };
+          drawer = {
+            transition-duration = 500;
+          };
         };
 
         "custom/power" = {
@@ -157,7 +172,13 @@ in {
         battery = {
           format = "{capacity}% {icon}";
           format-charging = "{capacity}% {icon} ";
-          format-icons = [ "" "" "" "" "" ];
+          format-icons = [
+            ""
+            ""
+            ""
+            ""
+            ""
+          ];
           states = {
             warning = 30;
             critical = 15;

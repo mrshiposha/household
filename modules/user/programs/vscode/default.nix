@@ -16,7 +16,7 @@ in {
       };
     };
 
-    home.packages = with pkgs; [ nil nixpkgs-fmt typst typstyle tinymist ];
+    home.packages = with pkgs; [ nil nixpkgs-fmt ];
 
     unfree.list = with pkgs;
       with pkgs.vscode-extensions.ms-vscode-remote; [

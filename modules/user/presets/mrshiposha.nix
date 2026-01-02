@@ -1,7 +1,15 @@
-{ nixosConfig, config, lib, pkgs, ... }:
+{
+  nixosConfig,
+  config,
+  lib,
+  pkgs,
+  ...
+}:
 with lib;
-let cfg = config.preset.mrshiposha;
-in {
+let
+  cfg = config.preset.mrshiposha;
+in
+{
   options.preset.mrshiposha = {
     enable = mkEnableOption "mrshiposha user";
     devEmail = mkEnableOption "dev email sender";
@@ -12,26 +20,30 @@ in {
 
     yazi.enable = mkDefault true;
     helix.enable = mkDefault true;
-    vscode.enable = mkDefault nixosConfig.gui.enable;
+    zed.enable = mkDefault nixosConfig.gui.enable;
     logseq.enable = mkDefault false;
     connections = {
       mattermost.enable = mkDefault nixosConfig.gui.enable;
       matrix.enable = mkDefault nixosConfig.gui.enable;
     };
 
-    firefox.addons =
-      [ "polkadot-js-extension" "ether-metamask" "torproject-snowflake" ];
+    firefox.addons = [
+      "polkadot-js-extension"
+      "ether-metamask"
+      "torproject-snowflake"
+    ];
 
     programs = {
-      zsh.initContent =
-        "	function navigate() {\n		echo \"Navigating the fleet...\\n\" && sudo -u navigator $*\n	}\n";
+      zsh.initContent = "	function navigate() {\n		echo \"Navigating the fleet...\\n\" && sudo -u navigator $*\n	}\n";
 
       git = {
         enable = mkDefault true;
         package = pkgs.gitFull;
         userName = "Daniel Shiposha";
         userEmail = "dev@shiposha.com";
-        extraConfig = { safe.directory = [ "/household" ]; };
+        extraConfig = {
+          safe.directory = [ "/household" ];
+        };
       };
 
       jujutsu.enable = true;
@@ -60,10 +72,22 @@ in {
       };
     };
 
-    home.packages = with pkgs;
+    home.packages =
+      with pkgs;
       mkMerge [
-        (mkIf nixosConfig.gui.enable [ usbimager trilium-desktop ])
-        [ coturn jq fx ]
+        (mkIf nixosConfig.gui.enable [
+          usbimager
+          typst
+          typstyle
+          typst-live
+          tinymist
+          wireshark
+        ])
+        [
+          coturn
+          jq
+          fx
+        ]
       ];
 
     xdg.desktopEntries = {
@@ -71,22 +95,19 @@ in {
         name = "work dev session";
         comment = "initiate work dev session";
         categories = [ "Development" ];
-        exec =
-          "wezterm start --class org.wezfurlong.wezterm/dev -- hx /home/mrshiposha/dev/work";
+        exec = "wezterm start --class org.wezfurlong.wezterm/dev -- hx /home/mrshiposha/dev/work";
       };
       devPersonal = {
         name = "personal dev session";
         comment = "initiate personal dev session";
         categories = [ "Development" ];
-        exec =
-          "wezterm start --class org.wezfurlong.wezterm/dev -- hx /home/mrshiposha/dev/personal";
+        exec = "wezterm start --class org.wezfurlong.wezterm/dev -- hx /home/mrshiposha/dev/personal";
       };
       household = {
         name = "household dev session";
         comment = "initiate household dev session";
         categories = [ "Development" ];
-        exec =
-          "wezterm start --class org.wezfurlong.wezterm/dev -- hx /household";
+        exec = "wezterm start --class org.wezfurlong.wezterm/dev -- hx /household";
       };
     };
   };

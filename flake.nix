@@ -1,6 +1,6 @@
 {
   inputs = {
-    nixpkgs.url = "github:NixOS/nixpkgs/release-25.05";
+    nixpkgs.url = "github:NixOS/nixpkgs/release-25.11";
     nixpkgs20250902.url =
       "github:NixOS/nixpkgs/adaa24fbf46737f3f1b5497bf64bae750f82942e";
 
@@ -10,7 +10,7 @@
 
     flake-parts.url = "github:hercules-ci/flake-parts";
     home-manager = {
-      url = "github:nix-community/home-manager/release-25.05";
+      url = "github:nix-community/home-manager/release-25.11";
       inputs.nixpkgs.follows = "nixpkgs";
     };
     fleet = {
@@ -56,6 +56,7 @@
 
         nixos.config._module.args = {
           flakeInputs = inputs;
+          pkgs20250902 = import nixpkgs20250902 { system = "x86_64-linux"; };
           unstablePkgs = import unstable-nixpkgs { system = "x86_64-linux"; };
           inherit household;
         };
