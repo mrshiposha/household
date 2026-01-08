@@ -28,9 +28,9 @@ in {
       screensaver = household.image /2560x1440/mountain-range.jpg;
     };
 
-    home.packages = with pkgs; [ teamspeak5_client spotify gimp-with-plugins ];
+    home.packages = with pkgs; [ teamspeak6-client spotify gimp-with-plugins ];
     office.enable = true;
 
-    unfree.list = with pkgs; [ teamspeak5_client spotify ];
+    unfree.list = with pkgs; [ teamspeak6-client spotify ];
   };
 }
