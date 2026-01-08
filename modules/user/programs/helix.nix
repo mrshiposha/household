@@ -1,5 +1,11 @@
-{ config, pkgs, lib, ... }:
-with lib; {
+{
+  config,
+  pkgs,
+  lib,
+  ...
+}:
+with lib;
+{
   options.helix.enable = mkEnableOption "helix editor";
 
   config.programs.helix = {
@@ -17,11 +23,31 @@ with lib; {
         whitespace.render = "all";
       };
     };
-    languages.language = [{
-      name = "nix";
-      auto-format = true;
-      formatter.command = "${pkgs.nixfmt}/bin/nixfmt";
-    }];
+    languages = {
+      language-server.deno-lsp = {
+        command = "deno";
+        args = ["lsp"];
+        config.deno.enable = true;
+      };
+      language = [
+        {
+          name = "nix";
+          auto-format = true;
+          formatter.command = "${pkgs.nixfmt}/bin/nixfmt";
+        }
+        {
+          name = "typescript";
+          roots = [
+            "deno.json"
+            "deno.jsonc"
+            "package.json"
+          ];
+          file-types = ["ts" "tsx"];
+          auto-format = true;
+          language-servers = [ "deno-lsp" ];
+        }
+      ];
+    };
     themes = {
       nord_transparent = {
         "inherits" = "nord";
