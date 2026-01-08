@@ -5,7 +5,7 @@ in {
     isNormalUser = true;
     inherit uid;
     description = "Valentina Shiposha";
-    extraGroups = [ "openrazer" ];
+    extraGroups = [ "openrazer" "scanner" ];
   };
   gui.games.mountSharedLibraryFor = [{
     ownerName = "wally";
@@ -29,6 +29,7 @@ in {
     };
 
     home.packages = with pkgs; [ teamspeak5_client spotify gimp-with-plugins ];
+    office.enable = true;
 
     unfree.list = with pkgs; [ teamspeak5_client spotify ];
   };

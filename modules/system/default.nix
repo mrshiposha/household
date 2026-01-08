@@ -14,6 +14,7 @@ with lib; {
     ./razer.nix
     ./monitoring.nix
     ./amdgpu.nix
+    ./mfp.nix
   ];
 
   hardware.enableRedistributableFirmware = mkDefault true;
@@ -29,4 +30,6 @@ with lib; {
 
   net.ssh.enable = mkDefault true;
   net.netbird.enable = mkDefault true;
+
+  mfp.enable = mkDefault true;
 }

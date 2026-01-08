@@ -16,5 +16,6 @@
     ./crypto.nix
     ./obs.nix
     ./zed.nix
+    ./office.nix
   ];
 }

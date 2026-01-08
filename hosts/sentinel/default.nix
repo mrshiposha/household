@@ -9,6 +9,7 @@ options: {
       system.stateVersion = "24.05";
       networking.hostName = "sentinel";
       intel.enable = true;
+      mfp.enable = false;
 
       networking.interfaces.enp3s0 = {
         ipv6.addresses = options.ip.addr.v6;

@@ -5,7 +5,7 @@ in {
     isNormalUser = true;
     inherit uid;
     description = "Daniel Shiposha";
-    extraGroups = [ "wheel" "podman" "wireshark" ];
+    extraGroups = [ "wheel" "podman" "wireshark" "scanner" ];
   };
   gui.games.mountSharedLibraryFor = [{
     ownerName = "mrshiposha";
