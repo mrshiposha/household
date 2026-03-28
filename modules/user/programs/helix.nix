@@ -22,11 +22,17 @@ with lib;
         file-picker.hidden = false;
         whitespace.render = "all";
       };
+      keys.normal = {
+        space.space = ":toggle line-number absolute relative";
+      };
+      keys.select = {
+        space.space = ":toggle line-number absolute relative";
+      };
     };
     languages = {
       language-server.deno-lsp = {
         command = "deno";
-        args = ["lsp"];
+        args = [ "lsp" ];
         config.deno.enable = true;
       };
       language = [
@@ -42,7 +48,10 @@ with lib;
             "deno.jsonc"
             "package.json"
           ];
-          file-types = ["ts" "tsx"];
+          file-types = [
+            "ts"
+            "tsx"
+          ];
           auto-format = true;
           language-servers = [ "deno-lsp" ];
         }
