@@ -165,6 +165,7 @@ in
         programs = {
           steam = {
             enable = true;
+            protontricks.enable = true;
             package = pkgs.steam.override {
               # Workaround for DRI_PRIME issue
               # See https://github.com/ValveSoftware/steam-for-linux/issues/9383
@@ -276,6 +277,7 @@ in
           instances = [
             {
               mount = "/shared/steam/library/compatdata";
+              mode = "0755";
               owner = "root";
               group = "root";
               source = "/shared/steam/poly/compatdata";

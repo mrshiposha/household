@@ -7,86 +7,110 @@ options: {
     ./valheim.nix
     ./bittensor/backup-service.nix
 
-    ({ config, household, pkgs, ... }: {
-      system.stateVersion = "24.11";
-      networking.hostName = "hearthstone";
+    (
+      {
+        config,
+        household,
+        pkgs,
+        ...
+      }:
+      {
+        system.stateVersion = "24.11";
+        networking.hostName = "hearthstone";
 
-      boot.initrd.kernelModules = [ "amdgpu" ];
-      systemd.tmpfiles.rules = [
-        "L+    /opt/rocm/hip   -    -    -     -    ${pkgs.rocmPackages.clr}"
-      ];
+        boot.initrd.kernelModules = [ "amdgpu" ];
+        systemd.tmpfiles.rules = [
+          "L+    /opt/rocm/hip   -    -    -     -    ${pkgs.rocmPackages.clr}"
+        ];
 
-      networking.interfaces.enp3s0 = {
-        ipv6.addresses = options.ip.addr.v6;
-        ipv4.addresses = options.ip.addr.v4;
-        useDHCP = true;
-      };
+        networking.interfaces.enp3s0 = {
+          ipv6.addresses = options.ip.addr.v6;
+          ipv4.addresses = options.ip.addr.v4;
+          useDHCP = true;
+        };
 
-      # Additional DE. Because Hyprland can't do XDnD properly
-      services.desktopManager.plasma6.enable = true;
+        # Additional DE. Because Hyprland can't do XDnD properly
+        services.desktopManager.plasma6.enable = true;
 
-      amdgpu.enable = true;
+        # Enable /bin /usr/bin stuff
+        # services.envfs.enable = true;
 
-      gui = {
-        enable = true;
-        games.enable = true;
-        greeter.seat0.theme = household.greeterThemeFromUserTheme
-          config.home-manager.users.mrshiposha;
-      };
-      multiseat = {
-        enable = true;
+        amdgpu.enable = true;
 
-        driPrimePci = "0000:03:00.0";
+        gui = {
+          enable = true;
+          games.enable = true;
+          greeter.seat0.theme = household.greeterThemeFromUserTheme config.home-manager.users.mrshiposha;
+        };
+        multiseat = {
+          enable = true;
 
-        extraSeats.seat-art.devices = [
+          driPrimePci = "0000:03:00.0";
+
+          extraSeats.seat-art.devices = [
+            {
+              subsystem = "drm";
+              pci = "0000:6c:00.0";
+            }
+
+            {
+              subsystem = "usb";
+              pci = "0000:68:00.0";
+              kernel = "3-8";
+            }
+          ];
+        };
+        fileSystems."/imperm" = {
+          device = "none";
+          fsType = "tmpfs";
+          options = [
+            "defaults"
+            "size=4G"
+            "mode=755"
+          ];
+        };
+
+        security.poly = {
+          enable = true;
+          enableDebug = true;
+          services = [ "greetd" ];
+          instances = [
+            {
+              mount = "/tmp";
+              source = "/imperm/poly/tmp";
+              type = "tmpdir";
+            }
+            {
+              mount = "/dev/shm";
+              source = "/imperm/poly/shm";
+              type = "tmpdir";
+            }
+          ];
+        };
+
+        container-mgmt.enable = true;
+
+        virtualisation.libvirtd.enable = true;
+        networking.firewall.trustedInterfaces = [ "virbr0" ];
+
+        boot.extraModprobeConfig = "	options kvm_amd nested=1\n	options kvm ignore_msrs=1 report_ignored_msrs=0\n";
+
+        time.timeZone = "Europe/Belgrade";
+
+        boot.kernel.sysctl."vm.swappiness" = 0; # prioritize RAM
+        swapDevices = [
           {
-            subsystem = "drm";
-            pci = "0000:6c:00.0";
-          }
-
-          {
-            subsystem = "usb";
-            pci = "0000:68:00.0";
-            kernel = "3-8";
+            device = "/swapfile";
+            size = 32 * 1024; # 32 GiB
           }
         ];
-      };
-      security.poly = {
-        enable = true;
-        services = [ "greetd" ];
-        instances = [
-          {
-            mount = "/tmp";
-            source = "/poly/tmp";
-            type = "tmpfs";
-          }
-          {
-            mount = "/dev/shm";
-            source = "/poly/shm";
-            type = "tmpfs";
-          }
-        ];
-      };
 
-      container-mgmt.enable = true;
-
-      virtualisation.libvirtd.enable = true;
-      boot.extraModprobeConfig =
-        "	options kvm_amd nested=1\n	options kvm ignore_msrs=1 report_ignored_msrs=0\n";
-
-      time.timeZone = "Europe/Belgrade";
-
-      boot.kernel.sysctl."vm.swappiness" = 0; # prioritize RAM
-      swapDevices = [{
-        device = "/swapfile";
-        size = 32 * 1024; # 32 GiB
-      }];
-
-      nix.settings = {
-        max-jobs = 2;
-        cores = 2;
-      };
-    })
+        nix.settings = {
+          max-jobs = 2;
+          cores = 2;
+        };
+      }
+    )
   ];
   # nixos.secrets = { valheim.owner = "valheim"; };
 }

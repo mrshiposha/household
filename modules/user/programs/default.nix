@@ -5,6 +5,7 @@
     ./wezterm.nix
     ./stats.nix
     ./firefox.nix
+    ./chromium.nix
     ./connections.nix
     ./yazi.nix
     ./zathura.nix
