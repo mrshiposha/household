@@ -1,4 +1,9 @@
-{ config, household, lib, ... }:
+{
+  config,
+  household,
+  lib,
+  ...
+}:
 let
   enableServer = true;
 
@@ -9,8 +14,13 @@ let
     game = 27016;
   };
 
-  allowedPorts = [ ports.ui ports.update ports.game ];
-in {
+  allowedPorts = [
+    ports.ui
+    ports.update
+    ports.game
+  ];
+in
+{
   users.users.${user} = {
     group = user;
     isNormalUser = true;
