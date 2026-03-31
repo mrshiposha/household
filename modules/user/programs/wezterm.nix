@@ -1,71 +1,118 @@
 { config, lib, ... }:
 with lib;
 {
-	options.wezterm.enable = mkEnableOption "wezterm";
+  options.wezterm.enable = mkEnableOption "wezterm";
 
-	config = mkIf config.wezterm.enable {
-		programs.wezterm = {
-			enable = true;
-			enableBashIntegration = true;
-			enableZshIntegration = true;
-			extraConfig = ''
-				local wezterm = require "wezterm"
+  config = mkIf config.wezterm.enable {
+    programs.wezterm = {
+      enable = true;
+      enableBashIntegration = true;
+      enableZshIntegration = true;
+      extraConfig = ''
+        local wezterm = require "wezterm"
 
-				return {
-					enable_wayland = true, -- was `false` due: https://github.com/wez/wezterm/issues/4483 + https://github.com/wez/wezterm/issues/5990
-					keys = {
-						{
-							key = 'Enter',
-				      mods = 'ALT',
-				      action = wezterm.action.DisableDefaultAssignment,
-						}
-					},
+        return {
+          enable_wayland = true, -- was `false` due: https://github.com/wez/wezterm/issues/4483 + https://github.com/wez/wezterm/issues/5990
+          keys = {
+            {
+              key = 'Enter',
+              mods = 'ALT',
+              action = wezterm.action.DisableDefaultAssignment,
+            },
 
-					color_scheme = "nord",
-					window_background_opacity = 0.7,
-					use_fancy_tab_bar = false,
-					hide_tab_bar_if_only_one_tab = true,
-					window_close_confirmation = "NeverPrompt",
+            {
+              key = '`',
+              mods = 'CTRL',
+              action = wezterm.action.SplitPane {
+                direction = 'Down'
+              }
+            },
 
-					font = wezterm.font "monospace",
-					front_end = "WebGpu",
-					webgpu_power_preference = 'HighPerformance',
+            {
+              key = '~',
+              mods = 'CTRL|SHIFT',
+              action = wezterm.action.CloseCurrentPane {
+                confirm = false
+              }
+            },
 
-					colors = {
-						tab_bar = {
-							background = "#2e3440",
+            {
+              key = 'UpArrow',
+              mods = 'CTRL',
+              action = wezterm.action.ActivatePaneDirection 'Up'
+            },
+            {
+              key = 'DownArrow',
+              mods = 'CTRL',
+              action = wezterm.action.ActivatePaneDirection 'Down'
+            },
+            {
+              key = 'k',
+              mods = 'CTRL',
+              action = wezterm.action.ActivatePaneDirection 'Up'
+            },
+            {
+              key = 'j',
+              mods = 'CTRL',
+              action = wezterm.action.ActivatePaneDirection 'Down'
+            },
+            {
+              key = 'h',
+              mods = 'CTRL',
+              action = wezterm.action.ActivatePaneDirection 'Left'
+            },
+            {
+              key = 'l',
+              mods = 'CTRL',
+              action = wezterm.action.ActivatePaneDirection 'Right'
+            }
+          },
 
-							active_tab = {
-								bg_color = "#81a1c1",
-								fg_color = "#e5e9f0",
-							},
+          color_scheme = "nord",
+          window_background_opacity = 0.7,
+          use_fancy_tab_bar = false,
+          hide_tab_bar_if_only_one_tab = true,
+          window_close_confirmation = "NeverPrompt",
 
-							inactive_tab = {
-								bg_color = "#4c566a",
-								fg_color = "#d8dee9",
-							},
+          font = wezterm.font "monospace",
+          front_end = "WebGpu",
+          webgpu_power_preference = 'HighPerformance',
 
-							inactive_tab_hover = {
-								bg_color = "#5e81ac",
-								fg_color = "#d8dee9",
-								italic = true,
-							},
+          colors = {
+            tab_bar = {
+              background = "#2e3440",
 
-							new_tab = {
-								bg_color = "#3b4252",
-								fg_color = "#d8dee9",
-							},
+              active_tab = {
+                bg_color = "#81a1c1",
+                fg_color = "#e5e9f0",
+              },
 
-							new_tab_hover = {
-								bg_color = "#5e81ac",
-								fg_color = "#d8dee9",
+              inactive_tab = {
+                bg_color = "#4c566a",
+                fg_color = "#d8dee9",
+              },
 
-								italic = true,
-							},
-						},
-					},
-				}
-			'';
-		};
-	};
+              inactive_tab_hover = {
+                bg_color = "#5e81ac",
+                fg_color = "#d8dee9",
+                italic = true,
+              },
+
+              new_tab = {
+                bg_color = "#3b4252",
+                fg_color = "#d8dee9",
+              },
+
+              new_tab_hover = {
+                bg_color = "#5e81ac",
+                fg_color = "#d8dee9",
+
+                italic = true,
+              },
+            },
+          },
+        }
+      '';
+    };
+  };
 }
