@@ -18,7 +18,7 @@ in
   config = mkIf cfg.enable {
     preset.regularUser.enable = mkDefault true;
 
-    yazi.enable = mkDefault true;
+    xplr.enable = mkDefault true;
     helix.enable = mkDefault true;
     zed.enable = mkDefault nixosConfig.gui.enable;
     logseq.enable = mkDefault false;

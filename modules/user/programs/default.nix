@@ -18,5 +18,6 @@
     ./obs.nix
     ./zed.nix
     ./office.nix
+    ./xplr.nix
   ];
 }
