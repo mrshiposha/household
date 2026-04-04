@@ -56,16 +56,6 @@ with lib;
               mods = 'CTRL',
               action = wezterm.action.ActivatePaneDirection 'Down'
             },
-            {
-              key = 'h',
-              mods = 'CTRL',
-              action = wezterm.action.ActivatePaneDirection 'Left'
-            },
-            {
-              key = 'l',
-              mods = 'CTRL',
-              action = wezterm.action.ActivatePaneDirection 'Right'
-            }
           },
 
           color_scheme = "nord",
