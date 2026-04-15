@@ -11,6 +11,7 @@ with lib;
   config.programs.helix = {
     enable = config.helix.enable;
     defaultEditor = true;
+    extraPackages = with pkgs; [ lldb ];
     settings = {
       theme = "nord_transparent";
       editor = {

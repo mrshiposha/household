@@ -1,12 +1,13 @@
 {
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/release-25.11";
-    nixpkgs20250902.url =
-      "github:NixOS/nixpkgs/adaa24fbf46737f3f1b5497bf64bae750f82942e";
+    nixpkgs20250902.url = "github:NixOS/nixpkgs/adaa24fbf46737f3f1b5497bf64bae750f82942e";
 
     unstable-nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
 
-    fixed-nix = { url = "github:CertainLach/nix/push-oyyysvytlnpr"; };
+    fixed-nix = {
+      url = "github:CertainLach/nix/push-oyyysvytlnpr";
+    };
 
     flake-parts.url = "github:hercules-ci/flake-parts";
     home-manager = {
@@ -27,29 +28,47 @@
     };
   };
 
-  outputs = inputs@{ nixpkgs, nixpkgs20250902, unstable-nixpkgs, flake-parts
-    , home-manager, fleet, multiseat, valheim-server, ... }:
+  outputs =
+    inputs@{
+      nixpkgs,
+      nixpkgs20250902,
+      unstable-nixpkgs,
+      flake-parts,
+      home-manager,
+      fleet,
+      multiseat,
+      valheim-server,
+      ...
+    }:
     let
       household = (import ./lib).household;
       navigatorUser = import ./navigator.nix;
-    in flake-parts.lib.mkFlake { inherit inputs; } {
+    in
+    flake-parts.lib.mkFlake { inherit inputs; } {
       imports = [ fleet.flakeModules.default ];
 
       systems = [ "x86_64-linux" ];
-      perSystem = { pkgs, config, system, ... }: {
-        _module.args = {
-          pkgs = import nixpkgs { inherit system; };
-          pkgs20250902 = import nixpkgs20250902 { inherit system; };
-          unstablePkgs = import unstable-nixpkgs { inherit system; };
-        };
+      perSystem =
+        {
+          pkgs,
+          config,
+          system,
+          ...
+        }:
+        {
+          _module.args = {
+            pkgs = import nixpkgs { inherit system; };
+            pkgs20250902 = import nixpkgs20250902 { inherit system; };
+            unstablePkgs = import unstable-nixpkgs { inherit system; };
+          };
 
-        devShells.default = pkgs.mkShell {
-          packages = [
-            fleet.packages.${system}.fleet
-            inputs.fixed-nix.packages.${system}.default
-          ];
+          devShells.default = pkgs.mkShell {
+            packages = [
+              fleet.packages.${system}.fleet
+              inputs.fixed-nix.packages.${system}.default
+            ];
+          };
         };
-      };
 
       fleetConfigurations.default = {
         nixpkgs.buildUsing = nixpkgs;
@@ -70,71 +89,84 @@
           valheim-server.nixosModules.default
           home-manager.nixosModules.home-manager
           navigatorUser
-          ({ pkgs, ... }: {
-            disabledModules =
-              [ "services/display-managers/greetd.nix" "programs/regreet.nix" ];
+          (
+            { pkgs, ... }:
+            {
+              disabledModules = [
+                "services/display-managers/greetd.nix"
+                "programs/regreet.nix"
+              ];
 
-            # Make `nix shell nixpkgs#thing` use the same nixpkgs, as used to build the system.
-            nix = {
-              registry.nixpkgs = {
-                from = {
-                  id = "nixpkgs";
-                  type = "indirect";
+              # Make `nix shell nixpkgs#thing` use the same nixpkgs, as used to build the system.
+              nix = {
+                registry.nixpkgs = {
+                  from = {
+                    id = "nixpkgs";
+                    type = "indirect";
+                  };
+                  flake = nixpkgs;
+                  exact = false;
                 };
-                flake = nixpkgs;
-                exact = false;
+                settings = {
+                  # see https://github.com/NixOS/nix/pull/7126#issuecomment-1820045768
+                  # replace with https://github.com/NixOS/nix/pull/7126 when ready
+                  sync-before-registering = true;
+
+                  trusted-users = [
+                    "root"
+                    "@wheel"
+                  ];
+                  trusted-public-keys = [
+                    "satellite-1:AAMTT4U2aR46/PhIa0HxcNnqN9IfTI6uCXICcxA1yQY="
+                  ];
+
+                  experimental-features = [
+                    "nix-command"
+                    "flakes"
+                  ];
+                };
               };
-              settings = {
-                # see https://github.com/NixOS/nix/pull/7126#issuecomment-1820045768
-                # replace with https://github.com/NixOS/nix/pull/7126 when ready
-                sync-before-registering = true;
-
-                trusted-users = [ "root" "@wheel" ];
-                trusted-public-keys = [
-                  "satellite-1:AAMTT4U2aR46/PhIa0HxcNnqN9IfTI6uCXICcxA1yQY="
-                ];
-
-                experimental-features = [ "nix-command" "flakes" ];
+              home-manager = {
+                useGlobalPkgs = true;
+                useUserPackages = true;
+                extraSpecialArgs = {
+                  inherit household;
+                  pkgs20250902 = import nixpkgs20250902 { system = pkgs.system; };
+                  unstablePkgs = import unstable-nixpkgs { system = pkgs.system; };
+                };
               };
-            };
-            home-manager = {
-              useGlobalPkgs = true;
-              useUserPackages = true;
-              extraSpecialArgs = {
-                inherit household;
-                pkgs20250902 = import nixpkgs20250902 { system = pkgs.system; };
-                unstablePkgs =
-                  import unstable-nixpkgs { system = pkgs.system; };
-              };
-            };
 
-            programs.nix-ld.enable = true;
+              programs.nix-ld.enable = true;
 
-            users.groups.users.gid = household.usersGid;
+              users.groups.users.gid = household.usersGid;
 
-            security.sudo.extraConfig =
-              "	Defaults:root,%wheel timestamp_timeout=0\n";
-          })
+              security.sudo.extraConfig = "	Defaults:root,%wheel timestamp_timeout=0\n";
+            }
+          )
         ];
 
         hosts = {
           hearthstone = import ./hosts/hearthstone {
             ip.addr = {
               v6 = [ ];
-              v4 = [{
-                address = "192.168.0.10";
-                prefixLength = 24;
-              }];
+              v4 = [
+                {
+                  address = "192.168.0.10";
+                  prefixLength = 24;
+                }
+              ];
             };
           };
           satellite = import ./hosts/satellite;
           sentinel = import ./hosts/sentinel {
             ip.addr = {
               v6 = [ ];
-              v4 = [{
-                address = "192.168.0.30";
-                prefixLength = 24;
-              }];
+              v4 = [
+                {
+                  address = "192.168.0.30";
+                  prefixLength = 24;
+                }
+              ];
             };
           };
         };
