@@ -14,6 +14,7 @@ with lib;
     extraPackages =
       epkgs: with epkgs; [
         nord-theme
+        agda2-mode
       ];
     extraConfig = ''
       (custom-set-variables

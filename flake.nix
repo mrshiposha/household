@@ -182,6 +182,11 @@
           description = "Rust Template";
           path = ./templates/rust;
         };
+
+        agda = {
+          description = "Agda Template";
+          path = ./templates/agda;
+        };
       };
     };
 }
