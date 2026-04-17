@@ -53,12 +53,15 @@ in
             "class<org.wezfurlong.wezterm.*> title<btop>" = "";
             "class<org.pwmt.zathura>" = "";
             "class<Zathura>" = "";
-            "class<org.wezfurlong.wezterm.*> title<Yazi.*>" = "";
+            "class<org.wezfurlong.wezterm.*> title<(\\[\\d/\\d\\] )?Yazi.*>" = "";
+            "class<org.wezfurlong.wezterm.*> title<(\\[\\d/\\d\\] )?xplr>" = "";
             "class<thunar>" = "";
             "class<org.gnome.FileRoller>" = "";
             "class<com.interversehq.qView>" = "";
             "class<PureRef>" = "Ⓟ";
             "class<org.wezfurlong.wezterm.*> title<(\\[\\d/\\d\\] )?hx>" = "";
+            "class<Emacs>" = "";
+            "class<org.pulseaudio.pavucontrol>" = "";
             "class<io.gitlab.adhami3310.Converter>" = "";
             "class<com.belmoussaoui.Decoder>" = "";
             "class<VSCodium>" = "󰨞";
