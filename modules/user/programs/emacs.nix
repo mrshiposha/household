@@ -15,6 +15,7 @@ with lib;
       epkgs: with epkgs; [
         nord-theme
         agda2-mode
+        direnv
       ];
     extraConfig = ''
       (custom-set-variables
@@ -22,6 +23,9 @@ with lib;
         '(custom-safe-themes
            '("7addbdeb9a444444c3114f228808c398eff733b0bd6e3050469b46f4d88c55d6"
              default)))
+
+      (global-display-line-numbers-mode 1)
+      (direnv-mode)
     '';
   };
 }
