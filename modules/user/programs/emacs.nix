@@ -10,6 +10,7 @@ with lib;
 
   config.programs.emacs = {
     enable = config.emacs.enable;
+    package = pkgs.emacs-pgtk;
     extraPackages =
       epkgs: with epkgs; [
         nord-theme
