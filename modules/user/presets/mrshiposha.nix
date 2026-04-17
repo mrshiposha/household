@@ -20,6 +20,7 @@ in
 
     xplr.enable = mkDefault true;
     helix.enable = mkDefault true;
+    emacs.enable = mkDefault true;
     zed.enable = mkDefault nixosConfig.gui.enable;
     logseq.enable = mkDefault false;
     connections = {

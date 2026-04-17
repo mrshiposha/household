@@ -11,6 +11,7 @@
     ./zathura.nix
     ./logseq.nix
     ./helix.nix
+    ./emacs.nix
     ./vscode
     ./audio.nix
     ./laptop.nix
