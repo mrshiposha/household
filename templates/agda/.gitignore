@@ -1,3 +1,9 @@
+# Agda
+*.agdai
+
+# Emacs
+*~
+
 # Nix
 result*
 result-*
