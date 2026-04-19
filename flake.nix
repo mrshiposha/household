@@ -187,6 +187,11 @@
           description = "Agda Template";
           path = ./templates/agda;
         };
+
+        haskell = {
+          description = "Haskell Template";
+          path = ./templates/haskell;
+        };
       };
     };
 }
