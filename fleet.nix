@@ -3,6 +3,7 @@
 {
   version = "0.1.0";
   gcRootPrefix = "fleet-gc-eT5oBjPe";
+  managerKeys = [ ];
   hosts = {
     hearthstone.encryptionKey = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIDXcYM8CidFpAdgqor2t0xYHvbOFdKeS0xBYGo3lJX3d root@nixos";
     satellite.encryptionKey = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIDWAjQXamZbDHbf0qDtjrUEljUJLMWL1AZQxEUy9wUIp root@satellite";
@@ -112,6 +113,5 @@
     };
   };
 }
-
 
 # vim: ts=2 et nowrap
