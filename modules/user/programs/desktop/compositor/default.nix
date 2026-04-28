@@ -183,6 +183,7 @@ in
             "Super_L, P, exec, $terminal"
 
             "$mainMod, Return, exec, rofi -show drun -show-icons"
+            "$mainMod+Alt, Return, exec, rofi -show run -show-icons"
             "$mainMod, Q, killactive,"
             "$mainMod+Shift, E, exit,"
             "$mainMod, L, exec, ${screen.lock}"
