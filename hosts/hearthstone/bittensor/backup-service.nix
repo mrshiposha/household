@@ -1,13 +1,17 @@
-{ pkgs, ... }: {
+{ pkgs, ... }:
+{
   systemd.user.services.bittensor-backup = {
-    enable = true;
+    enable = false;
     unitConfig.ConditionUser = "mrshiposha";
     serviceConfig.Type = "oneshot";
 
     after = [ "network.target" ];
     wantedBy = [ "multi-user.target" ];
 
-    path = with pkgs; [ bash openssh ];
+    path = with pkgs; [
+      bash
+      openssh
+    ];
     script = "bash " + ./backup-keys.sh;
   };
 
