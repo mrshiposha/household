@@ -16,6 +16,10 @@ with lib;
         nord-theme
         agda2-mode
         direnv
+        typst-ts-mode
+        (treesit-grammars.with-grammars (p: [
+          p.tree-sitter-typst
+        ]))
       ];
     extraConfig = ''
       (custom-set-variables
