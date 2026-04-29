@@ -92,6 +92,7 @@ options: {
 
         virtualisation.libvirtd.enable = true;
         networking.firewall.trustedInterfaces = [ "virbr0" ];
+        net.netbird.enable = false;
 
         boot.extraModprobeConfig = "	options kvm_amd nested=1\n	options kvm ignore_msrs=1 report_ignored_msrs=0\n";
 
